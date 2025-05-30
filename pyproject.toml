@@ -13,7 +13,7 @@ keywords = ["timba", "model", "optimization", "thuenen institute", "economics of
 
 requires-python = ">=3.8.9"
 dependencies = [
-    "click==8.1.7",
+    "click==8.1.8",
     "coverage==7.6.3",
     "osqp==0.6.7.post3",
     "cvxpy==1.6.4",
