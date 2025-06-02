@@ -21,5 +21,6 @@ LOGGING_OUTPUT_FOLDER = r"data/output"
 
 # plot
 OUTPUT_FILE = "\\data\\output\\results_D*.csv"
-OUTPUT_DIR = "\\data\\output\\"
+OUTPUT_DIR = r"/data/output/"
+ADDINFOPTHTOOLBOX = r"/Toolbox/Input/Additional_Information/"
 INPUT_DIR = "\\analysis\\Data\\TiMBA\\"

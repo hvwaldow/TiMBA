@@ -6,6 +6,8 @@ from TiMBA.main_runner.main_runner import main
 from TiMBA.data_management.ParameterCollector import ParameterCollector
 from TiMBA.parameters import INPUT_WORLD_PATH
 import warnings
+from TiMBA.parameters.paths import OUTPUT_DIR, ADDINFOPTHTOOLBOX 
+from TiMBA.Toolbox.toolbox import timba_dashboard 
 warnings.simplefilter(action='ignore', category=FutureWarning)
 from TiMBA.user_io.default_parameters import (default_year, default_max_period, default_calc_product_price,
                                               default_calc_world_price, default_transportation_impexp_factor, default_MB,
@@ -56,7 +58,6 @@ from TiMBA.user_io.default_parameters import (default_year, default_max_period, 
               show_default=True, required=False, type=bool,
               help="If activated prices will be capped by a maximum."
               "(Only not capped prices were validated extensively)")
-
 @click.option('-VO', '--verb_opt_log', 'verbose_optimization_logger', default=verbose_optimization_logger,
               show_default=True, required=False, type=bool,
               help="If true the logs will show verbose optimization output.")
@@ -67,7 +68,7 @@ from TiMBA.user_io.default_parameters import (default_year, default_max_period, 
     file_okay=False, writable=True, path_type=Path), help="Path to directory with Input/Output folder.")
 
 
-def cli(year, max_period, calc_product_price, calc_world_price, material_balance, global_material_balance,
+def timba_cli(year, max_period, calc_product_price, calc_world_price, material_balance, global_material_balance,
         transportation_impexp_factor, serialization, dynamization_activated, cleaned_opt_quantity, capped_prices,
         verbose_optimization_logger, verbose_calculation_logger, folderpath):
     
@@ -105,7 +106,28 @@ def cli(year, max_period, calc_product_price, calc_world_price, material_balance
              time_stamp=current_dt,
              package_dir=PACKAGEDIR,
              sc_name=world[:len(world) - 5])
+        world_count = len(world_list)
+    td = timba_dashboard(num_files_to_read=world_count,
+                    scenario_folder_path=OUTPUT_DIR,
+                    additional_info_folderpath=ADDINFOPTHTOOLBOX)
+    td.run()
+
+@click.option('-NF', '--num_files', default=10, 
+              show_default=True, required=True, type=int, 
+              help="Number of .pkl files to read")
+@click.option('-FP', '--sc_folderpath', default=OUTPUT_DIR, 
+              show_default=True, required=True, type=Path, 
+              help="Folder path for scenarios")
+@click.option('-AIFP', '--addinfo_folderpath', default=ADDINFOPTHTOOLBOX, 
+              show_default=True, required=True, type=Path, 
+              help="Folder path for additional informations")
+def dashboard_cli(num_files, sc_folderpath,addinfo_folderpath):    
+    click.echo("Begin to show dashboard")
+    td = timba_dashboard(num_files_to_read=num_files,
+                    scenario_folder_path=sc_folderpath,
+                    additional_info_folderpath=addinfo_folderpath)
+    td.run()
 
 
 if __name__ == '__main__':
-    cli()
+    timba_cli()
