@@ -184,7 +184,7 @@ class import_pkl_data:
 
             data_prev = data
             ID += 1
-        
+
         data_prev["data_periods"] = self.downcasting(data_prev["data_periods"])
         try:
             data = self.read_historic_data()

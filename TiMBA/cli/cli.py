@@ -5,8 +5,8 @@ import datetime as dt
 from TiMBA.main_runner.main_runner import main
 from TiMBA.data_management.ParameterCollector import ParameterCollector
 from TiMBA.parameters import INPUT_WORLD_PATH
-import warnings
 from TiMBA.parameters.paths import OUTPUT_DIR, ADDINFOPTHTOOLBOX 
+import warnings
 from TiMBA.Toolbox.toolbox import timba_dashboard 
 warnings.simplefilter(action='ignore', category=FutureWarning)
 from TiMBA.user_io.default_parameters import (default_year, default_max_period, default_calc_product_price,
@@ -15,6 +15,10 @@ from TiMBA.user_io.default_parameters import (default_year, default_max_period, 
                                               dynamization_activated, cleaned_opt_quantity, capped_prices,
                                               verbose_optimization_logger, verbose_calculation_logger,
                                               read_additional_information_file)
+
+@click.group()
+def cli():
+    pass
 
 @click.command()
 @click.option('-Y', '--year', default=default_year, 
@@ -66,11 +70,13 @@ from TiMBA.user_io.default_parameters import (default_year, default_max_period, 
               help="If true the logs will show verbose calculation informations.")
 @click.option('-FP', '--folderpath', 'folderpath', required=False, type=click.Path(
     file_okay=False, writable=True, path_type=Path), help="Path to directory with Input/Output folder.")
-
+@click.option('-SD', '--show_dashboard', 'show_dashboard', default=False, 
+              show_default=True, required=False, type=bool,
+              help="If true the the dashboard with the results from all scenarios will open automatically after simulations are done.")
 
 def timba_cli(year, max_period, calc_product_price, calc_world_price, material_balance, global_material_balance,
         transportation_impexp_factor, serialization, dynamization_activated, cleaned_opt_quantity, capped_prices,
-        verbose_optimization_logger, verbose_calculation_logger, folderpath):
+        verbose_optimization_logger, verbose_calculation_logger, folderpath,show_dashboard):
     
     user_input_cli = {"year": year, "max_period": max_period, "product_price": calc_product_price,
                       "world_price": calc_world_price, "transportation_factor": transportation_impexp_factor,
@@ -107,22 +113,31 @@ def timba_cli(year, max_period, calc_product_price, calc_world_price, material_b
              package_dir=PACKAGEDIR,
              sc_name=world[:len(world) - 5])
         world_count = len(world_list)
-    td = timba_dashboard(num_files_to_read=world_count,
-                    scenario_folder_path=OUTPUT_DIR,
-                    additional_info_folderpath=ADDINFOPTHTOOLBOX)
-    td.run()
+    if show_dashboard:
+        sc_folderpath = PACKAGEDIR / OUTPUT_DIR
+        addinfo_folderpath = PACKAGEDIR / ADDINFOPTHTOOLBOX
+        td = timba_dashboard(num_files_to_read=world_count,
+                        scenario_folder_path=sc_folderpath,
+                        additional_info_folderpath=addinfo_folderpath)
+        td.run()
 
-@click.option('-NF', '--num_files', default=10, 
-              show_default=True, required=True, type=int, 
+@cli.command()
+@click.option('-NF', '--num_files', default=2, 
+              show_default=True, type=int, 
               help="Number of .pkl files to read")
 @click.option('-FP', '--sc_folderpath', default=OUTPUT_DIR, 
-              show_default=True, required=True, type=Path, 
+              show_default=True, type=Path, 
               help="Folder path for scenarios")
 @click.option('-AIFP', '--addinfo_folderpath', default=ADDINFOPTHTOOLBOX, 
-              show_default=True, required=True, type=Path, 
+              show_default=True, type=Path, 
               help="Folder path for additional informations")
-def dashboard_cli(num_files, sc_folderpath,addinfo_folderpath):    
-    click.echo("Begin to show dashboard")
+def dashboard_cli(num_files, sc_folderpath, addinfo_folderpath):    
+    PACKAGEDIR = Path(__file__).parents[1]
+    sc_folderpath = PACKAGEDIR / sc_folderpath
+    addinfo_folderpath = PACKAGEDIR / addinfo_folderpath
+    click.echo(PACKAGEDIR)
+    click.echo(sc_folderpath)
+    click.echo(addinfo_folderpath)
     td = timba_dashboard(num_files_to_read=num_files,
                     scenario_folder_path=sc_folderpath,
                     additional_info_folderpath=addinfo_folderpath)
@@ -130,4 +145,4 @@ def dashboard_cli(num_files, sc_folderpath,addinfo_folderpath):
 
 
 if __name__ == '__main__':
-    timba_cli()
+    cli()
