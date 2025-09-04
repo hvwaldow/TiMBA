@@ -7,7 +7,7 @@ from TiMBA.data_management.ParameterCollector import ParameterCollector
 from TiMBA.parameters import INPUT_WORLD_PATH
 from TiMBA.parameters.paths import OUTPUT_DIR, ADDINFOPTHTOOLBOX 
 import warnings
-from TiMBA.Toolbox.toolbox import timba_dashboard 
+from Toolbox.toolbox import timba_dashboard
 warnings.simplefilter(action='ignore', category=FutureWarning)
 from TiMBA.user_io.default_parameters import (default_year, default_max_period, default_calc_product_price,
                                               default_calc_world_price, default_transportation_impexp_factor, default_MB,
