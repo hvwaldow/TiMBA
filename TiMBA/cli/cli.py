@@ -7,7 +7,7 @@ from TiMBA.data_management.ParameterCollector import ParameterCollector
 from TiMBA.parameters import INPUT_WORLD_PATH
 from TiMBA.parameters.paths import OUTPUT_DIR, ADDINFOPTHTOOLBOX 
 import warnings
-from Toolbox.toolbox import timba_dashboard
+from Toolbox.toolbox import timba_dashboard, validation_dashboard
 warnings.simplefilter(action='ignore', category=FutureWarning)
 from TiMBA.user_io.default_parameters import (default_year, default_max_period, default_calc_product_price,
                                               default_calc_world_price, default_transportation_impexp_factor, default_MB,
@@ -121,6 +121,7 @@ def timba_cli(year, max_period, calc_product_price, calc_world_price, material_b
                         additional_info_folderpath=addinfo_folderpath)
         td.run()
 
+#Dashboard command
 @cli.command()
 @click.option('-NF', '--num_files', default=2, 
               show_default=True, type=int, 
@@ -143,6 +144,24 @@ def dashboard_cli(num_files, sc_folderpath, addinfo_folderpath):
                     additional_info_folderpath=addinfo_folderpath)
     td.run()
 
+#Validation Command
+@click.command()
+@click.option('-NF', '--num_files', default=3, 
+              show_default=True, required=True, type=int, 
+              help="Number of .pkl files to read")
+@click.option('-FP', '--sc_folderpath', default=OUTPUT_DIR, 
+              show_default=True, required=True, type=Path, 
+              help="Folder path for scenarios")
+def validation_cli(num_files, sc_folderpath):    
+    PACKAGEDIR = Path(__file__).parents[1]
+    sc_folderpath = PACKAGEDIR / sc_folderpath
+    click.echo("Validation is started")
+    validb = validation_dashboard(
+        num_files_to_read=num_files,
+        scenario_folder_path=sc_folderpath
+    )
+    validb.run()
 
-if __name__ == '__main__':
-    cli()
+cli.add_command(timba_cli, name="timba")
+cli.add_command(dashboard_cli, name="dashboard")
+cli.add_command(validation_cli, name="validation")
