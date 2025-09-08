@@ -152,13 +152,14 @@ def dashboard_cli(num_files, sc_folderpath, addinfo_folderpath):
 @click.option('-FP', '--sc_folderpath', default=OUTPUT_DIR, 
               show_default=True, required=True, type=Path, 
               help="Folder path for scenarios")
-def validation_cli(num_files, sc_folderpath):    
+def validation_cli(num_files, sc_folderpath, addinfo_folderpath):    
     PACKAGEDIR = Path(__file__).parents[1]
     sc_folderpath = PACKAGEDIR / sc_folderpath
     click.echo("Validation is started")
     validb = validation_dashboard(
         num_files_to_read=num_files,
-        scenario_folder_path=sc_folderpath
+        scenario_folder_path=sc_folderpath,
+        addinfo_folderpath=addinfo_folderpath
     )
     validb.run()
 
