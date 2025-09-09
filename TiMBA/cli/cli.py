@@ -162,7 +162,7 @@ def validation_cli(num_files, sc_folderpath, addinfo_folderpath):
     validb = validation_dashboard(
         num_files_to_read=num_files,
         scenario_folder_path=sc_folderpath,
-        addinfo_folderpath=addinfo_folderpath
+        additional_info_folderpath=addinfo_folderpath
     )
     validb.run()
 
