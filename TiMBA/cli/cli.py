@@ -152,6 +152,9 @@ def dashboard_cli(num_files, sc_folderpath, addinfo_folderpath):
 @click.option('-FP', '--sc_folderpath', default=OUTPUT_DIR, 
               show_default=True, required=True, type=Path, 
               help="Folder path for scenarios")
+@click.option('-AIFP', '--addinfo_folderpath', default=ADDINFOPTHTOOLBOX, 
+              show_default=True, type=Path, 
+              help="Folder path for additional informations")
 def validation_cli(num_files, sc_folderpath, addinfo_folderpath):    
     PACKAGEDIR = Path(__file__).parents[1]
     sc_folderpath = PACKAGEDIR / sc_folderpath
