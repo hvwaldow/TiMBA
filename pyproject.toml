@@ -45,9 +45,9 @@ Repository = "https://github.com/TI-Forest-Sector-Modelling/TiMBA"
 Issues = "https://github.com/TI-Forest-Sector-Modelling/TiMBA/issues"
 
 [project.scripts]
-run_timba = "TiMBA.cli.cli:timba_cli"
-show_dashboard = "TiMBA.cli.cli:dashboard_cli"
-show_validation = "TiMBA.cli.cli:validation_cli"
+timba_run = "TiMBA.cli.cli:timba_cli"
+timba_show_dashboard = "TiMBA.cli.cli:dashboard_cli"
+timba_show_validation = "TiMBA.cli.cli:validation_cli"
 
 [tool.setuptools]
 include-package-data = true
