@@ -1,17 +1,17 @@
 [build-system]
-requires = ["setuptools==75.2.0", "wheel"]
+requires = ["setuptools==75.2.0", "wheel", "twine"]
 build-backend = "setuptools.build_meta"
 
 [project]
 name = "TiMBA" 
-version = "1.0.3"
+version = "1.3.0"
 authors = [{name = "TI-FSM", email = "wf-timba@thuenen.de"}]
 description = "TiMBA is a partial economic equilibrium model for the global forest products market"
 readme = "README.md"
-license = {file = "COPYING.txt"}
+license = { text = "AGPL-3.0-or-later" }
 keywords = ["timba", "model", "optimization", "thuenen institute", "economics of forests", "research"]
 
-requires-python = ">=3.8.9"
+requires-python = ">=3.9,<3.12 "
 dependencies = [
     "click==8.1.8",
     "coverage==7.6.3",
@@ -26,30 +26,38 @@ dependencies = [
     "tomli==2.0.2",
     "typing==3.7.4.3",
     "TiMBA-Charts==0.2.2" 
+    "PyYAML==6.0.3",
+    "Carbon-Module==1.1.1",
 ]
 
 classifiers = [
     "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
     "Programming Language :: Python :: 3 :: Only",
     "Operating System :: Microsoft :: Windows",
     "Operating System :: Microsoft :: Windows :: Windows 10",
-    "License :: OSI Approved :: GNU Affero General Public License v3 or later (AGPLv3+)",
+    "Operating System :: MacOS",
+    "Operating System :: POSIX :: Linux",
     "Intended Audience :: Science/Research",
     "Topic :: Scientific/Engineering"
 ]
 
 [project.urls]
-Homepage = "https://placeholder.com"
-Documentation = "https://placeholder.org"
+Homepage = "https://github.com/TI-Forest-Sector-Modelling/TiMBA"
+Documentation = "https://github.com/TI-Forest-Sector-Modelling/TiMBA/blob/main/documentation/documentation_TiMBA.pdf"
 Repository = "https://github.com/TI-Forest-Sector-Modelling/TiMBA"
 Issues = "https://github.com/TI-Forest-Sector-Modelling/TiMBA/issues"
 
 [project.scripts]
-timba_run = "TiMBA.cli.cli:timba_cli"
+run_timba = "TiMBA.cli.cli:timba_cli"
+load_timba = "TiMBA.cli.cli:load_data_cli"
+run_carbon_module = "TiMBA.cli.cli:carbon_cli"
 timba_show_dashboard = "TiMBA.cli.cli:dashboard_cli"
-timba_show_validation = "TiMBA.cli.cli:validation_cli"
 
 [tool.setuptools]
+license-files = ["COPYING"]
 include-package-data = true
 zip-safe = true
 
@@ -57,7 +65,7 @@ zip-safe = true
 find = {namespaces = false}
 
 [tool.setuptools.package-data]
-"*" = ["README.md"]
+"*" = ["README.md", "COPYING", "COPYRIGHT", "CITATION.cff", "timba_logo_v3.png"]
 
 [tool.coverage.report]
 fail_under = 50
