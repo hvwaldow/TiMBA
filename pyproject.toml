@@ -13,7 +13,7 @@ keywords = ["timba", "model", "optimization", "thuenen institute", "economics of
 
 requires-python = ">=3.9,<3.12 "
 dependencies = [
-    "click==8.1.7",
+    "click==8.1.8",
     "coverage==7.6.3",
     "osqp==0.6.7.post3",
     "cvxpy==1.6.4",
@@ -24,7 +24,8 @@ dependencies = [
     "pandas==1.5.3",
     "pathlib==1.0.1",
     "tomli==2.0.2",
-    "typing==3.7.4.3" ,
+    "typing==3.7.4.3",
+    "TiMBA-Charts==0.2.2" 
     "PyYAML==6.0.3",
     "Carbon-Module==1.1.1",
 ]
@@ -53,6 +54,7 @@ Issues = "https://github.com/TI-Forest-Sector-Modelling/TiMBA/issues"
 run_timba = "TiMBA.cli.cli:timba_cli"
 load_timba = "TiMBA.cli.cli:load_data_cli"
 run_carbon_module = "TiMBA.cli.cli:carbon_cli"
+timba_show_dashboard = "TiMBA.cli.cli:dashboard_cli"
 
 [tool.setuptools]
 license-files = ["COPYING"]

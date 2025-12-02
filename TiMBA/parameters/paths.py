@@ -19,6 +19,12 @@ manufacture_output_name = "manufacture_D"
 LOGGING_OUTPUT_FOLDER = r"output/logs/"
 OUTPUT_DIR = r"output/data/"
 
+# plot
+OUTPUT_FILE = "\\data\\output\\results_D*.csv"
+OUTPUT_DIR = r"data/output/"
+ADDINFOPTHTOOLBOX = r"data/input/02_Additional_Information/"
+INPUT_DIR = "\\analysis\\Data\\TiMBA\\"
+
 # Input to adress data storage in GIT Repo
 GIT_USER="TI-Forest-Sector-Modelling"
 GIT_REPO="TiMBA_Additional_Information"

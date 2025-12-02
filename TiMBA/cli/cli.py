@@ -10,9 +10,11 @@ from TiMBA.main_runner.main_runner import main
 from TiMBA.logic.model_extensions import run_extensions
 from TiMBA.data_management.ParameterCollector import ParameterCollector
 from TiMBA.parameters import INPUT_WORLD_PATH
+from TiMBA.parameters.paths import OUTPUT_DIR, ADDINFOPTHTOOLBOX 
 from TiMBA.parameters.Defines import ParamNames
 from c_module.logic.main import C_Module
 import warnings
+from Toolbox.toolbox import timba_dashboard, validation_dashboard
 warnings.simplefilter(action='ignore', category=FutureWarning)
 from TiMBA.user_io.default_parameters import (default_year, default_max_period, default_calc_product_price,
                                               default_calc_world_price, default_transportation_impexp_factor, default_MB,
@@ -30,6 +32,10 @@ from TiMBA.user_io.default_parameters import (default_year, default_max_period, 
 def cli():
     pass
 
+
+@click.group()
+def cli():
+    pass
 
 @click.group()
 def cli():
@@ -82,16 +88,20 @@ def cli():
               show_default=True, required=False, type=bool,
               help="If true the logs will show verbose calculation informations.")
 @click.option('-FP', '--folderpath', 'folderpath', required=False, type=click.Path(
-    file_okay=False, writable=True, path_type=Path), default=Path.cwd(), show_default=f"current working directory: {Path.cwd()}",
-    help="Path to directory with Input/Output folder.")
+              file_okay=False, writable=True, path_type=Path), default=Path.cwd(), show_default=f"current working directory: {Path.cwd()}",
+              help="Path to directory with Input/Output folder.")
 @click.option('-C', '--activate_cmodule', 'activate_cmodule',
               default=False, show_default=True, required=False, type=bool,
               help="Flag to activate carbon module.")
+@click.option('-SD', '--show_dashboard', 'show_dashboard', default=False, 
+              show_default=True, required=False, type=bool,
+              help="If true the the dashboard with the results from all scenarios will open automatically after simulations are done.")
+
 
 
 def timba_cli(year, max_period, calc_product_price, calc_world_price, material_balance, global_material_balance,
               transportation_impexp_factor, serialization, dynamization_activated, cleaned_opt_quantity, capped_prices,
-              verbose_optimization_logger, verbose_calculation_logger, folderpath, activate_cmodule):
+              verbose_optimization_logger, verbose_calculation_logger, folderpath, activate_cmodule,show_dashboard):
     
     user_input_cli = {ParamNames.year.value: year,
                       ParamNames.max_period.value: max_period,
@@ -109,6 +119,7 @@ def timba_cli(year, max_period, calc_product_price, calc_world_price, material_b
                       ParamNames.verbose_calculation_logger.value: verbose_calculation_logger,
                       ParamNames.addInfo.value: read_additional_information_file,
                       ParamNames.activate_cmodule.value: activate_cmodule,
+                      ParamNames.chart_flag.value: show_dashboard,
                     #   ParamNames.sc_num.value: sc_num,
                     #   ParamNames.read_in_pkl.value: read_in_pkl,
                     #   ParamNames.calc_c_forest_agb.value: calc_c_forest_agb,
@@ -128,7 +139,30 @@ def timba_cli(year, max_period, calc_product_price, calc_world_price, material_b
     run_timba(Parameters=Parameters,folderpath=folderpath)
     run_extensions(UserIO=Parameters)
 
+#Dashboard command
+@cli.command()
+@click.option('-NF', '--num_files', default=2, 
+              show_default=True, type=int, 
+              help="Number of .pkl files to read")
+@click.option('-FP', '--sc_folderpath', default=OUTPUT_DIR, 
+              show_default=True, type=Path, 
+              help="Folder path for scenarios")
+@click.option('-AIFP', '--addinfo_folderpath', default=ADDINFOPTHTOOLBOX, 
+              show_default=True, type=Path, 
+              help="Folder path for additional informations")
+def dashboard_cli(num_files, sc_folderpath, addinfo_folderpath):    
+    PACKAGEDIR = Path(__file__).parents[1]
+    sc_folderpath = PACKAGEDIR / sc_folderpath
+    addinfo_folderpath = PACKAGEDIR / addinfo_folderpath
+    click.echo(PACKAGEDIR)
+    click.echo(sc_folderpath)
+    click.echo(addinfo_folderpath)
+    td = timba_dashboard(num_files_to_read=num_files,
+                    scenario_folder_path=sc_folderpath,
+                    additional_info_folderpath=addinfo_folderpath)
+    td.run()
 
+# Load data command
 @click.command()
 @click.option('-U', '--user', default=GIT_USER, show_default=True, required=True,
               help="Name of the GitHub user who stored the data.")
@@ -211,4 +245,5 @@ def carbon_cli(calc_c_forest_agb, sc_num, calc_c_forest_bgb, calc_c_forest_soil,
 cli.add_command(timba_cli, name="timba")
 cli.add_command(load_data_cli, name="load_data")
 cli.add_command(carbon_cli, name="carbon")
+cli.add_command(dashboard_cli, name="dashboard")
 

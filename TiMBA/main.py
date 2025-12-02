@@ -2,10 +2,12 @@ from TiMBA.main_runner.main_runner import main
 from TiMBA.parameters import INPUT_WORLD_PATH, DATA_FOLDER
 from TiMBA.logic.model_extensions import run_extensions
 from TiMBA.data_management.ParameterCollector import ParameterCollector
+from TiMBA.parameters.paths import INPUT_WORLD_PATH,OUTPUT_DIR, ADDINFOPTHTOOLBOX 
 from pathlib import Path
 import datetime as dt
 import os
 import warnings
+from TiMBA.Toolbox.toolbox import timba_dashboard 
 import sys
 warnings.simplefilter(action='ignore', category=FutureWarning)
 from TiMBA.results_logging.base_logger import close_logger
@@ -64,6 +66,13 @@ def run_timba(Parameters:dict=None,folderpath:str=None):
              Data_Path=folderpath / DATA_FOLDER,
              sc_name=world[:len(world) - 5])     
         close_logger()
+
+    if Parameters.chart_flag:
+        world_count = len(world_list)
+        td = timba_dashboard(num_files_to_read=world_count,
+                            scenario_folder_path=OUTPUT_DIR,
+                            additional_info_folderpath=ADDINFOPTHTOOLBOX)
+        td.run()
     
 def parameter_setter():
     from TiMBA.data_management.ParameterCollector import ParameterCollector
@@ -72,7 +81,6 @@ def parameter_setter():
 
 if __name__ == '__main__':
     Parameters = parameter_setter()
-    run_timba(Parameters=Parameters)#,folderpath=Path(r"E:/"))
-
+    world_list = run_timba(Parameters=Parameters)#,folderpath=Path(r"E:/"))
     run_extensions(UserIO=Parameters)
 
