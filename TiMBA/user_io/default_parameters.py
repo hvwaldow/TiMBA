@@ -39,6 +39,9 @@ hist_hwp_start_year_default = default_year
 show_carbon_dashboard = True
 fao_data_update = False
 
+# Charts integration
+chart_flag = False
+
 user_input = {ParamNames.year.value: default_year,
               ParamNames.max_period.value: default_max_period,
               ParamNames.product_price.value: default_calc_product_price,
@@ -68,5 +71,6 @@ user_input = {ParamNames.year.value: default_year,
               ParamNames.hist_hwp_start_year.value: hist_hwp_start_year,
               ParamNames.hist_hwp_start_year_default.value: hist_hwp_start_year_default,
               ParamNames.show_carbon_dashboard.value: show_carbon_dashboard,
-              ParamNames.fao_data_update.value: fao_data_update
+              ParamNames.fao_data_update.value: fao_data_update,
+              ParamNames.chart_flag.value: chart_flag,
               }

@@ -49,6 +49,7 @@ class ParameterCollector:
         self._hist_hwp_start_year_default = user_input[ParamNames.hist_hwp_start_year_default.value]
         self._show_carbon_dashboard = user_input[ParamNames.show_carbon_dashboard.value]
         self._fao_data_update = user_input[ParamNames.fao_data_update.value]
+        self._chart_flag = user_input[ParamNames.chart_flag.value]
 
         # Run directly after __init__ to ensure correct user IO
         self.input_data_check()
@@ -301,6 +302,14 @@ class ParameterCollector:
     def fao_data_update(self, value: bool):
         self._fao_data_update = value
 
+    @property
+    def chart_flag(self) -> bool:
+        return self._chart_flag
+
+    @chart_flag.setter
+    def chart_flag(self, value: bool):
+        self._chart_flag = value
+
     def __repr__(self):
         return repr(f"year={self.year}, "
                     f"max_period={self.max_period}, "
@@ -339,6 +348,7 @@ class ParameterCollector:
         assert isinstance(self.hist_hwp_start_year_default, int)
         assert isinstance(self.show_carbon_dashboard, bool)
         assert isinstance(self.fao_data_update, bool)
+        assert isinstance(self.chart_flag, bool)
 
         # TODO: Adapt tests for new params: Following are just exemplary.
         # assert self.param_x[0] > 0
