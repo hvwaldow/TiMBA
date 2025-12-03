@@ -7,7 +7,7 @@ from pathlib import Path
 import datetime as dt
 import os
 import warnings
-from TiMBA.Toolbox.toolbox import timba_dashboard 
+from Toolbox.toolbox import timba_dashboard 
 import sys
 warnings.simplefilter(action='ignore', category=FutureWarning)
 from TiMBA.results_logging.base_logger import close_logger

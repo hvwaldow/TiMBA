@@ -13,7 +13,7 @@ keywords = ["timba", "model", "optimization", "thuenen institute", "economics of
 
 requires-python = ">=3.9,<3.12 "
 dependencies = [
-    "click==8.1.8",
+    "click==8.1.7",
     "coverage==7.6.3",
     "osqp==0.6.7.post3",
     "cvxpy==1.6.4",
@@ -25,7 +25,7 @@ dependencies = [
     "pathlib==1.0.1",
     "tomli==2.0.2",
     "typing==3.7.4.3",
-    "TiMBA-Charts==0.2.2" 
+    "TiMBA-Charts==0.2.2", 
     "PyYAML==6.0.3",
     "Carbon-Module==1.1.1",
 ]
