@@ -130,23 +130,24 @@ def timba_cli(year, max_period, calc_product_price, calc_world_price, material_b
 @click.option('-NF', '--num_files', default=2, 
               show_default=True, type=int, 
               help="Number of .pkl files to read")
-@click.option('-FP', '--sc_folderpath', default=OUTPUT_DIR, 
-              show_default=True, type=Path, 
-              help="Folder path for scenarios")
-@click.option('-AIFP', '--addinfo_folderpath', default=ADDINFOPTHTOOLBOX, 
-              show_default=True, type=Path, 
-              help="Folder path for additional informations")
-def dashboard_cli(num_files, sc_folderpath, addinfo_folderpath):    
-    PACKAGEDIR = Path(__file__).parents[1]
-    sc_folderpath = PACKAGEDIR / sc_folderpath
-    addinfo_folderpath = PACKAGEDIR / addinfo_folderpath
-    click.echo(PACKAGEDIR)
-    click.echo(sc_folderpath)
-    click.echo(addinfo_folderpath)
+@click.option('-FP', '--sc_folderpath', required=False, type=click.Path(
+              file_okay=False, writable=True, path_type=Path), default=Path.cwd(), 
+              show_default=f"current working directory: {Path.cwd()}",
+              help="Path to directory with Input/Output folder for scenarios."
+              )
+def dashboard_cli(num_files, sc_folderpath):    
+    from TiMBA.parameters.paths import OUTPUT_DIR, ADDINFOPTHTOOLBOX, DATA_FOLDER
+    SC_FOLDER = sc_folderpath / DATA_FOLDER / OUTPUT_DIR
+    ADDINFO_FOLDER = sc_folderpath / DATA_FOLDER / ADDINFOPTHTOOLBOX
+    click.echo(SC_FOLDER)
+    click.echo(ADDINFO_FOLDER)
     td = timba_dashboard(num_files_to_read=num_files,
-                    scenario_folder_path=sc_folderpath,
-                    additional_info_folderpath=addinfo_folderpath)
-    td.run()
+                    scenario_folder_path=SC_FOLDER,
+                    additional_info_folderpath=ADDINFO_FOLDER)
+    try:
+        td.run()
+    except FileNotFoundError:
+        click.echo(f"No data found at: {sc_folderpath / DATA_FOLDER}. Please, check if the TiMBA output is stored at this directory.")
 
 # Load data command
 @click.command()

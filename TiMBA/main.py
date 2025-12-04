@@ -13,7 +13,8 @@ warnings.simplefilter(action='ignore', category=FutureWarning)
 from TiMBA.results_logging.base_logger import close_logger
 from TiMBA.parameters.paths import (
     DATA_FOLDER, GIT_USER, GIT_REPO, GIT_BRANCH,
-    GIT_FOLDER, INPUT_WORLD_PATH, DESTINATION_PATH
+    GIT_FOLDER, INPUT_WORLD_PATH, DESTINATION_PATH,
+    ADDINFOPTHTOOLBOX
 )
 from TiMBA.data_management.Load_Data import load_data
 
@@ -69,9 +70,11 @@ def run_timba(Parameters:dict=None,folderpath:str=None):
 
     if Parameters.chart_flag:
         world_count = len(world_list)
+        OUTPUT_DIRECTORY = folderpath / DATA_FOLDER / OUTPUT_DIR
+        ADDINFOPATH = folderpath / DATA_FOLDER / ADDINFOPTHTOOLBOX
         td = timba_dashboard(num_files_to_read=world_count,
-                            scenario_folder_path=OUTPUT_DIR,
-                            additional_info_folderpath=ADDINFOPTHTOOLBOX)
+                            scenario_folder_path=OUTPUT_DIRECTORY,
+                            additional_info_folderpath=ADDINFOPATH)
         td.run()
     
 def parameter_setter():
@@ -81,6 +84,8 @@ def parameter_setter():
 
 if __name__ == '__main__':
     Parameters = parameter_setter()
-    world_list = run_timba(Parameters=Parameters)#,folderpath=Path(r"E:/"))
-    run_extensions(UserIO=Parameters)
+    Parameters.max_period = 1
+    Parameters.chart_flag = True
+    world_list = run_timba(Parameters=Parameters,folderpath=Path(r"E:/"))
+    #run_extensions(UserIO=Parameters)
 
