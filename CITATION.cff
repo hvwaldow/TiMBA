@@ -40,7 +40,7 @@ authors:
     orcid: 'https://orcid.org/0000-0002-6719-0190'
 identifiers:
   - type: doi
-    value: 'https://doi.org/10.5281/zenodo.13842384'
+    value: '10.5281/zenodo.13842384'
     description: 'Zenodo Archive'
 repository-code: 'https://github.com/TI-Forest-Sector-Modelling/TiMBA'
 abstract: |-
