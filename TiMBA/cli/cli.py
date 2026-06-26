@@ -32,16 +32,7 @@ from TiMBA.user_io.default_parameters import (default_year, default_max_period, 
 def cli():
     pass
 
-
-@click.group()
-def cli():
-    pass
-
-@click.group()
-def cli():
-    pass
-
-@click.command()
+@cli.command("run")
 @click.option('-Y', '--year', default=default_year, 
               show_default=True, required=True, type=int, 
               help="Starting year.")
@@ -102,6 +93,7 @@ def cli():
 def timba_cli(year, max_period, calc_product_price, calc_world_price, material_balance, global_material_balance,
               transportation_impexp_factor, serialization, dynamization_activated, cleaned_opt_quantity, capped_prices,
               verbose_optimization_logger, verbose_calculation_logger, folderpath, activate_cmodule,show_dashboard):
+    """start TiMBA simulations"""
     
     Parameters = parameter_setter()
     Parameters.year = year
@@ -126,7 +118,7 @@ def timba_cli(year, max_period, calc_product_price, calc_world_price, material_b
     run_extensions(UserIO=Parameters)
 
 #Dashboard command
-@cli.command()
+@cli.command("dashboard")
 @click.option('-NF', '--num_files', default=2, 
               show_default=True, type=int, 
               help="Number of .pkl files to read")
@@ -135,7 +127,8 @@ def timba_cli(year, max_period, calc_product_price, calc_world_price, material_b
               show_default=f"current working directory: {Path.cwd()}",
               help="Path to directory with Input/Output folder for scenarios."
               )
-def dashboard_cli(num_files, sc_folderpath):    
+def dashboard_cli(num_files, sc_folderpath):  
+    """toolkit for analysing TiMBA's simulation results"""  
     from TiMBA.parameters.paths import OUTPUT_DIR, ADDINFOPTHTOOLBOX, DATA_FOLDER
     SC_FOLDER = sc_folderpath / DATA_FOLDER / OUTPUT_DIR
     ADDINFO_FOLDER = sc_folderpath / DATA_FOLDER / ADDINFOPTHTOOLBOX
@@ -150,7 +143,7 @@ def dashboard_cli(num_files, sc_folderpath):
         click.echo(f"No data found at: {sc_folderpath / DATA_FOLDER}. Please, check if the TiMBA output is stored at this directory.")
 
 # Load data command
-@click.command()
+@cli.command("load")
 @click.option('-U', '--user', default=GIT_USER, show_default=True, required=True,
               help="Name of the GitHub user who stored the data.")
 @click.option('-R', '--repo', default=GIT_REPO, show_default=True, required=True,
@@ -162,7 +155,7 @@ def dashboard_cli(num_files, sc_folderpath):
 @click.option('-FP', '--folderpath', default=Path.cwd(), show_default=f"current working directory: {Path.cwd()}",
               required=True, help="The destination where the data should be copied to.")
 def load_data_cli(user, repo, branch, folder, folderpath):
-    """CLI wrapper for loading additional input data from GitHub"""
+    """load input data from web-based data hub"""
 
     dest_path = Path(folderpath) / DESTINATION_PATH
     print("destination path: ",dest_path)
@@ -175,7 +168,7 @@ def load_data_cli(user, repo, branch, folder, folderpath):
     )
 
 # Carbon Module command
-@click.command()
+@cli.command("carbon")
 @click.option('-SC', '--sc_num', "sc_num",
               default=sc_num, show_default=True, required=True, type=int,
               help="Flag to control the number of processed scenarios.")
@@ -206,6 +199,7 @@ def load_data_cli(user, repo, branch, folder, folderpath):
 
 def carbon_cli(calc_c_forest_agb, sc_num, calc_c_forest_bgb, calc_c_forest_soil, calc_c_forest_dwl, calc_c_hwp,
                c_hwp_accounting_approach, read_in_pkl, show_carbon_dashboard):
+    """calculate carbon stocks in forests and harvested wood products"""
 
     user_input_cli = {
         ParamNames.activate_cmodule.value: activate_add_on_cmodule,
@@ -229,8 +223,8 @@ def carbon_cli(calc_c_forest_agb, sc_num, calc_c_forest_bgb, calc_c_forest_soil,
     c_module.run()
 
 
-cli.add_command(timba_cli, name="timba")
-cli.add_command(load_data_cli, name="load_data")
-cli.add_command(carbon_cli, name="carbon")
-cli.add_command(dashboard_cli, name="dashboard")
+# cli.add_command(timba_cli, name="timba")
+# cli.add_command(load_data_cli, name="load_data")
+# cli.add_command(carbon_cli, name="carbon")
+# cli.add_command(dashboard_cli, name="dashboard")
 
