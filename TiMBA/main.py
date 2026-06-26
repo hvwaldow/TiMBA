@@ -70,11 +70,14 @@ def run_timba(Parameters:dict=None,folderpath:str=None):
 
     if Parameters.chart_flag:
         world_count = len(world_list)
-        OUTPUT_DIRECTORY = folderpath / DATA_FOLDER / OUTPUT_DIR
-        ADDINFOPATH = folderpath / DATA_FOLDER / ADDINFOPTHTOOLBOX
-        td = timba_dashboard(num_files_to_read=world_count,
-                            scenario_folder_path=OUTPUT_DIRECTORY,
-                            additional_info_folderpath=ADDINFOPATH)
+        SC_FOLDER = Path(DATA_FOLDER) / Path(OUTPUT_DIR)
+        ADDINFO_FOLDER = Path(DATA_FOLDER) / Path(ADDINFOPTHTOOLBOX)
+        td = timba_dashboard(
+            num_files_to_read=world_count,
+            FOLDER_PATH=PACKAGEDIR,
+            SCENARIO_PATH=SC_FOLDER,
+            ADDINFO_PATH=ADDINFO_FOLDER,
+        )
         td.run()
     
 def parameter_setter():

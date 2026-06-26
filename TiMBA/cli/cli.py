@@ -15,6 +15,7 @@ from TiMBA.parameters.Defines import ParamNames
 from c_module.logic.main import C_Module
 import warnings
 from Toolbox.toolbox import timba_dashboard
+import traceback
 warnings.simplefilter(action='ignore', category=FutureWarning)
 from TiMBA.user_io.default_parameters import (default_year, default_max_period, default_calc_product_price,
                                               default_calc_world_price, default_transportation_impexp_factor, default_MB,
@@ -122,25 +123,29 @@ def timba_cli(year, max_period, calc_product_price, calc_world_price, material_b
 @click.option('-NF', '--num_files', default=2, 
               show_default=True, type=int, 
               help="Number of .pkl files to read")
-@click.option('-FP', '--sc_folderpath', required=False, type=click.Path(
+@click.option('-DP', '--data_folderpath', required=False, type=click.Path(
               file_okay=False, writable=True, path_type=Path), default=Path.cwd(), 
               show_default=f"current working directory: {Path.cwd()}",
-              help="Path to directory with Input/Output folder for scenarios."
+              help="Path to directory with Input/Output folder."
               )
-def dashboard_cli(num_files, sc_folderpath):  
+def dashboard_cli(num_files, data_folderpath):  
     """toolkit for analysing TiMBA's simulation results"""  
     from TiMBA.parameters.paths import OUTPUT_DIR, ADDINFOPTHTOOLBOX, DATA_FOLDER
-    SC_FOLDER = sc_folderpath / DATA_FOLDER / OUTPUT_DIR
-    ADDINFO_FOLDER = sc_folderpath / DATA_FOLDER / ADDINFOPTHTOOLBOX
-    click.echo(SC_FOLDER)
-    click.echo(ADDINFO_FOLDER)
-    td = timba_dashboard(num_files_to_read=num_files,
-                    scenario_folder_path=SC_FOLDER,
-                    additional_info_folderpath=ADDINFO_FOLDER)
+    SC_FOLDER = Path(DATA_FOLDER) / Path(OUTPUT_DIR)
+    ADDINFO_FOLDER = Path(DATA_FOLDER) / Path(ADDINFOPTHTOOLBOX)
+    click.echo(data_folderpath / SC_FOLDER)
+    click.echo(data_folderpath / ADDINFO_FOLDER)
+    td = timba_dashboard(
+        num_files_to_read=num_files,
+        FOLDER_PATH=data_folderpath,
+        SCENARIO_PATH=SC_FOLDER,
+        ADDINFO_PATH=ADDINFO_FOLDER,
+    )
     try:
         td.run()
-    except FileNotFoundError:
-        click.echo(f"No data found at: {sc_folderpath / DATA_FOLDER}. Please, check if the TiMBA output is stored at this directory.")
+    except Exception as e:
+        print(traceback.format_exc())
+        #click.echo(f"No data found at: {SC_FOLDER}. Please, check if the TiMBA output is stored at this directory.")
 
 # Load data command
 @cli.command("load")
@@ -221,10 +226,3 @@ def carbon_cli(calc_c_forest_agb, sc_num, calc_c_forest_bgb, calc_c_forest_soil,
 
     c_module = C_Module(UserInput=user_input_cli)
     c_module.run()
-
-
-# cli.add_command(timba_cli, name="timba")
-# cli.add_command(load_data_cli, name="load_data")
-# cli.add_command(carbon_cli, name="carbon")
-# cli.add_command(dashboard_cli, name="dashboard")
-
