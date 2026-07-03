@@ -727,17 +727,52 @@ class TiMBA(object):
         :param opt_quantity: independent variable
         :param DOMAIN_LEN: aligned length of optimized domains
         """
+        from TiMBA.parameters.sust_harvest import SUST_HARVEST_REGION
         max_harvest_var = VarNames.MAX_HARVEST.value
-        for region in self.Data.Regions.data[Domains.Regions.region_code].iloc[:self.Data.Regions.df_length - 1]:
-            #TODO could be implemented as a specific iterator (iterate over all regions with zy and all countries without zy)
-            region_index = self.Data.data_aligned[self.Data.data_aligned[Domains.Regions.region_code] == region].index
-            total_harvest = self.Data.Forest.data_aligned[Domains.Forest.ratio_inventory_drain].iloc[
-                                region_index.min()] * cp.sum(
-                cp.multiply(opt_quantity[4 * DOMAIN_LEN + region_index.min(): 4 * DOMAIN_LEN + region_index.max() + 1],
-                            np.array(pd.DataFrame(self.Data.Forest.data_aligned[Domains.Forest.fraction_fuelwood].iloc[
-                                                      region_index]))) / ConversionParameters.MIO_FACTOR.value)
+        
+        data_aligned = self.Data.data_aligned
+        forest_data = self.Data.Forest.data_aligned
+        reg_data = self.Data.Regions
 
-            available_stock = self.Data.Forest.data_aligned[Domains.Forest.forest_stock].iloc[region_index.min()]
+        stock = Domains.Forest.forest_stock
+        stock_growth = Domains.Forest.growth_rate_forest_stock
+        reg_code = Domains.Regions.region_code
+        inv_drain = Domains.Forest.ratio_inventory_drain
+        frac_fulewood =Domains.Forest.fraction_fuelwood
+
+        forest_stock = forest_data[stock]
+        stock_growth = forest_data[stock] * (forest_data[stock_growth])
+
+        for region in reg_data.data[reg_code].iloc[:reg_data.df_length - 1]:
+            #TODO could be implemented as a specific iterator (iterate over all regions with zy and all countries without zy)
+            region_index = data_aligned[data_aligned[reg_code] == region].index
+            min_idx = 4 * DOMAIN_LEN + region_index.min()
+            max_idx = 4 * DOMAIN_LEN + region_index.max() + 1
+
+            total_harvest = (
+                forest_data[inv_drain].iloc[region_index.min()] * 
+                cp.sum(
+                    cp.multiply(
+                        opt_quantity[min_idx:max_idx],
+                        np.array(
+                            pd.DataFrame(
+                                forest_data[frac_fulewood].iloc[region_index]
+                            )
+                        )
+                    ) / ConversionParameters.MIO_FACTOR.value
+                )
+            )
+
+            available_stock = forest_stock.iloc[region_index.min()]
+
+            if region in SUST_HARVEST_REGION:
+                sustainable_stock = stock_growth.iloc[region_index.min()]
+                if sustainable_stock > 0:
+                    available_stock = sustainable_stock
+            
+            self.Logger.info(f"{region}")
+            self.Logger.info(f"available_stock: {forest_stock.iloc[region_index.min()]}")
+            self.Logger.info(f"max_harvest: {available_stock}")
 
             constraints += [total_harvest <= available_stock]
         constraint_get_position(constraints_position, max_harvest_var, constraints, constraint_counter)
