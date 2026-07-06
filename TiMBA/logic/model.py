@@ -769,10 +769,6 @@ class TiMBA(object):
                 sustainable_stock = stock_growth.iloc[region_index.min()]
                 if sustainable_stock > 0:
                     available_stock = sustainable_stock
-            
-            self.Logger.info(f"{region}")
-            self.Logger.info(f"available_stock: {forest_stock.iloc[region_index.min()]}")
-            self.Logger.info(f"max_harvest: {available_stock}")
 
             constraints += [total_harvest <= available_stock]
         constraint_get_position(constraints_position, max_harvest_var, constraints, constraint_counter)

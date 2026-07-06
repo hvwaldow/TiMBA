@@ -577,6 +577,7 @@ def dynamize_forest(Data: pd.DataFrame, DataChange: pd.DataFrame, DataSupply: pd
     Data[Domains.Forest.forest_area] = forest_area_new
     Data[Domains.Forest.forest_stock] = forest_stock_new
     Data[Domains.Forest.gdp_per_capita_base_period] = gdp_per_capita * ConversionParameters.MIO_FACTOR.value
+    Data[Domains.Forest.growth_rate_forest_stock] = (1 + stock_growth / forest_stock_prev) ** (1 / period_info["length"]) -1
     Data["ga"] = periodic_area_growth # TODO Hard code
     Data["gu"] = periodic_stock_growth_without_harvest # TODO Hard code
     Data["supply_from_forest"] = roundwood_supply.iloc[:len(Data)] # TODO Hard code
