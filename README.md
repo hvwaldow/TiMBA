@@ -4,51 +4,47 @@
 
 # TiMBA - Timber market Model for policy-Based Analysis
 
+
+
 [![CI - Test](https://img.shields.io/github/actions/workflow/status/TI-Forest-Sector-Modelling/TiMBA/actions.yml?label=CI%20-%20Test)](https://github.com/TI-Forest-Sector-Modelling/TiMBA/actions/workflows/actions.yml)
 [![Coverage](https://sonarcloud.io/api/project_badges/measure?project=TI-Forest-Sector-Modelling_TiMBA&metric=coverage)](https://sonarcloud.io/summary/new_code?id=TI-Forest-Sector-Modelling_TiMBA)
 ![GitHub Release](https://img.shields.io/github/v/release/TI-Forest-Sector-Modelling/TiMBA)
 [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.13842384.svg)](https://doi.org/10.5281/zenodo.13842384)
 [![DOI](https://joss.theoj.org/papers/10.21105/joss.08034/status.svg)](https://doi.org/10.21105/joss.08034)
-[![License](https://img.shields.io/github/license/TI-Forest-Sector-Modelling/TiMBA)](https://github.com/TI-Forest-Sector-Modelling/TiMBA/blob/main/COPYING)
+[![License](https://img.shields.io/github/license/TI-Forest-Sector-Modelling/TiMBA?style=flat)](https://github.com/TI-Forest-Sector-Modelling/TiMBA/blob/main/COPYING)
 
------------------
-
-[1. Cite TiMBA](#11-cite-timba)  
-[2. Install TiMBA](#12-install-timba)  
-&emsp;[2.1. Known Issues](#121-known-issues)  
-&emsp;[2.2. Installation Process](#122-installation-process)  
-[3. Installation](#13-installation)  
-&emsp;[3.1. PyPI](#131-from-pypi)  
-&emsp;[3.2. PyPI import and running TiMBA](#132-importing-and-running-timba)  
-&emsp;[3.3. GitHub](#133-from-github)  
-&emsp;[3.4. Double check installation and test suite](#134-double-check-installation-and-test-suite)  
-[4. Use TiMBA](#14-use-timba)  
-&emsp;[4.1. Running TiMBA](#141-running-timba)  
-&emsp;[4.2. Working with custom data](#142-working-with-custom-data)  
-[5. Model extensions](#15-model-extensions)  
-&emsp;[5.1. Interactive dashboard](#151-interactive-dashboard)  
-&emsp;[5.2. Carbon accounting](#152-carbon-accounting)  
-[6. Project structure](#16-project-structure)  
-&emsp;[6.1. Output directory](#161-output-directory)  
-&emsp;[6.2. Output management](#162-output-management)  
-&emsp;[6.3. Model settings](#163-model-settings)  
-&emsp;&emsp;[6.3.1. Settings as parameters](#1631-settings-as-parameters)  
-&emsp;&emsp;[6.3.2. Advanced settings](#1632-advanced-settings)  
-[7. TiMBA extended model description](#17-timba-extended-model-description)  
-[8. Extensions for TiMBA](#18-extensions-for-timba)  
-[9. Roadmap and project status](#19-roadmap-and-project-status)  
-[10. Contributing to the project](#110-contributing-to-the-project)  
-[11. Authors](#111-authors)  
-[12. Contribution statement](#112-contribution-statement)  
-[13. License and copyright note](#113-license-and-copyright-note)  
-[14. Acknowledgements](#114-acknowledgements)  
-[15. References](#115-references)
-
+-----------------  
 
 **TiMBA** is a partial economic equilibrium model for the global forest products market. The model endogenously simulates 
 production, consumption and trade of wood and wood-based products in 180 countries. TiMBA recursively computes the market 
 equilibrium for each country and product in a given period by maximizing the social surplus in the global forest sector. 
 In the equilibrium processes, product supply, demand and price are balanced for each simulation period. 
+
+-----------------
+
+- [TiMBA - Timber market Model for policy-Based Analysis](#timba---timber-market-model-for-policy-based-analysis)
+  - [1. Cite TiMBA](#1-cite-timba)
+  - [2. Installation](#2-installation)
+    - [2.1. PyPI package](#21-pypi-package)
+    - [2.2. GitHub repository](#22-github-repository)
+  - [3. Use TiMBA](#3-use-timba)
+  - [4. Model extensions](#4-model-extensions)
+  - [5. Project structure](#5-project-structure)
+  - [6. Model settings](#6-model-settings)
+    - [6.1. Settings as parameters](#61-settings-as-parameters)
+    - [6.2. Advanced settings](#62-advanced-settings)
+  - [7. TiMBA extended model description](#7-timba-extended-model-description)
+  - [8. Extensions for TiMBA](#8-extensions-for-timba)
+  - [9. Roadmap and project status](#9-roadmap-and-project-status)
+  - [10. Contributing to the project](#10-contributing-to-the-project)
+  - [11. Authors](#11-authors)
+  - [12. Contribution statement](#12-contribution-statement)
+  - [13. License and copyright note](#13-license-and-copyright-note)
+  - [14. Acknowledgements](#14-acknowledgements)
+  - [15. References](#15-references)
+
+
+-----------------
 
 ## 1. Cite TiMBA
 
@@ -59,32 +55,29 @@ or elsewhere, please cite the model as
 
 The authors' collective is named Thünen Institute Forest Sector Modelling (TI-FSM). The individual authors are listed as 
 Co-authors in alphabetical order. 
-## 2. Install TiMBA
+
+## 2. Installation
 
 The package is developed and tested with Python 3.9 on Windows. TiMBA is compatible with Python versions between 3.9–3.11
 with Windows and Ubuntu OS. The functionality with Python versions and different OS is continuously tested using GitHub
 Actions. 
 
-### 2.1. Known Issues
+Before proceeding, please ensure that Python is installed on your system. 
+It can be downloaded and installed from [Python.org](https://www.python.org/downloads/release/python-3119/).
+
+***Known Issues***:
 TiMBA currently has compatibility issues on macOS and with Python 3.12 and 3.13. Users may experience unexpected behavior during the optimization 
 process on macOS, as well as package installation problems when using Python 3.12 and 3.13.
 We recommend using Python 3.9–3.11 on Ubuntu or Windows for best results, until full support for Python 3.12 and 3.13 and macOS is implemented.
 
-### 2.2. Installation Process
-Before proceeding, please ensure that Python is installed on your system. 
-It can be downloaded and installed from [Python.org](https://www.python.org/downloads/release/python-3119/).
-
-## 3. Installation
 
 The package can be installed from **PyPI** or directly from **GitHub**:
 
-### 3.1. PyPI
+### 2.1. PyPI package
 
 ```bash
 pip install pytimba
 ````
-
-### 3.2. PyPI import and running TiMBA
 
 Once installed, `timba` can be imported with standard settings:
 
@@ -114,7 +107,7 @@ parameters.max_period = 2
 run_timba(Parameters=parameters)
 ```
 
-### 3.3. From GitHub:
+### 2.2. GitHub repository
 
 1. Clone the repository
 Begin by cloning the repository to your local machine using the following command: 
@@ -147,8 +140,9 @@ Enable the virtual environment to isolate TiMBA dependencies.
     If the following error occurs: "ERROR: File "setup.py" or "setup.cfg" not found."
     you might need to update the pip version you use with: 
     >python.exe -m pip install --upgrade pip  
+      
 
-### 3.4. Double check installation and test suite
+***Double check installation and test suite***:  
 Double check if installation was successful by running following command from terminal:  
    >timba --help
 
@@ -167,7 +161,7 @@ The coverage report of the TiMBA model can be accessed using:
  > coverage report
 
 
-## 4. Use TiMBA
+## 3. Use TiMBA
 
 TiMBA provides a built-in command-line interface (CLI) that enables users to download input data, execute simulations, and analyse model outputs.
 
@@ -180,8 +174,6 @@ timba load
 ```
 
 If no target directory is specified, the datasets are downloaded into the current working directory. The command retrieves the latest public release of the TiMBA default scenario. Additional scenario datasets will be published separately alongside the corresponding scientific publications.
-
-### 4.1. Running TiMBA
 
 The main entry point for executing simulations is:
 
@@ -204,8 +196,6 @@ The available CLI commands are:
 | `carbon` | Calculate forest carbon stocks in forests and harvested wood products. |
 | `dashboard` | Launch an interactive dashboard for analysing simulation results. |
 
-### 4.2. Working with custom data
-
 By default, TiMBA uses the current working directory for input and output files. A different project directory can be specified using the `-FP` (folder path) option:
 
 ```bash
@@ -220,9 +210,7 @@ To verify that the installation is working correctly, execute a simulation for t
 timba run -MP 1
 ```
 
-## 5. Model extensions
-
-### 5.1. Interactive dashboard
+## 4. Model extensions
 
 TiMBA includes support for **[TiMBA Charts](https://doi.org/10.5281/zenodo.20925292)**, an interactive dashboard for exploring simulation results.
 
@@ -242,8 +230,6 @@ To launch the dashboard automatically after a simulation finishes, use:
 timba run -SD True
 ```
 
-### 5.2. Carbon accounting
-
 TiMBA also supports a dedicated carbon accounting module:
 
 ```bash
@@ -252,7 +238,7 @@ timba carbon
 
 This module estimates carbon stocks in forests and harvested wood products based on TiMBA simulation results.
 
-## 6. Project structure
+## 5. Project structure
 
 After downloading the input data (`timba load`), the project directory is organised as follows:
 
@@ -272,9 +258,7 @@ data
 
 The serialization files are generated automatically and contain cached representations of the processed input data. They are used to speed up subsequent model runs.
 
-### 6.1. Output directory
-
-After each simulation, TiMBA creates an `output` directory inside the `data` folder.
+After simulation, TiMBA creates an `output` directory inside the `data` folder.
 
 ```text
 data
@@ -300,8 +284,6 @@ The output files contain:
 | `manufacture_<timestamp>.csv` | Manufacturing sector results in csv format. |
 | `results_aggregated_<timestamp>.csv` | Results aggregated at the continental level in csv format.|
 
-### 6.2. Output management
-
 To ensure reproducibility, TiMBA never overwrites existing simulation results.
 
 Each model run creates a new set of output files using timestamp-based filenames, for example:
@@ -313,7 +295,7 @@ results_D20260708T14-32-18.csv
 This guarantees that previous simulation results remain available for comparison and documentation.
 
 
-### 6.3. Model settings
+## 6. Model settings
 Multiple settings are integrated for the ***timba run*** command to allow users to interact with the model and adapt the modelling parameters to their research interests.
 Following chapter provides a brief overview of the model settings. A detailed description of the settings is provided in the documentation. 
 
@@ -338,7 +320,7 @@ Basic add-on module settings include (see [add-on modules for TiMBA](#add-on-mod
 TiMBA is delivered with a validated set of default settings that were tested for stability and consistency. These default parameters can be modified when executing the package via CLI or directly in `default_parameters.py`. Please note that any parameters specified in the CLI will overwrite those defined in `default_parameters.py`.  
 Not all combinations of functionalities and settings have been tested or validated. In particular, shadow and calculated price modes for country- and product-level (PP) and world (WP) prices must be applied consistently. Mixing the two (e.g., PP="calculated_PP" and WP="shadow_WP") is currently not supported and may result in an error. 
   
-#### 6.3.1. Settings as parameters
+### 6.1. Settings as parameters
 The CLI provides to access basic model settings, and their default values. 
 Check if CLI command is registered and available on your computer by executing either:
 
@@ -350,7 +332,7 @@ Default settings can be changed in the following way: (Note: The change of defau
 
 For this example, TiMBA will simulate 5 periods using calculated prices as product prices and shadow prices as world market prices.
 
-#### 6.3.2. Advanced settings
+### 6.2. Advanced settings
 In addition to the settings accessible via the CLI, users can control advanced settings through changes in `Defines.py` 
 Advance settings include:
 - solver settings (like accuracy, number of iterations and penalties)
