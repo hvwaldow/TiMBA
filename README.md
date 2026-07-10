@@ -54,15 +54,25 @@ Co-authors in alphabetical order.
 
 ## Install TiMBA
 
+The package is developed and tested with Python 3.9 on Windows 11. TiMBA is compatible with Python versions between 3.9–3.11.
+The functionality with supported Python versions is continuously tested using GitHub with [operating system images](https://github.com/actions/runner-images#available-images) `windows-latest` and `ubuntu-latest`.
+Actions.
+
 ### Requirements
 
-The package is developed and tested with Python 3.9 on Windows. TiMBA is compatible with Python versions between 3.9–3.11
-under Linux and Windows and macOS. The functionality with Python versions and different OS is continuously tested using GitHub
-Actions.
+- Operating system: Linux or Windows on a x64 architecture. We test Windows 11
+  and Ubuntu 24.04, but other Windows and Linux versions are likely to work too.
+- The Python package manager [uv](https://docs.astral.sh/uv/). We strongly
+  recommend to use `uv`, because it provides a very user-friendly,
+  platform-independent and 
+
+
+
 
 ### Quick start with uv
 
-The easiest way to get a reproducible, cross-platform environment is to use [uv](https://docs.astral.sh/uv/).
+The easiest way to get a reproducible, cross-platform environment is to use
+[uv](https://docs.astral.sh/uv/).
 
 1. Install uv:
 

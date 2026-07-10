@@ -18,26 +18,22 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
-      - name: Set up Python ${{ matrix.python-version }}
-        uses: actions/setup-python@v5
+      - name: Set up uv and Python ${{ matrix.python-version }}
+        uses: astral-sh/setup-uv@v5
         with:
+          version: "0.7.8"
           python-version: ${{ matrix.python-version }}
+          enable-cache: true
 
-      # Install dependencies necessary for the package
       - name: Install dependencies
-        run: |
-          python -m pip install --upgrade pip setuptools wheel
-          pip install -r requirements.txt
-          pip install coverage
+        run: uv sync --python ${{ matrix.python-version }}
 
-      # Generate a coverage report
       - name: Run tests with coverage
         run: |
-          python -W ignore::DeprecationWarning -m coverage run --rcfile=.coveragerc -m unittest discover
-          coverage report
-          coverage xml -o coverage.xml
+          uv run python -W ignore::DeprecationWarning -m coverage run --rcfile=.coveragerc -m unittest discover
+          uv run coverage report
+          uv run coverage xml -o coverage.xml
 
-      # Execute project scan and upload the coverage report to SonarCloud
       - name: SonarCloud Scan
         uses: sonarsource/sonarcloud-github-action@v2
         with:
@@ -45,7 +41,7 @@ jobs:
             -Dsonar.organization=ti-forest-sector-modelling
             -Dsonar.projectKey=TI-Forest-Sector-Modelling_TiMBA
             -Dsonar.projectName=TiMBA
-            -Dsonar.projectVersion=1.0.3
+            -Dsonar.projectVersion=1.3.0
             -Dsonar.python.coverage.reportPaths=coverage.xml
             -Dsonar.exclusions=test/**,**/test_*.py
         env:
