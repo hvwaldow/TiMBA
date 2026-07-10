@@ -16,6 +16,7 @@
 <!-- TOC -->
 - [Cite TiMBA](#cite-timba)
 - [Install TiMBA](#install-timba)
+    - [Quick start with uv](#quick-start-with-uv)
     - [Known Issues](#known-issues)
     - [Installation Process](#installation-process)
     - [Double check installation and test suite](#double-check-installation-and-test-suite)
@@ -45,20 +46,75 @@ In the equilibrium processes, product supply, demand and price are balanced for 
 We are happy that you use TiMBA for your research. When publishing your work in articles, working paper, presentations 
 or elsewhere, please cite the model as 
 
-[TI-FSM, Morland, C., Schier, F., Tandetzki, J., Honkomp, T. (2025). TiMBA (Timber market Model for policy-Based Analysis). Journal of Open Source Software, 10(115), 8034, https://doi.org/10.21105/joss.08034](https://joss.theoj.org/papers/10.21105/joss.08034#)
+TI-FSM, Morland, C., Schier, F., Tandetzki, J., Honkomp, T. (2025). TiMBA (Timber market Model for policy-Based Analysis). Journal of Open Source Software, 10(115), 8034, [https://doi.org/10.21105/joss.08034](https://doi.org/10.21105/joss.08034)  
+[Download BibTeX](./citation.bib)
 
 The authors' collective is named Thünen Institute Forest Sector Modelling (TI-FSM). The individual authors are listed as 
-Co-authors in alphabetical order. 
+Co-authors in alphabetical order.
+
 ## Install TiMBA
 
+### Requirements
+
 The package is developed and tested with Python 3.9 on Windows. TiMBA is compatible with Python versions between 3.9–3.11
-with Windows and Ubuntu OS. The functionality with Python versions and different OS is continuously tested using GitHub
-Actions. 
+under Linux and Windows and macOS. The functionality with Python versions and different OS is continuously tested using GitHub
+Actions.
+
+### Quick start with uv
+
+The easiest way to get a reproducible, cross-platform environment is to use [uv](https://docs.astral.sh/uv/).
+
+1. Install uv:
+
+   - **Linux / macOS**:
+     ```bash
+     curl -LsSf https://astral.sh/uv/install.sh | sh
+     ```
+   - **Windows**:
+     ```powershell
+     powershell -c "irm https://astral.sh/uv/install.ps1 | iex"
+     ```
+
+   Alternatively, install uv via pip:
+   ```bash
+   pip install uv
+   ```
+
+2. Clone the repository and move into the project folder:
+   ```bash
+   git clone https://github.com/TI-Forest-Sector-Modelling/TiMBA.git
+   cd TiMBA
+   ```
+
+3. Create the virtual environment and install the project. The project pins Python 3.11 in `.python-version`:
+   ```bash
+   uv sync
+   ```
+
+   This installs the exact dependency tree from `uv.lock` and installs the package in editable mode.
+
+4. Verify the installation and run a first period:
+   ```bash
+   uv run run_timba --help
+   uv run run_timba -MP=1
+   ```
+
+5. Run the test suite:
+   ```bash
+   uv run python -W ignore::DeprecationWarning -m coverage run --rcfile=.coveragerc -m unittest discover
+   uv run coverage report
+   ```
+
+6. Build the package:
+   ```bash
+   uv build --sdist --wheel
+   ```
+
+If you prefer not to use uv, the pip-based instructions below still work.
 
 ### Known Issues
-TiMBA currently has compatibility issues on macOS and with Python 3.12 and 3.13. Users may experience unexpected behavior during the optimization 
-process on macOS, as well as package installation problems when using Python 3.12 and 3.13.
-We recommend using Python 3.9–3.11 on Ubuntu or Windows for best results, until full support for Python 3.12 and 3.13 and macOS is implemented.
+Python 3.12 and 3.13 are currently not supported because the pinned dependencies (e.g. pandas) are not compatible with those Python versions.
+We recommend using Python 3.9–3.11 for best results. macOS is supported through the uv workflow above and is part of the CI matrix; please report any remaining platform-specific issues.
 
 ### Installation Process
 Before proceeding, please ensure that Python is installed on your system. 
@@ -150,29 +206,49 @@ Enable the virtual environment to isolate TiMBA dependencies.
    
 
 ### Double check installation and test suite
-Double check if installation was successful by running following command from terminal:  
-   >run_timba --help
+Double check if installation was successful by running the following command from the terminal:
 
-The help provides you information about the basic model settings which changed to adapt model runs to your needs 
+```bash
+run_timba --help
+```
+
+If you are using uv, run the command with the `uv run` prefix:
+
+```bash
+uv run run_timba --help
+```
+
+The help provides you information about the basic model settings which can be changed to adapt model runs to your needs
 (see section [Model settings](#model-settings) for further details).
 
 Test if TiMBA is running by executing the model only for the first period:
 
-  >run_timba -MP=1
-
+```bash
+run_timba -MP=1
+# or with uv:
+uv run run_timba -MP=1
+```
 
 The TiMBA model comes with a test suite to ensure its functionality.
 Run the test suite to check the functionality of the package and validate the produced results with those provided by the
 TI-FSM using the coverage report:
 
-  > coverage run
-
+```bash
+python -W ignore::DeprecationWarning -m coverage run --rcfile=.coveragerc -m unittest discover
+# or with uv:
+uv run python -W ignore::DeprecationWarning -m coverage run --rcfile=.coveragerc -m unittest discover
+```
 
 To reduce the test suite running time, only the first period will be computed and compared. The test suite results will not be saved.
-The computed results and provided validation results are compared with a relative tolerance of 5%.  
+The computed results and provided validation results are compared with a relative tolerance of 5%.
 
 The coverage report of the TiMBA model can be accessed using:
- > coverage report
+
+```bash
+coverage report
+# or with uv:
+uv run coverage report
+```
 
 
 ## Use TiMBA
