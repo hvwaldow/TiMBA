@@ -16,7 +16,7 @@
 -----------------  
 
 **TiMBA** is a partial economic equilibrium model for the global forest products market. The model endogenously simulates 
-production, consumption and trade of wood and wood-based products in 180 countries. TiMBA recursively computes the market 
+production, consumption, and trade of wood and wood-based products in 180 countries. TiMBA recursively computes the market 
 equilibrium for each country and product in a given period by maximizing the social surplus in the global forest sector. 
 In the equilibrium processes, product supply, demand and price are balanced for each simulation period. 
 
@@ -68,7 +68,7 @@ It can be downloaded and installed from [Python.org](https://www.python.org/down
 ***Known Issues***:
 TiMBA currently has compatibility issues on macOS and with Python 3.12 and 3.13. Users may experience unexpected behavior during the optimization 
 process on macOS, as well as package installation problems when using Python 3.12 and 3.13.
-We recommend using Python 3.9–3.11 on Ubuntu or Windows for best results, until full support for Python 3.12 and 3.13 and macOS is implemented.
+We recommend using Python 3.9–3.11 on Windows or Ubuntu for best results until full support of Python 3.12 and 3.13 and macOS is implemented.
 
 
 The package can be installed from **PyPI** or directly from **GitHub**:
@@ -173,7 +173,7 @@ The default input datasets are archived on Zenodo in the repository **[TiMBA Add
 timba load
 ```
 
-If no target directory is specified, the datasets are downloaded into the current working directory. The command retrieves the latest public release of the TiMBA default scenario. Additional scenario datasets will be published separately alongside the corresponding scientific publications.
+If no target directory is specified by the user, the datasets are downloaded into the current working directory. The command retrieves the latest public release of the TiMBA default scenario. Additional scenario datasets will be published separately alongside the corresponding scientific publications and then can be loaded separately.
 
 The main entry point for executing simulations is:
 
@@ -210,9 +210,9 @@ To verify that the installation is working correctly, execute a simulation for t
 timba run -MP 1
 ```
 
-## 4. Model extensions
+## 4. Supplementary modules
 
-TiMBA includes support for **[TiMBA Charts](https://doi.org/10.5281/zenodo.20925292)**, an interactive dashboard for exploring simulation results.
+The TiMBA ecosystem has a modular design. Thus, TiMBA includes support for **[TiMBA Charts](https://doi.org/10.5281/zenodo.20925292)**, an interactive dashboard for exploring simulation results.
 
 Launch the dashboard with:
 
@@ -297,10 +297,10 @@ This guarantees that previous simulation results remain available for comparison
 
 ## 6. Model settings
 Multiple settings are integrated for the ***timba run*** command to allow users to interact with the model and adapt the modelling parameters to their research interests.
-Following chapter provides a brief overview of the model settings. A detailed description of the settings is provided in the documentation. 
+The following chapter provides a brief overview of the model settings. A detailed description of the settings is provided in the model documentation (TI-FSM 2025). 
 
 Basic model settings include:
-- The base year of simulation (year in which is simulation starts)
+- The base year of simulation (the year in which simulation starts)
 - The maximum number of periods for the simulations
 - A flag to use product prices as shadow or calculated prices [default: shadow_PP]
 - A flag to compute world prices as shadow, constant or average prices [default: shadow_WP]
@@ -321,12 +321,12 @@ TiMBA is delivered with a validated set of default settings that were tested for
 Not all combinations of functionalities and settings have been tested or validated. In particular, shadow and calculated price modes for country- and product-level (PP) and world (WP) prices must be applied consistently. Mixing the two (e.g., PP="calculated_PP" and WP="shadow_WP") is currently not supported and may result in an error. 
   
 ### 6.1. Settings as parameters
-The CLI provides to access basic model settings, and their default values. 
-Check if CLI command is registered and available on your computer by executing either:
+The CLI provides access to basic model settings and their default values. 
+Check if CLI command is registered and available on your computer by executing:
 
 - >timba run --help
 
-Default settings can be changed in the following way: (Note: The change of default settings as described below is for demonstration purposes only, and the results have not been validated.):
+Default settings can be changed in the following way: (Note that the change of default settings as described below is for demonstration purposes only, and the results have not been validated.):
 - > timba run -MP=5 -MB="RCG_specific" -CP="True"
  
 
@@ -340,7 +340,7 @@ Advance settings include:
 
 **Caution: The model results were validated for a selection of setting combinations.**   
 Some setting combinations might not be coherent and can lead to errors in the simulations or to unreliable results. Those combinations have neither been tested nor validated.   
-Note: TiMBA has been tested for periods one to nine. Additionally, if the number of periods is changed, it is necessary to compare and adjust this in the ExogChange sheet in the input file.
+Note: TiMBA was tested with a pre-defined number of periods and respective periods' lenght. If the number of periods is changed, it is necessary to compare and adjust this in the ExogChange sheet in the input file.
 
 ## 7. TiMBA extended model description 
 TiMBA is a partial economic equilibrium model for the global forest products market. The market equilibrium is subject to 
@@ -353,23 +353,19 @@ produced from a mix of coniferous and non-coniferous industrial roundwood. Scena
 future developments. In the model framework, wood products are implicitly treated as perfect substitutes, regardless of their origin, as long as they belong 
 to the same commodity group. As the optimization of the market equilibrium in a given year does not include an elasticity of substitution, demand is merely 
 shifted by changes in income and price (Murray et al. 2004). The supply of roundwood depends on wood prices and forest development which in turn is basically 
-determined by the growth dynamics of forest stock, the change in forest area, and harvest volumes. The GDP development indicating national incomes is an important 
-driver of change. In TiMBA, demand for wood-based products is positively correlated to income, thus, an increase in income basically leads to an increase in demand. 
+determined by the growth dynamics of forest stock, the change in forest area, and harvest volumes. The GDP development indicating national incomes is an important driver of change. In TiMBA, demand for wood-based products is positively correlated to income, thus, an increase in income basically leads to an increase in demand. 
 Forest area development and thus, timber supply is coupled to GDP per capita developments based on the concept of the environmental Kuznets curve (Panayotou 2004). 
-In its basic version, TiMBA uses the assumptions made in the “Middle of the road” scenario described in “The Shared Socioeconomic Pathways” (the so called SSP2 scenario) to 
-model future GDP developments and population growth. This scenario describes a world of modest population growth and where social, economic and technological trends continue 
-similarly to historical patterns (Riahi et al. 2017). Price and income elasticities of demand are taken from Morland et al. (2018). Further exogenous specifications on technology 
-developments (input-output coefficients and manufacturing cost) are estimated based historical developments from 1993-2020. Information on trade inertia are based on 
-WTO data as provided in the GFPM (Buongiorno et al. 2015; GFPM version 1-29-2017-World500) while data on WTO Ad-valorem taxes rates are taken from Schier et al. (2025). 
+In its basic version, TiMBA uses the assumptions made in the “Middle of the road” scenario described in “The Shared Socioeconomic Pathways” (the so called SSP2 scenario) to model future GDP developments and population growth. This scenario describes a world of modest population growth and where social, economic and technological trends continue similarly to historical patterns (Riahi et al. 2017). 
+Price and income elasticities of demand are taken from Morland et al. (2018). Further exogenous specifications on technology 
+developments (input-output coefficients and manufacturing cost) are estimated based historical developments from 1993-2020. Information on trade inertia are based on WTO data as provided in the GFPM (Buongiorno et al. 2015; GFPM version 1-29-2017-World500) while data on WTO Ad-valorem taxes rates were recalculated by the authors as described in Schier et al. (2026). 
 The base year for the scenario simulations with the current version of TiMBA is 2020.
-The input data used for simulation with TiMBA needs to be calibrated and provided in a source file prior to model runs. This file is provided together with the model. 
-The calibration procedure is described in Buongiorno and Zhu (2015) and altered according to Schier et al. (2018). The input data for calibrating the model are 
-obtained from three global databases: The FAO forestry statistics (FAOSTAT), the FAO Forest Global Resources Assessment (FAO 2020) and the World Bank Development 
-Indicators (World Bank). The model output comprises information about production, consumption and trade quantities, and prices as well as forest development. The 
-model concept bases on the formal description of the Global Forest Products Model (GFPM) (Buongiorno et al. 2015, Buongiorno et al. 2003). 
+The input data used for simulation with TiMBA needs to be calibrated and provided in a source file prior to model runs. This file is provided together with the model (`scenario_input.xlsx`) as described in [3. Use TiMBA](#3-use-timba). 
+The model input data calibration procedure is described in Buongiorno and Zhu (2015) and altered according to Schier et al. (2018). The input data for calibrating the model are obtained from three global databases: The FAO forestry statistics (FAOSTAT), the FAO Forest Global Resources Assessment (FAO 2020) and the World Bank Development Indicators (World Bank). 
+The model output comprises information about production, consumption and trade quantities, and prices as well as forest development. 
+The model concept bases on the formal description of the Global Forest Products Model (GFPM) (Buongiorno et al. 2015, Buongiorno et al. 2003). 
 
-## 8. Extensions for TiMBA
-TiMBA is a flexible modelling framework that can be extended with additional applications to enable further functionalities. 
+## 8. Supplementary modules for TiMBA
+TiMBA is designed as a modular modelling framework that can be extended with additional applications to enable further functionalities. 
 Depending on the use case and the research question, users can activate or deactivate these modular extensions via the CLI or
 through the `default_parameters`. In this way, the computational load is tailored to the user's needs. The modules are designed
 as separate packages which can be imported into the main TiMBA application. These packages are usually hosted on the
@@ -395,8 +391,8 @@ The development of TiMBA is ongoing and we are already working on future release
 - To provide an easy way to visualize and analyse the output of TiMBA we published the interactive analysis toolbox TiMBA:_charts (Morland et al. 2025) that is also available in our [TiMBA repository](https://github.com/TI-Forest-Sector-Modelling/TiMBA). 
 
 Several projects are currently extending different components of TiMBA:
-- In the project [iNFORSu](https://www.thuenen.de/en/institutes/forestry/projects-1/modelling-of-the-global-roundwood-supply), we are working on the revision of the module computing forest area and stock development. Forest area development should not longer be only depend on the of GDPpc. Instead, further drivers significantly shaping forest area shall be included into the simulation. This should bring forest development and thus, wood supply closer to reality. 
-- In the project [BioSDG](https://www.thuenen.de/en/institutes/forestry/projects-1/the-bioeconomy-and-the-sustainable-development-goals-of-the-united-nations-biosdg) and [CarbonLeak](https://www.thuenen.de/en/cross-institutional-projects/carbon-leak), we extended the model to track and quantify carbon fluxes and stocks related to the forest sectors. Based on IPCC-based methods, carbon stocks in forest biomass and harvested wood products as well as substitution effects are quantified for each simulation period. This extension enables in-depth impact assessments of forest-based climate mitigation policies (e.g., carbon pricing policies and mitigation target-setting policies for the Land Use, Land Use Change and Forestry sector). The high flexibility of TiMBA allows it to cover a large panel of policy designs and conduct sensitivity analyses.   
+- In the project [iNFORSu](https://www.thuenen.de/en/institutes/forestry/projects-1/modelling-of-the-global-roundwood-supply), we are working on the revision of the module computing forest area and stock development. Forest area development should not longer be only depend on the of GDPpc. Instead, further drivers significantly shaping forest area could be included into the simulation. In addition, the authors are working on the utilization of Global Vegetation Models (GVM) results on forest area development and net-primary production for integration into TiMBA simulations. This should bring forest development and thus, wood supply closer to reality. 
+- The high flexibility of TiMBA allows it to cover a large panel of policy designs and conduct sensitivity analyses. In the project [BioSDG](https://www.thuenen.de/en/institutes/forestry/projects-1/the-bioeconomy-and-the-sustainable-development-goals-of-the-united-nations-biosdg) and [CarbonLeak](https://www.thuenen.de/en/cross-institutional-projects/carbon-leak), we extended the model to track and quantify carbon fluxes and stocks related to the forest sectors. Based on IPCC-based methods, carbon stocks in forest biomass and harvested wood products as well as substitution effects are quantified for each simulation period. This extension enables in-depth impact assessments of forest-based climate mitigation policies (e.g., carbon pricing policies and mitigation target-setting policies for the Land Use, Land Use Change and Forestry sector). 
 - In another project, we are implementing bilateral trade flows into the model framework. This step is important to enhance policy impact assessments on e.g., leakage effects.
 - Given the fast processing time, we are extending TiMBA to conduct exhaustive uncertainty analysis using Monte Carlo simulations. While these Monte Carlo simulations are currently used in the quantification of carbon stocks, their applications can be deployed to any input data of the model.
 
@@ -404,12 +400,12 @@ Several projects are currently extending different components of TiMBA:
 Frequently check [TiMBA repository](https://github.com/TI-Forest-Sector-Modelling/TiMBA) for new releases.
 
 ## 10. Contributing to the project
-We welcome contributions, additions and suggestion to further develop or improve the code and the model. To check, discuss and include them into this project, we would like you to share your ideas with us so that we can agree on the requirements needed for accepting your contribution. 
+We welcome contributions, additions, and suggestion to further develop or improve the code and the model. To check, discuss and include them into this project, we would like you to share your ideas with us so that we can agree on the requirements needed for accepting your contribution. 
 You can contact us directly via GitHub by creating issues, or by writing an Email to:
 
 [wf-timba@thuenen.de](mailto:wf-timba@thuenen.de)
 
-A scientific documentation will follow and be linked here soon. So far, this README serves as a comprehensive introduction and guidance on how to get started. 
+So far, this README serves as a comprehensive introduction and guidance on how to get started. ´The model documentation (TI-FSM 2025) and model validation (TI-FSM 2026) enables a deeper dive.
 
 
 
@@ -460,7 +456,7 @@ This work is the result of great joint efforts of the forest products market ana
 -	Pixida GmbH and especially Tobias Hierlmeier for professional support in revising and restructuring the model architecture and code and being valuable help in programming tasks
 -	Thünen Institute Service Centre for Research Data Management and especially Harald von Waldow for providing expertise, consultation, and support during the release process
 -	Holger Weimar and Matthias Dieter for the trustful and cooperative working environment, valuable support and critical discussion and the opportunity to keep on going
--	Johanna Schliemann for technical support whenever needed
+-	Johanna Schliemann and Gregor Müller for technical support whenever needed
 -	The Thünen Institut of Forestry and its Head Matthias Dieter for providing financial resources over the years 
 - [makeareadme.com](https://www.makeareadme.com/) for providing the template this README is leaned on.
 
@@ -478,6 +474,7 @@ This work is the result of great joint efforts of the forest products market ana
 - Panayotou, T. Empirical Tests and Policy Analysis of Environmental Degradation at Different Stages of Economic Development; Working Paper No. 238; International Labour Organization: Geneva, Switzerland, 1993; Available online: http://www.ilo.org/public/libdoc/ilo/1993/93B09_31_engl.pdf 
 - Riahi, K.; van Vuuren, D.P.; Kriegler, E.; Edmonds, J.; O’Neill, B.C.; Fujimori, S.; Bauer, N.; Calvin, K.; Dellink, R.; Fricko, O.; et al. The Shared Socioeconomic Pathways and their energy, land use, and greenhouse gas emissions implications: An overview. Glob. Environ. Chang. 2017, 42, 153–168.
 - Samuelson, Paul A. Spatial Price Equilibrium and Linear Programming; The American Economic Review, 1952, 42 (3), 283–303; Available online http://www.jstor.org/stable/1810381.
-- Schier, F.; Morland, C.; Tandetzki, J.; Honkomp, T. (2025). TI-Forest-Sector-Modelling/TiMBA_Additional_Information: Additional Information for TiMBA Setup (v1.0.1). Zenodo. https://doi.org/10.5281/zenodo.14928911.
+- Schier, F.; Morland, C.; Tandetzki, J.; Honkomp, T. (2026). TI-Forest-Sector-Modelling/TiMBA_Additional_Information: Reworking data files and licenses (Version v1.0.2). Zenodo. https://doi.org/10.5281/zenodo.19466845
 - TI-FSM (2025) TiMBA - Timber market Model for policy-Based Analysis: Documentation of model structure, data, and parameters. Braunschweig: Johann Heinrich von Thünen-Institut, 35 p, Thünen Working Paper 263, DOI:10.3220/253-2025-16
+- TI-FSM (2026) TiMBA - Timber market Model for policy-Based Analysis: Validation of a partial equilibrium model. Braunschweig: Johann Heinrich von Thünen-Institut, 36 p, Thünen Working Paper 282, DOI:10.3220/253-2026-29
 - World Bank. World Development Indicators|DataBank. Available online: https://databank.worldbank.org/source/world-development-indicators
