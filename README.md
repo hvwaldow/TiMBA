@@ -36,15 +36,16 @@
 
 <!-- /TOC -->
 
-**TiMBA** is a partial economic equilibrium model for the global forest products market. The model endogenously simulates 
-production, consumption and trade of wood and wood-based products in 180 countries. TiMBA recursively computes the market 
-equilibrium for each country and product in a given period by maximizing the social surplus in the global forest sector. 
-In the equilibrium processes, product supply, demand and price are balanced for each simulation period. 
+**TiMBA** is a partial economic equilibrium model for the global forest products
+market. The model endogenously simulates production, consumption and trade of
+wood and wood-based products in 180 countries. TiMBA recursively computes the
+market equilibrium for each country and product in a given period by maximizing
+the social surplus in the global forest sector. In the equilibrium processes,
+product supply, demand and price are balanced for each simulation period.
 
 ## Cite TiMBA
 
-We are happy that you use TiMBA for your research. When publishing your work in articles, working paper, presentations 
-or elsewhere, please cite the model as 
+We are happy that you use TiMBA for your research. When publishing your work in articles, working paper, presentations or elsewhere, please cite the model as 
 
 TI-FSM, Morland, C., Schier, F., Tandetzki, J., Honkomp, T. (2025). TiMBA (Timber market Model for policy-Based Analysis). Journal of Open Source Software, 10(115), 8034, [https://doi.org/10.21105/joss.08034](https://doi.org/10.21105/joss.08034)  
 [Download BibTeX](./citation.bib)
@@ -64,9 +65,9 @@ Actions.
   and Ubuntu 24.04, but other Windows and Linux versions are likely to work too.
 - The Python package manager [uv](https://docs.astral.sh/uv/). We strongly
   recommend to use `uv`, because it provides a very user-friendly,
-  platform-independent and 
+  platform-independent and reliable way to install, use and develop TiMBA.
 
-
+------- BEGIN WIP ------------------
 
 
 ### Quick start with uv
@@ -82,7 +83,8 @@ The easiest way to get a reproducible, cross-platform environment is to use
      ```
    - **Windows**:
      ```powershell
-     powershell -c "irm https://astral.sh/uv/install.ps1 | iex"
+
+     powershell -ExecutionPolicy ByPass -c "irm https://astral.sh/uv/install.ps1 | iex"
      ```
 
    Alternatively, install uv via pip:
@@ -162,7 +164,7 @@ run_timba(folderpath=Path(r"your_path"))
 To modify specific parameters, the user can import `parameter_setter` from `TiMBA.main` and set new values:
 
 ```python
-from timba.main import run_timba, parameter_setter
+from TiMBA.main import run_timba, parameter_setter
 
 parameters = parameter_setter()
 parameters.max_period = 2
@@ -214,6 +216,8 @@ Enable the virtual environment to isolate TiMBA dependencies.
 7. If the user does not set any folderpath the standard input data will be loaded to the current working directory or the folderpath which is set with:
    >run_timba -FP your_path 
    
+------------------ END WIP -------------------------
+
 
 ### Double check installation and test suite
 Double check if installation was successful by running the following command from the terminal:
@@ -471,10 +475,12 @@ This work is the result of great joint efforts of the forest products market ana
 - [makeareadme.com](https://www.makeareadme.com/) for providing the template this README is leaned on.
 
 ## References
+- Barker, M., Chue Hong, N.P., Katz, D.S. et al. Introducing the FAIR Principles for research software. Sci Data 9, 622 (2022). https://doi.org/10.1038/s41597-022-01710-x
 - Buongiorno, J.; Zhu, S.; Zhang, D.; Turner, J.; Tomberlin, D. The Global Forest Products Model; Academic Press: Cambridge, MA, USA, 2003; ISBN 978-0-12-141362-0
 - Buongiorno, J. Global modelling to predict timber production and prices: The GFPM approach. Forestry 2015, 88, 291–303.
 - Buongiorno, J.; and Zhu, S. 2015. Technical change in forest sector models: The GFPM approach.  Scand. J. For. Research, 30, 30-48.
 - GFPM - Global Forest Product Model is available at https://onedrive.live.com/?authkey=%21AEF7RY7oAPlrDPk&id=93BC28B749A1DFB6%21118&cid=93BC28B749A1DFB6
+- Chue Hong, N.P. et al. (2022) “FAIR Principles for Research Software (FAIR4RS Principles)”. Zenodo. Available at: https://doi.org/10.15497/RDA00068.
 - FAO. Global Forest Resources Assessment: Terms and Definitions; Forest Resources Assessment Working Paper 188; FAO: Rome, Italia, 2020; Available online: http://www.fao.org/3/I8661EN/i8661en.pdf
 - FAO. Global Forest Resources Assessment. 2022. Available online: https://fra-data.fao.org/
 - FAOSTAT. Forestry Production and Trade: Datenbank. Available online: https://www.fao.org/faostat/en/#data/FO
@@ -486,4 +492,113 @@ This work is the result of great joint efforts of the forest products market ana
 - Samuelson, Paul A. Spatial Price Equilibrium and Linear Programming; The American Economic Review, 1952, 42 (3), 283–303; Available online http://www.jstor.org/stable/1810381.
 - Schier, F.; Morland, C.; Tandetzki, J.; Honkomp, T. (2025). TI-Forest-Sector-Modelling/TiMBA_Additional_Information: Additional Information for TiMBA Setup (v1.0.1). Zenodo. https://doi.org/10.5281/zenodo.14928911.
 - TI-FSM (2025) TiMBA - Timber market Model for policy-Based Analysis: Documentation of model structure, data, and parameters. Braunschweig: Johann Heinrich von Thünen-Institut, 35 p, Thünen Working Paper 263, DOI:10.3220/253-2025-16
+- von Waldow, H. (2024). Research Software Licensing Guide (Version v1.0.2). Zenodo. https://doi.org/10.5281/zenodo.14008091
 - World Bank. World Development Indicators|DataBank. Available online: https://databank.worldbank.org/source/world-development-indicators
+
+
+## FAIR research software
+
+We attempt to adhere as much as possible to the FAIR Principles for research
+software (e.g. see Barker et al. 2022 and Chue Hong et al. 2022) and reach high
+standards of scientific quality and openness. I you find TiMBA or its
+publication lacking in that regard, we very much appreciate your feedback as an
+[Issue](https://github.com/TI-Forest-Sector-Modelling/TiMBA/issues/new/choose)
+in the GitHub repository or via email to [wf-timba@thuenen.de](mailto:wf-timba@thuenen.de).
+
+In the following we detail our efforts and considerations.
+
+
+### Findable
+
+- Zenodo provided DOI with extensive metadata according to the DataCite schema.
+  - Separate DOIs for each release and one representing all releases.
+- A set of SWHID (Software Hash IDentifiers) is created by the [Software
+  Heritage archive](https://archive.softwareheritage.org/) for each release and
+  refereneces the code in a very granular fashion.
+- An accompanying [software paper](https://doi.org/10.21105/joss.08034) makes
+  sure the software is also referenced in search indices that focus on journal articles.
+- We provide rich metadata also as Linked Data in the form of the file `codemeta.json` in the
+  [CodeMeta](https://codemeta.github.io/) standard.
+
+
+### Accessible
+
+- The source code can be accessed in the form of a *git remote* from GitHub, via
+  *http* from Zenodo, but also by Python package managers through the [Python
+  Package Index](https://pypi.org/), both as source distribution and as a
+  *Wheel*.
+
+- Metadata is preserved to a very high degree of safety in a redundant fashion.
+  The DataCite type metadata not only preserved by DataCite but also by Zenodo
+  and in the form of a file `zenodo.json` on GitHub and in the SoftwareHeritage
+  datacenters. These three repositories also hold the file `codemeta.json`.
+
+- We are aware that Microsoft GitHub, as a profit driven commercial service, is
+  tainted by political and company-strategic limitations, in particular with
+  regard to data safety, security, adherence to scientific community-standards
+  and long-term viability. However, GitHub's comfortable integration with Zenodo
+  yields a lot of benefits that we could not achive otherwise with our limited
+  resources. We hope that a comparable integration will be developed in the
+  future for better suited Forges such as [Forgejo](https://forgejo.org/) or
+  self-hosted [GitLab](gitlab.com).
+
+### Interoperable
+
+#### Software interoperability
+
+- TiMBA installs both as executable script (`timba_run`) as well as as a Python
+  module (`TiMBA`). The script copies its output also to STDOUT and allows to
+  chain TiMBA with other command line tools in a classical UNIX fashion.
+  Importing the module allows users to integrate TiMBA into their own Python
+  programs.
+  
+- We also maintain extensions to TiMBA ([Crabon
+  Module](https://github.com/TI-Forest-Sector-Modelling/C-Module) and [TiMBA
+  Charts](https://github.com/TI-Forest-Sector-Modelling/TiMBA_Charts)) in the
+  form of Python packages that can be used by importing them. These packages
+  also adhere to FAIR principles, are version-controlled in GitHub and can be
+  referenced with DOIs registered by Zenodo.
+
+#### Data interoperability
+
+- TiMBA relies on a set of required input data. The canonical versions of these
+  data (a non-trivial scientific output) are also kept [version controlled in
+  GitHub](https://github.com/TI-Forest-Sector-Modelling/TiMBA_Additional_Information)
+  and releases are [published to
+  Zenodo](https://doi.org/10.5281/zenodo.14928910).
+
+- The main input data file is Office Open XML ("Microsoft Excel") format. We are
+  aware that this format is not a good choice from a purely technical point of
+  view and has severe shortcomings with regard to robustness, stability over
+  time, machine readability, interoperability, platform independence and
+  accessibility. However, this is the optimal format to make the input
+  understandable and modifyable by our main target group, who understands
+  Microsoft Excel very well but might struggle with less common formats and
+  conventions. This is a cultural and educational problem we can't solve in this
+  context. We are familiar with and track projects such as [Frictionnless
+  Data](https://frictionlessdata.io/) with its [Data Package
+  standard](https://datapackage.org/). We hope to eventually be able to combine
+  user-friendliness with robust data standards to represent our input data.
+
+- TiMBA output is written to universally readable CSV-files. We plan to describe
+  these files with standardized metadata in the future.
+
+### Reusable
+
+- TiMBA has dependencies and sub-dependencies which are extensively recorded in
+  the `uv.lock` file to ensure reproducibility.
+- We continually strife to keep and improve software quality. We utilize
+  automated CI processes (testing for different platforms, linting) in the form
+  of GitHub workflows.
+- We have licensed the software under the [GNU Affero General Public
+  License](https://www.gnu.org/licenses/agpl-3.0.txt). On the one hand side this
+  license is most compatible with the potential need to In-license further
+  dependencies. On the other hand, as a *Copyleft* license, it is very well
+  suited to support Open Science, reproducibility and transparency (von Waldow,
+  2024).
+- The scientific background and in particular prior software on which this work
+  improves, is extensively documented and referenced in this README file.
+- Python as a programming language, adherence to an improved (`ruff`-defaults)
+  PEP 8 style guide, default installation as "editable", user-friendly
+  formatting of input data, and instructions about how to contribute increase
+  the chances that this software is being reused in our research community.
