@@ -1,5 +1,26 @@
 # Changelog
 
+## [Unreleased]
+
+### Added
+- Integration of the TiMBA Charts package into TiMBA.
+- Added a CLI command to launch the Validation Dashboard.
+- Added package information to the YAML log output.
+
+### Changed
+- Revised and streamlined command-line interface (CLI) for executing core functionality.
+- Revised path management for the TiMBA Charts integration.
+- Updated the branch used for the Additional Info repository.
+
+### Fixed
+- Fixed issues in the Validation Dashboard integration.
+- Resolved permission errors by adjusting the main execution loop.
+
+### Documentation
+- Updated and extended the project README.
+- Revised section numbering and the table of contents.
+  
+
 ## [v1.3.0] - 2025-12-03
 
 ### Added
