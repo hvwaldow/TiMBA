@@ -6,10 +6,19 @@ from TiMBA.data_management.Load_Data import load_data
 from TiMBA.parameters.paths import (
     GIT_USER, GIT_REPO, GIT_BRANCH, DESTINATION_PATH, GIT_FOLDER)
 from TiMBA.logic.model_extensions import run_extensions
-from TiMBA.data_management.ParameterCollector import ParameterCollector
-from TiMBA.parameters import INPUT_WORLD_PATH
-from TiMBA.parameters.paths import OUTPUT_DIR, ADDINFOPTHTOOLBOX 
 from TiMBA.parameters.Defines import ParamNames
+from TiMBA.user_io.default_parameters import (
+    default_year, default_max_period, default_calc_product_price,
+    default_calc_world_price, default_transportation_impexp_factor,
+    default_MB, global_material_balance, serialization_flag,
+    constants, dynamization_activated, cleaned_opt_quantity,
+    capped_prices, verbose_optimization_logger, verbose_calculation_logger,
+    read_additional_information_file, activate_add_on_cmodule,
+    sc_num, read_in_pkl, calc_c_forest_agb, calc_c_forest_bgb,
+    calc_c_forest_soil, calc_c_forest_dwl, calc_c_hwp,
+    c_hwp_accounting_approach, historical_c_hwp, hist_hwp_start_year,
+    hist_hwp_start_year_default, show_carbon_dashboard, fao_data_update
+    )
 from c_module.logic.main import C_Module
 import warnings
 from Toolbox.toolbox import timba_dashboard
