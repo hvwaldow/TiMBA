@@ -80,13 +80,14 @@ e.g. `python3.11 -m venv .venv`.
 
 ### Install uv
 
-- **Linux**:
-  ```bash
-  curl -LsSf https://astral.sh/uv/install.sh | sh
-  ```
-- **Windows**:
-  ```powershell
-  powershell -ExecutionPolicy ByPass -c "irm https://astral.sh/uv/install.ps1 | iex"
+#### Linux
+
+```bash
+curl -LsSf https://astral.sh/uv/install.sh | sh
+```
+#### Windows
+```powershell
+powershell -ExecutionPolicy ByPass -c "irm https://astral.sh/uv/install.ps1 | iex"
 ```
 
 ### Install the TiMBA command line programs
