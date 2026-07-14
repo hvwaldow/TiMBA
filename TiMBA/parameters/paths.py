@@ -3,7 +3,8 @@ DATA_FOLDER = r"TiMBA/data/"
 
 # Paths for input files
 INPUT_WORLD_PATH = r"input/01_Input_Files/"
-ADDITIONAL_INFORMATION_PATH = r"input/02_Additional_Information/additional_information.xlsx"
+ADDITIONAL_INFORMATION_PATH = (
+    r"input/02_Additional_Information/additional_information.xlsx")
 WORLDPRICE_PATH = r"input/02_Additional_Information/worldprice_world500.xlsx"
 PKL_WORLD_PATH = r"input/03_Serialization/WorldDataContent.pkl"
 PKL_ADD_INFO_PATH = r"input/03_Serialization/AddInfoContent.pkl"

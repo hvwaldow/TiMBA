@@ -1,5 +1,5 @@
 from TiMBA.main_runner.main_runner import main
-from TiMBA.parameters import INPUT_WORLD_PATH, DATA_FOLDER
+from TiMBA.parameters import INPUT_WORLD_PATH
 from TiMBA.logic.model_extensions import run_extensions
 from TiMBA.data_management.ParameterCollector import ParameterCollector
 from TiMBA.parameters.paths import INPUT_WORLD_PATH,OUTPUT_DIR, ADDINFOPTHTOOLBOX 
@@ -17,8 +17,10 @@ from TiMBA.parameters.paths import (
     ADDINFOPTHTOOLBOX
 )
 from TiMBA.data_management.Load_Data import load_data
+warnings.simplefilter(action='ignore', category=FutureWarning)
 
-def run_timba(Parameters:dict=None,folderpath:str=None):
+
+def run_timba(Parameters: dict = None, folderpath: str = None):
     if Parameters is None:
         print("Paramerters need to be set before running TiMBA.",
               "Note: For this simulation standard parameters are used from, ",
@@ -26,15 +28,16 @@ def run_timba(Parameters:dict=None,folderpath:str=None):
         Parameters = parameter_setter()
     PACKAGEDIR = Path(__file__).parent.parent.absolute()
     if folderpath is None:
-            folderpath = PACKAGEDIR
+        folderpath = PACKAGEDIR
     INPUT_PATH = folderpath / DATA_FOLDER / INPUT_WORLD_PATH
     if os.path.exists(INPUT_PATH):
         pass
     else:
-        print("FileNotFoundError at: ",INPUT_PATH)
+        print("FileNotFoundError at: ", INPUT_PATH)
         print(f"Make sure input data is downloaded to {INPUT_PATH} \nor ",
               "change the folder path where the data is stored.",
-              "Note: For this simulation standard input files will be loaded from GitHub",
+              """Note: For this simulation standard input
+              files will be loaded from GitHub""",
               f"and saved at {folderpath / DESTINATION_PATH}")
         load_data(
             user=GIT_USER,
@@ -88,6 +91,7 @@ def parameter_setter():
     from TiMBA.user_io.default_parameters import user_input
     return ParameterCollector(user_input=user_input)
 
+
 if __name__ == '__main__':
     Parameters = parameter_setter()
     Parameters.max_period = 1
@@ -95,3 +99,4 @@ if __name__ == '__main__':
     world_list = run_timba(Parameters=Parameters,folderpath=Path(r"E:/"))
     #run_extensions(UserIO=Parameters)
 
+    # run_extensions(UserIO=Parameters)

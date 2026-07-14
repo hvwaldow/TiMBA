@@ -8,32 +8,61 @@ class ParameterCollector:
     """
     Class to collect user IO and propagate through application.
     """
-    def __init__(self, user_input: dict, folderpath: Union[str, Path, None] = None):
+    def __init__(self, user_input: dict,
+                 folderpath: Union[str, Path, None] = None):
         """
         :param year: ...
         :param max_period: ...
         :param country: ...
         :param product: ...
         :param calc_product_prices: Switch to enable/disable shadow-price calc
-        :param transportation_imp_exp_bound_factor: Factor to be used in model.set_bounds() for import/export
+        :param transportation_imp_exp_bound_factor: Factor to be used in
+        model.set_bounds() for import/export
         :param param_x: EXEMPLARY ADDITIONAL PARAM  TODO: Drop
         :param param_y: EXEMPLARY ADDITIONAL PARAM  TODO: Drop
         """
-        self._year = user_input[ParamNames.year.value]
-        self._max_period = user_input[ParamNames.max_period.value]
-        self._calc_product_prices = user_input[ParamNames.product_price.value]
-        self._calc_world_prices = user_input[ParamNames.world_price.value]
-        self._transportation_imp_exp_bound_factor = user_input[ParamNames.transportation_factor.value]
-        self._material_balance = user_input[ParamNames.material_balance.value]
-        self._global_material_balance = user_input[ParamNames.global_material_balance.value]
-        self._serialization = user_input[ParamNames.serialization.value]
-        self._constants = user_input[ParamNames.constants.value]
-        self._dynamization_activated = user_input[ParamNames.dynamization_activated.value]
-        self._capped_prices = user_input[ParamNames.capped_prices.value]
-        self._cleaned_opt_quantity = user_input[ParamNames.cleaned_opt_quantity.value]
-        self._verbose_optimization_logger = user_input[ParamNames.verbose_optimization_logger.value]
-        self._verbose_calculation_logger = user_input[ParamNames.verbose_calculation_logger.value]
-        self._addInfo = user_input[ParamNames.addInfo.value]
+        self._year = (
+            user_input[ParamNames.year.value]
+            )
+        self._max_period = (
+            user_input[ParamNames.max_period.value]
+            )
+        self._calc_product_prices = (
+            user_input[ParamNames.product_price.value])
+        self._calc_world_prices = (
+            user_input[ParamNames.world_price.value]
+            )
+        self._transportation_imp_exp_bound_factor = (
+            user_input[ParamNames.transportation_factor.value]
+            )
+        self._material_balance = (
+            user_input[ParamNames.material_balance.value]
+            )
+        self._global_material_balance = (
+            user_input[ParamNames.global_material_balance.value]
+            )
+        self._serialization = (
+            user_input[ParamNames.serialization.value]
+            )
+        self._constants = (
+            user_input[ParamNames.constants.value]
+            )
+        self._dynamization_activated = (
+            user_input[ParamNames.dynamization_activated.value]
+            )
+        self._capped_prices = (user_input[ParamNames.capped_prices.value])
+        self._cleaned_opt_quantity = (
+            user_input[ParamNames.cleaned_opt_quantity.value]
+            )
+        self._verbose_optimization_logger = (
+            user_input[ParamNames.verbose_optimization_logger.value]
+            )
+        self._verbose_calculation_logger = (
+            user_input[ParamNames.verbose_calculation_logger.value]
+            )
+        self._addInfo = (
+            user_input[ParamNames.addInfo.value]
+            )
         self._folderpath = folderpath
         self._activate_add_on_cmodule = user_input[ParamNames.activate_cmodule.value]
         self._sc_num = user_input[ParamNames.sc_num.value]
@@ -315,7 +344,8 @@ class ParameterCollector:
                     f"max_period={self.max_period}, "
                     f"calc_product_prices={self.calc_product_prices}, "
                     f"calc_world_prices={self.calc_world_prices}, "
-                    f"transportation_imp_exp_bound_factor={self.transportation_imp_exp_bound_factor}"
+                    f"""transportation_imp_exp_bound_factor=
+                    {self.transportation_imp_exp_bound_factor}"""
                     f"material_balance={self.material_balance}, "
                     )
 
