@@ -54,7 +54,7 @@ or elsewhere, please cite the model as
 [TI-FSM, Morland, C., Schier, F., Tandetzki, J., Honkomp, T. (2025). TiMBA (Timber market Model for policy-Based Analysis). Journal of Open Source Software, 10(115), 8034, https://doi.org/10.21105/joss.08034](https://joss.theoj.org/papers/10.21105/joss.08034#)
 
 The authors' collective is named Thünen Institute Forest Sector Modelling (TI-FSM). The individual authors are listed as 
-Co-authors in alphabetical order. 
+co-authors in alphabetical order. 
 
 ## 2. Installation
 
@@ -68,7 +68,7 @@ It can be downloaded and installed from [Python.org](https://www.python.org/down
 ***Known Issues***:
 TiMBA currently has compatibility issues on macOS and with Python 3.12 and 3.13. Users may experience unexpected behavior during the optimization 
 process on macOS, as well as package installation problems when using Python 3.12 and 3.13.
-We recommend using Python 3.9–3.11 on Windows or Ubuntu for best results until full support of Python 3.12 and 3.13 and macOS is implemented.
+We recommend using Python 3.9–3.11 on Windows or Ubuntu OS for best results until full support of Python 3.12 and 3.13 and macOS is implemented.
 
 
 The package can be installed from **PyPI** or directly from **GitHub**:
@@ -192,12 +192,12 @@ Although TiMBA can also be imported directly as a Python package, the CLI is the
 
 The available CLI commands are:
 
-| Command | Description |
-|---------|-------------|
-| `load` | Download input datasets from the TiMBA data repository. |
-| `run` | Execute TiMBA simulations. |
-| `carbon` | Calculate forest carbon stocks in forests and harvested wood products. |
-| `dashboard` | Launch an interactive dashboard for analysing simulation results. |
+| Command     | Description                                                            |
+|-------------|------------------------------------------------------------------------|
+| `load`      | Download input datasets from the TiMBA data repository.                |
+| `run`       | Execute TiMBA simulations.                                             |
+| `carbon`    | Calculate forest carbon stocks in forests and harvested wood products. |
+| `dashboard` | Launch an interactive dashboard for analysing simulation results.      |
 
 By default, TiMBA uses the current working directory for input and output files. A different project directory can be specified using the `-FP` (folder path) option:
 
@@ -215,7 +215,8 @@ timba run -MP 1
 
 ## 4. Supplementary modules
 
-The TiMBA ecosystem has a modular design. Thus, TiMBA includes support for **[TiMBA Charts](https://doi.org/10.5281/zenodo.20925292)**, an interactive dashboard for exploring simulation results.
+The TiMBA ecosystem has a modular design. Each module extends the base functionality of TiMBA in a specific way.
+TiMBA includes support for **[TiMBA Charts](https://doi.org/10.5281/zenodo.20925292)**, an interactive dashboard for exploring simulation results.
 
 Launch the dashboard with:
 
@@ -233,13 +234,13 @@ To launch the dashboard automatically after a simulation finishes, use:
 timba run -SD True
 ```
 
-TiMBA also supports a dedicated carbon accounting module:
+TiMBA also supports a dedicated **[Carbon Module](https://zenodo.org/records/17814169)**:
 
 ```bash
 timba carbon
 ```
 
-This module estimates carbon stocks in forests and harvested wood products based on TiMBA simulation results.
+This module estimates carbon stocks in forest biomass, forest soils, deadwood, litter, harvested wood products, and substitution effects based on TiMBA simulation results and historical statistics on forest resources and forest product markets ([Honkomp 2026](https://www.sciencedirect.com/science/article/pii/S2352711026000828#abs0001)).
 
 ## 5. Project structure
 
@@ -277,15 +278,15 @@ data
 
 The output files contain:
 
-| File | Description |
-|------|-------------|
-| `TiMBA.log` | Log file containing information about the simulation process. |
-| `DataContainer_<timestamp>.pkl` | Complete serialized simulation results for programmatic use. |
-| `results_<timestamp>.csv` | Main simulation results in csv format. |
-| `worldprices_<timestamp>.csv` | World price results in csv format. |
-| `forest_<timestamp>.csv` | Forest area and forest stock results in csv format. |
-| `manufacture_<timestamp>.csv` | Manufacturing sector results in csv format. |
-| `results_aggregated_<timestamp>.csv` | Results aggregated at the continental level in csv format.|
+| File                                 | Description                                                   |
+|--------------------------------------|---------------------------------------------------------------|
+| `TiMBA.log`                          | Log file containing information about the simulation process. |
+| `DataContainer_<timestamp>.pkl`      | Complete serialized simulation results for programmatic use.  |
+| `results_<timestamp>.csv`            | Main simulation results in csv format.                        |
+| `worldprices_<timestamp>.csv`        | World price results in csv format.                            |
+| `forest_<timestamp>.csv`             | Forest resources-related results in csv format.               |
+| `manufacture_<timestamp>.csv`        | Manufacturing sector-related results in csv format.           |
+| `results_aggregated_<timestamp>.csv` | Results aggregated at the continental level in csv format.    |
 
 To ensure reproducibility, TiMBA never overwrites existing simulation results.
 
@@ -303,23 +304,24 @@ Multiple settings are integrated for the ***timba run*** command to allow users 
 The following chapter provides a brief overview of the model settings. A detailed description of the settings is provided in the model documentation (TI-FSM 2025). 
 
 Basic model settings include:
-| Option                              | Parameter                      | Type  | Default                              |
-| ----------------------------------- | ------------------------------ | ----- | ------------------------------------ |
-| `-Y`, `--year`                      | `year`                         | int   | default_year                         |
-| `-MP`, `--max_period`               | `max_period`                   | int   | default_max_period                   |
-| `-PP`, `--calc_product_price`       | `calc_product_price`           | str   | default_calc_product_price           |
-| `-WP`, `--calc_world_price`         | `calc_world_price`             | str   | default_calc_world_price             |
-| `-MB`, `--material_balance`         | `material_balance`             | str   | default_MB                           |
-| `-GMB`, `--global_material_balance` | `global_material_balance`      | bool  | global_material_balance              |
-| `-TF`, `--trans_imp_exp_factor`     | `transportation_impexp_factor` | float | default_transportation_impexp_factor |
-| `-S`, `--serialization`             | `serialization`                | bool  | serialization_flag                   |
-| `-D`, `--dynamization`              | `dynamization_activated`       | bool  | dynamization_activated               |
-| `-COQ`, `--cleaned_opt_quantity`    | `cleaned_opt_quantity`         | bool  | cleaned_opt_quantity                 |
-| `-CP`, `--capped_prices`            | `capped_prices`                | bool  | capped_prices                        |
-| `-VO`, `--verb_opt_log`             | `verbose_optimization_logger`  | bool  | verbose_optimization_logger          |
-| `-VT`, `--verb_calc_log`            | `verbose_calculation_logger`   | bool  | verbose_calculation_logger           |
-| `-FP`, `--folderpath`               | `folderpath`                   | Path  | `cwd`                                |
-| `-C`, `--activate_cmodule`          | `activate_cmodule`             | bool  | False                                |
+
+| Option                              | Parameter                      | Type   | Default                              |
+|-------------------------------------|--------------------------------|--------|--------------------------------------|
+| `-Y`, `--year`                      | `year`                         | int    | default_year                         |
+| `-MP`, `--max_period`               | `max_period`                   | int    | default_max_period                   |
+| `-PP`, `--calc_product_price`       | `calc_product_price`           | str    | default_calc_product_price           |
+| `-WP`, `--calc_world_price`         | `calc_world_price`             | str    | default_calc_world_price             |
+| `-MB`, `--material_balance`         | `material_balance`             | str    | default_MB                           |
+| `-GMB`, `--global_material_balance` | `global_material_balance`      | bool   | global_material_balance              |
+| `-TF`, `--trans_imp_exp_factor`     | `transportation_impexp_factor` | float  | default_transportation_impexp_factor |
+| `-S`, `--serialization`             | `serialization`                | bool   | serialization_flag                   |
+| `-D`, `--dynamization`              | `dynamization_activated`       | bool   | dynamization_activated               |
+| `-COQ`, `--cleaned_opt_quantity`    | `cleaned_opt_quantity`         | bool   | cleaned_opt_quantity                 |
+| `-CP`, `--capped_prices`            | `capped_prices`                | bool   | capped_prices                        |
+| `-VO`, `--verb_opt_log`             | `verbose_optimization_logger`  | bool   | verbose_optimization_logger          |
+| `-VT`, `--verb_calc_log`            | `verbose_calculation_logger`   | bool   | verbose_calculation_logger           |
+| `-FP`, `--folderpath`               | `folderpath`                   | Path   | `cwd`                                |
+| `-C`, `--activate_cmodule`          | `activate_cmodule`             | bool   | False                                |
 
 
 Basic add-on module settings include (see [add-on modules for TiMBA](#add-on-modules-for-timba)):
@@ -386,18 +388,16 @@ This sections provides an overview of available extensions. Beyond the activatio
 settings to adapt their functionality to specific use cases. For details about each module and its configuration options,
 users should refer the respective GitHub repositories.   
 
-|    Module     |                                                                                                                                                         Description                                                                                                                                                         |                                      Activation                                      |                           GitHub project                            |                       Citation                        |
-|:-------------:|:---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------:|:------------------------------------------------------------------------------------:|:-------------------------------------------------------------------:|:-----------------------------------------------------:|
-| Carbon Module | tracks carbon stocks and stock changes across pools in the forestry sector including aboveground and belowground biomass, forest soils, deadwood and litter, and harvested wood products. The module applies updated guidelines of the IPCC (2019). A visualization dashbord for carbon results is generated automatically. | `activate_cmodule=True` in `default_parameters.py` <br/>or<br/> `-C=True` in the CLI | [C-Module](https://github.com/TI-Forest-Sector-Modelling/C-Module)  | [Honkomp (2025)](https://zenodo.org/records/16912178) |
-| TiMBA Charts | an analysis toolbox with multiple dashboards about the main TiMBA results | `timba run -SD True` to open the toolbox directly after simulation has ended, or `timba dashboard` to open the toolbox indepently from a specific TiMBA run | [TiMBA Charts](https://github.com/TI-Forest-Sector-Modelling/TiMBA_Charts)  | [Morland, C., Tandetzki, J., & Honkomp, T. (2026)](https://doi.org/10.5281/zenodo.20925292) |
-
-
+|    Module     |                                                                                                                                                         Description                                                                                                                                                         |                                                                         Activation                                                                          |                               GitHub project                               |                                           Citation                                           |
+|:-------------:|:---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------:|:-----------------------------------------------------------------------------------------------------------------------------------------------------------:|:--------------------------------------------------------------------------:|:--------------------------------------------------------------------------------------------:|
+| Carbon Module | tracks carbon stocks and stock changes across pools in the forestry sector including aboveground and belowground biomass, forest soils, deadwood and litter, and harvested wood products. The module applies updated guidelines of the IPCC (2019). A visualization dashbord for carbon results is generated automatically. |                                    `activate_cmodule=True` in `default_parameters.py` <br/>or<br/> `-C=True` in the CLI                                     |     [C-Module](https://github.com/TI-Forest-Sector-Modelling/C-Module)     |                    [Honkomp (2025)](https://zenodo.org/records/16912178)                     |
+| TiMBA Charts  |                                                                                                                          an analysis toolbox with multiple dashboards about the main TiMBA results                                                                                                                          | `timba run -SD True` to open the toolbox directly after simulation has ended, or `timba dashboard` to open the toolbox indepently from a specific TiMBA run | [TiMBA Charts](https://github.com/TI-Forest-Sector-Modelling/TiMBA_Charts) | [Morland, C., Tandetzki, J., & Honkomp, T. (2026)](https://doi.org/10.5281/zenodo.20925292)  |
 
 ## 9. Roadmap and project status
 
 The development of TiMBA is ongoing and we are already working on future releases.
 
-- To provide an easy way to visualize and analyse the output of TiMBA we published the interactive analysis toolbox TiMBA:_charts (Morland et al. 2025) that is also available in our [TiMBA repository](https://github.com/TI-Forest-Sector-Modelling/TiMBA). 
+- To provide an easy way to visualize and analyse the output of TiMBA we published the interactive analysis toolbox TiMBA_Charts (Morland et al. 2025) that is also available in our [TiMBA repository](https://github.com/TI-Forest-Sector-Modelling/TiMBA). 
 
 Several projects are currently extending different components of TiMBA:
 - In the project [iNFORSu](https://www.thuenen.de/en/institutes/forestry/projects-1/modelling-of-the-global-roundwood-supply), we are working on the revision of the module computing forest area and stock development. Forest area development should not longer be only depend on the of GDPpc. Instead, further drivers significantly shaping forest area could be included into the simulation. In addition, the authors are working on the utilization of Global Vegetation Models (GVM) results on forest area development and net-primary production for integration into TiMBA simulations. This should bring forest development and thus, wood supply closer to reality. 
