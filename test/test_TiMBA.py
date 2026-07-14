@@ -155,6 +155,7 @@ class TestTiMBAClass(unittest.TestCase):
         with patch("TiMBA.cli.cli.run_timba") as mock_timba, \
              patch("TiMBA.cli.cli.run_extensions") as mock_ext, \
              patch("TiMBA.cli.cli.load_data") as mock_load, \
+             patch("TiMBA.cli.cli.timba_dashboard") as mock_dashboard, \
              patch("TiMBA.cli.cli.C_Module") as mock_c:
 
             # Setup mock for C_Module.run
@@ -162,7 +163,7 @@ class TestTiMBAClass(unittest.TestCase):
             mock_instance.run.return_value = None
 
             # ---- timba command ----
-            res = runner.invoke(cli, ["timba"])
+            res = runner.invoke(cli, ["run"])
             self.assertEqual(res.exit_code, 0,
                              f"timba command failed: {res.output}")
             mock_timba.assert_called_once()
@@ -170,7 +171,7 @@ class TestTiMBAClass(unittest.TestCase):
 
             # ---- load_data command ----
             res = runner.invoke(cli, [
-                "load_data",
+                "load",
                 "--user", "dummy_user",
                 "--repo", "dummy_repo",
                 "--branch", "main",
@@ -180,6 +181,17 @@ class TestTiMBAClass(unittest.TestCase):
             self.assertEqual(res.exit_code, 0,
                              f"load_data command failed: {res.output}")
             mock_load.assert_called_once()
+
+            # ---- dashboard command ----
+            res = runner.invoke(cli, [
+                "dashboard",
+                "--num_files", "2",
+                "--data_folderpath", str(self.PACKAGEDIR)
+            ])
+            self.assertEqual(res.exit_code, 0,
+                             f"dashboard command failed: {res.output}")
+            mock_dashboard.assert_called_once()
+            mock_ext.assert_called_once()
 
             # ---- carbon command ----
             res = runner.invoke(cli, [
