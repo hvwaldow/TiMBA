@@ -435,10 +435,11 @@ In the following we detail our efforts and considerations.
   2024).
 - The scientific background and in particular prior software on which this work
   improves, is extensively documented and referenced in this README file.
-- Python as a programming language, adherence to an improved (`ruff`-defaults)
-  PEP 8 style guide, default installation as "editable", user-friendly
-  formatting of input data, and instructions about how to contribute increase
-  the chances that this software is being reused in our research community.
+- Python as a programming language, adherence to an improved
+  ([`ruff`](https://docs.astral.sh/ruff/)-defaults) PEP8 style guide,
+  user-friendly formatting of input data, and instructions about how to
+  contribute increase the chances that this software is being reused in our
+  research community.
 
 ## Contributing to the project
 We welcome contributions, additions and suggestion to further develop or improve the code and the model. To check, discuss and include them into this project, we would like you to share your ideas with us so that we can agree on the requirements needed for accepting your contribution. 
