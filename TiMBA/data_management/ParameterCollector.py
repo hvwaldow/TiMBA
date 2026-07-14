@@ -21,48 +21,21 @@ class ParameterCollector:
         :param param_x: EXEMPLARY ADDITIONAL PARAM  TODO: Drop
         :param param_y: EXEMPLARY ADDITIONAL PARAM  TODO: Drop
         """
-        self._year = (
-            user_input[ParamNames.year.value]
-            )
-        self._max_period = (
-            user_input[ParamNames.max_period.value]
-            )
-        self._calc_product_prices = (
-            user_input[ParamNames.product_price.value])
-        self._calc_world_prices = (
-            user_input[ParamNames.world_price.value]
-            )
-        self._transportation_imp_exp_bound_factor = (
-            user_input[ParamNames.transportation_factor.value]
-            )
-        self._material_balance = (
-            user_input[ParamNames.material_balance.value]
-            )
-        self._global_material_balance = (
-            user_input[ParamNames.global_material_balance.value]
-            )
-        self._serialization = (
-            user_input[ParamNames.serialization.value]
-            )
-        self._constants = (
-            user_input[ParamNames.constants.value]
-            )
-        self._dynamization_activated = (
-            user_input[ParamNames.dynamization_activated.value]
-            )
-        self._capped_prices = (user_input[ParamNames.capped_prices.value])
-        self._cleaned_opt_quantity = (
-            user_input[ParamNames.cleaned_opt_quantity.value]
-            )
-        self._verbose_optimization_logger = (
-            user_input[ParamNames.verbose_optimization_logger.value]
-            )
-        self._verbose_calculation_logger = (
-            user_input[ParamNames.verbose_calculation_logger.value]
-            )
-        self._addInfo = (
-            user_input[ParamNames.addInfo.value]
-            )
+        self._year = user_input[ParamNames.year.value]
+        self._max_period = user_input[ParamNames.max_period.value]
+        self._calc_product_prices = user_input[ParamNames.product_price.value]
+        self._calc_world_prices = user_input[ParamNames.world_price.value]
+        self._transportation_imp_exp_bound_factor = user_input[ParamNames.transportation_factor.value]
+        self._material_balance = user_input[ParamNames.material_balance.value]
+        self._global_material_balance = user_input[ParamNames.global_material_balance.value]
+        self._serialization = user_input[ParamNames.serialization.value]
+        self._constants = user_input[ParamNames.constants.value]
+        self._dynamization_activated = user_input[ParamNames.dynamization_activated.value]
+        self._capped_prices = user_input[ParamNames.capped_prices.value]
+        self._cleaned_opt_quantity = user_input[ParamNames.cleaned_opt_quantity.value]
+        self._verbose_optimization_logger = user_input[ParamNames.verbose_optimization_logger.value]
+        self._verbose_calculation_logger = user_input[ParamNames.verbose_calculation_logger.value]
+        self._addInfo = user_input[ParamNames.addInfo.value]
         self._folderpath = folderpath
         self._activate_add_on_cmodule = user_input[ParamNames.activate_cmodule.value]
         self._sc_num = user_input[ParamNames.sc_num.value]
