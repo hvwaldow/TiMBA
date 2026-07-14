@@ -54,22 +54,22 @@ def run_timba(Parameters: dict = None, folderpath: str = None):
             print(f"Path: {folderpath}")
             print(f"Name of input file: {world[:len(world) - 5]} \n")
             print("User input for model settings:\n",
-                f"Start year: {Parameters.year}\n",
-                f"Number of periods: {Parameters.max_period}\n",
-                f"Calculation of prices by: {Parameters.calc_product_prices}\n",
-                f"Calculation of world prices by: {Parameters.calc_world_prices}\n",
-                f"Material balance: {Parameters.material_balance}\n",
-                f"Input data through serialization: {Parameters.serialization}\n",
-                f"Dynamization activated: {Parameters.dynamization_activated}\n",
-                f"Prices are capped: {Parameters.capped_prices}\n",
-                f"Optimization gives verbose logs: {Parameters.verbose_optimization_logger}\n",
-                f"TiMBA gives verbose logs: {Parameters.verbose_calculation_logger}\n",
-                f"Read additional informations: {Parameters.addInfo}\n")
+                  f"Start year: {Parameters.year}\n",
+                  f"Number of periods: {Parameters.max_period}\n",
+                  f"Calculation of prices by: {Parameters.calc_product_prices}\n",
+                  f"Calculation of world prices by: {Parameters.calc_world_prices}\n",
+                  f"Material balance: {Parameters.material_balance}\n",
+                  f"Input data through serialization: {Parameters.serialization}\n",
+                  f"Dynamization activated: {Parameters.dynamization_activated}\n",
+                  f"Prices are capped: {Parameters.capped_prices}\n",
+                  f"Optimization gives verbose logs: {Parameters.verbose_optimization_logger}\n",
+                  f"TiMBA gives verbose logs: {Parameters.verbose_calculation_logger}\n",
+                  f"Read additional informations: {Parameters.addInfo}\n")
             main(UserIO=Parameters,
-                world_version=world,
-                time_stamp=current_dt,
-                Data_Path=folderpath / DATA_FOLDER,
-                sc_name=world[:len(world) - 5])     
+                 world_version=world,
+                 time_stamp=current_dt,
+                 Data_Path=folderpath / DATA_FOLDER,
+                 sc_name=world[:len(world) - 5])
             close_logger()
         except PermissionError:
             pass
@@ -96,7 +96,5 @@ if __name__ == '__main__':
     Parameters = parameter_setter()
     Parameters.max_period = 1
     Parameters.chart_flag = True
-    world_list = run_timba(Parameters=Parameters,folderpath=Path(r"E:/"))
-    #run_extensions(UserIO=Parameters)
-
+    run_timba(Parameters=Parameters, folderpath=Path(r"E:/"))
     # run_extensions(UserIO=Parameters)
