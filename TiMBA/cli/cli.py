@@ -308,7 +308,7 @@ def load_data_cli(user, repo, branch, folder, folderpath):
 # Carbon Module command
 @cli.command("carbon")
 @click.option('-SC', '--sc_num', "sc_num",
-              default=user_input[ParamNames.carbon_sc_num.value], show_default=True, required=True, type=int,
+              default=user_input[ParamNames.sc_num.value], show_default=True, required=True, type=int,
               help='Flag to control the number of processed scenarios.'
               )
 @click.option('-CF_AGB', '--calc_c_forest_agb', 'calc_c_forest_agb',

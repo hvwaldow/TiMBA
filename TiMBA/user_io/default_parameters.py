@@ -96,5 +96,4 @@ user_input = {
     ParamNames.show_carbon_dashboard.value: show_carbon_dashboard,
     ParamNames.fao_data_update.value: fao_data_update,
     ParamNames.chart_flag.value: chart_flag,
-    ParamNames.carbon_sc_num.value: sc_num,
 }

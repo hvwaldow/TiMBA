@@ -79,7 +79,6 @@ class ParamNames(Enum):
     show_carbon_dashboard = "show_carbon_dashboard"
     fao_data_update = "fao_data_update"
     chart_flag = "chart_flag"
-    carbon_sc_num = "sc_num"
 
 
 class Constants(Enum):

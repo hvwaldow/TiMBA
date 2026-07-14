@@ -2,10 +2,10 @@ import unittest
 import os
 from pathlib import Path
 import shutil
+from TiMBA.main import run_timba
 from TiMBA.data_management.DataManager import DataManager
 from TiMBA.data_management.ParameterCollector import ParameterCollector
 from TiMBA.data_validation.DataValidator import DataValidator
-from TiMBA.main import run_timba
 from TiMBA.user_io.default_parameters import user_input
 from TiMBA.parameters.paths import (
     DATA_FOLDER, GIT_USER, GIT_REPO, GIT_BRANCH,
