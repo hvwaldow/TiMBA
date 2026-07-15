@@ -137,24 +137,56 @@ parameters.max_period = 2
 run_timba(Parameters=parameters)
 ```
 
-### Install TiMBA from GitHub
+### From GitHub:
 
-To install TiMBA in editable mode, so that you can modify the TiMBA source code, install it directly from GitHub: 
+Clone the repository Begin by cloning the repository to your local machine using the following command:
+```python
+git clone https://github.com/TI-Forest-Sector-Modelling/TiMBA.git
+```
+Switch to the TiMBA directory
+>Navigate into the TiMBA project folder on your local machine.
 
-1. Clone the repository and move into the project folder:
-   ```bash
-   git clone https://github.com/TI-Forest-Sector-Modelling/TiMBA.git timba
-   cd timba
-   ```
-2. Create the virtual environment and install all dependencies into it:
-   ```bash
-   uv sync
-   ```
-3. Verify the installation and run a first period:
-   ```bash
-   uv run run_timba --help
-   uv run run_timba -MP=1
-   ```
+```python
+cd TiMBA
+```
+Create a virtual environment
+>It is recommended to set up a virtual environment for TiMBA to manage dependencies. The package is tested for Python versions up to 3.11. With a newer Python version, we can not >guarantee the full functionality of the package. Select the correct Python interpreter.
+Show installed versions:
+
+```python
+py -0
+```
+If you have installed multiple versions of Python, activate the correct version using the py-Launcher.
+```python
+py -3.11 -m venv venv
+```
+If you are using only a single version of Python on your computer:
+```python
+python -m venv venv
+```
+Activate the virtual environment
+>Enable the virtual environment to isolate TiMBA dependencies.
+```python
+venv\Scripts\activate
+```
+Or for Linux:
+```python
+source venv/bin/activate
+```
+Install TiMBA in the editable mode
+```python
+pip install -e .
+```
+If the following error occurs: "ERROR: File "setup.py" or "setup.cfg" not found." you might need to update the pip version you use with:
+```python
+python.exe -m pip install --upgrade pip
+```
+Double check installation and test suite:
+>Double check if installation was successful by running following command from terminal:
+```python
+timba --help
+```
+The help provides you information about the basic model commands.
 
 ### Testing TiMBA
 
@@ -337,23 +369,22 @@ Frequently check [TiMBA repository](https://github.com/TI-Forest-Sector-Modellin
 
 We attempt to adhere as much as possible to the FAIR Principles for research
 software (e.g. see Barker et al. 2022 and Chue Hong et al. 2022) and reach high
-standards of scientific quality and openness. I you find TiMBA or its
-publication lacking in that regard, we very much appreciate your feedback as an
-[Issue](https://github.com/TI-Forest-Sector-Modelling/TiMBA/issues/new/choose)
+standards of scientific quality and openness. If you find that TiMBA or its documentation could be improved, we would greatly appreciate your feedback.
+Please submit it as an [Issue](https://github.com/TI-Forest-Sector-Modelling/TiMBA/issues/new/choose)
 in the GitHub repository or via email to [wf-timba@thuenen.de](mailto:wf-timba@thuenen.de).
 
 In the following we detail our efforts and considerations.
 
 ### Findable
 
-- Zenodo provided DOI with extensive metadata according to the DataCite schema.
+- Zenodo provides a DOI with extensive metadata according to the DataCite schema.
   - Separate DOIs for each release and one representing all releases.
 - A set of SWHID (Software Hash IDentifiers) is created by the [Software
   Heritage archive](https://archive.softwareheritage.org/) for each release and
   refereneces the code in a very granular fashion.
 - An accompanying [software paper](https://doi.org/10.21105/joss.08034) makes
   sure the software is also referenced in search indices that focus on journal articles.
-- We provide rich metadata also as Linked Data in the form of the file `codemeta.json` in the
+- We provide rich metadata also as linked data in the form of the file `codemeta.json` in the
   [CodeMeta](https://codemeta.github.io/) standard.
 - We provide machine-actionable citation information in the [Citation File Format
   (CFF)](https://citation-file-format.github.io/).
@@ -370,13 +401,13 @@ In the following we detail our efforts and considerations.
   and in the form of a file `zenodo.json` on GitHub and in the SoftwareHeritage
   datacenters. These three repositories also hold the file `codemeta.json`.
 
-- We are aware that Microsoft GitHub, as a profit driven commercial service, is
-  tainted by political and company-strategic limitations, in particular with
-  regard to data safety, security, adherence to scientific community-standards
-  and long-term viability. However, GitHub's comfortable integration with Zenodo
-  yields a lot of benefits that we could not achive otherwise with our limited
-  resources. We hope that a comparable integration will be developed in the
-  future for better suited Forges such as [Forgejo](https://forgejo.org/) or
+- We recognize that GitHub, a commercial platform owned by Microsoft, is subject
+to business and strategic considerations that may raise concerns regarding data
+governance, security, adherence to scientific community standards, and long-term
+sustainability. Nevertheless, GitHub's seamless integration with Zenodo provides
+substantial benefits, including automated archiving and DOI assignment, which would
+be difficult to achieve with our current resources. We hope that a comparable integration
+will be developed in the future for better suited Forges such as [Forgejo](https://forgejo.org/) or
   self-hosted [GitLab](gitlab.com).
 
 ### Interoperable
