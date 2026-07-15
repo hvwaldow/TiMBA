@@ -32,7 +32,7 @@ jobs:
 
     - name: Run test suite with coverage
       run: |
-        uv run python -W ignore::DeprecationWarning -m coverage run --rcfile=.coveragerc -m unittest discover
+        uv run python -W ignore::DeprecationWarning -m coverage run --rcfile=.coveragerc -m unittest discover -s test -p "test*.py"
         uv run coverage report
         uv run coverage xml -o coverage.xml
 

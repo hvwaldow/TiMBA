@@ -19,10 +19,11 @@ manufacture_output_name = "manufacture_D"
 
 LOGGING_OUTPUT_FOLDER = r"output/logs/"
 OUTPUT_DIR = r"output/data/"
+ADDINFOPTHTOOLBOX = r"input/02_Additional_Information/"
 
 # Input to adress data storage in GIT Repo
-GIT_USER = "TI-Forest-Sector-Modelling"
-GIT_REPO = "TiMBA_Additional_Information"
-GIT_BRANCH = "main"
-GIT_FOLDER = "Input_Data/default_scenario"
-DESTINATION_PATH = r"TiMBA/data/input/"
+GIT_USER="TI-Forest-Sector-Modelling"
+GIT_REPO="TiMBA_Additional_Information"
+GIT_BRANCH="main"
+GIT_FOLDER="Input_Data/default_scenario"
+DESTINATION_PATH=r"TiMBA/data/input/"

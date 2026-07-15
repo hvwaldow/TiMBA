@@ -25,8 +25,9 @@ dependencies = [
     "pathlib==1.0.1",
     "tomli==2.0.2",
     "typing==3.7.4.3",
+    "TiMBA-Charts==1.0.3", 
     "PyYAML==6.0.3",
-    "Carbon-Module==1.1.1",
+    "Carbon-Module==1.1.2",
 ]
 
 classifiers = [
@@ -49,9 +50,7 @@ Repository = "https://github.com/TI-Forest-Sector-Modelling/TiMBA"
 Issues = "https://github.com/TI-Forest-Sector-Modelling/TiMBA/issues"
 
 [project.scripts]
-run_timba = "TiMBA.cli.cli:timba_cli"
-load_timba = "TiMBA.cli.cli:load_data_cli"
-run_carbon_module = "TiMBA.cli.cli:carbon_cli"
+timba = "TiMBA.cli.cli:cli"
 
 [tool.setuptools]
 license-files = ["COPYING"]
