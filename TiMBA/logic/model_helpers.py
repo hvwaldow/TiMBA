@@ -4,6 +4,7 @@ from TiMBA.parameters.Defines import (Constants, Shifter, ConversionParameters, 
 
 from TiMBA.helpers.utils import Domains
 from TiMBA.data_management.DataContainer import InterfaceWorldData
+from TiMBA.user_io.default_parameters import max_density_growth
 
 
 def calc_slope_inverted(self, domain_name:str, elasticity: pd.Series, price: pd.Series, quantity: pd.Series):
@@ -535,7 +536,16 @@ def dynamize_forest(Data: pd.DataFrame, DataChange: pd.DataFrame, DataSupply: pd
     
     stock_growth = ((periodic_area_growth + periodic_stock_growth_without_harvest +
                      adjustment_endogenous_growth_rate_stock) * forest_stock_prev)
+    
     forest_stock_new = forest_stock_prev + stock_growth - (ratio_inventory_drain * roundwood_supply[:len(Data)])
+
+    forest_density = forest_stock_new / forest_area_new
+    forest_density_limit = (forest_stock_prev / forest_area_prev) * max_density_growth
+
+    forest_stock_new = forest_stock_new.where(
+        forest_density <= forest_density_limit,
+        forest_density_limit * forest_area_new
+    )  
 
     try:
         forest_stock_max_index = Data[

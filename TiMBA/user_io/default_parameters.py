@@ -61,6 +61,9 @@ hist_hwp_start_year_default = default_year
 show_carbon_dashboard = True
 fao_data_update = False
 
+# Max stock density compared to the previous period
+max_density_growth = 1.5
+
 # Charts integration
 chart_flag = False
 
