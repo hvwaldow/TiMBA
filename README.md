@@ -190,14 +190,17 @@ To install TiMBA in editable mode, so that you can modify the TiMBA source code,
    ```
 3. Verify the installation and run a first period:
    ```bash
-   uv run run_timba --help
-   uv run run_timba -MP=1
+   uv run timba run --help
+   uv run timba run -MP=1
    ```
 ### 2.5.1 Install from GitHub without 'uv`
 
 If you want to develop without using `uv`, you can install TiMBA with `venv` and `pip`, for example for Windows like so:
 
-The prerequistite is, that the version of you system-Python is supported (3.9 - 3.11).
+The prerequistite is that a supported version (9.9 -3.11) is among your
+system-wide installed Python interpreters and that you have [Python Launcher for
+Windows](https://github.com/oleksis/pylauncher/blob/master/docs/launcher.rst)
+installed.
 
 1. Clone the repository and move into the project folder:
    ```bash
