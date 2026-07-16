@@ -175,6 +175,26 @@ parameters.max_period = 2
 run_timba(Parameters=parameters)
 ```
 
+### 2.5 Install TiMBA from GitHub
+
+To install TiMBA in editable mode, so that you can modify the TiMBA source code, install it directly from GitHub: 
+
+1. Clone the repository and move into the project folder:
+   ```bash
+   git clone https://github.com/TI-Forest-Sector-Modelling/TiMBA.git timba
+   cd timba
+   ```
+2. Create the virtual environment and install all dependencies into it:
+   ```bash
+   uv sync
+   ```
+3. Verify the installation and run a first period:
+   ```bash
+   uv run run_timba --help
+   uv run run_timba -MP=1
+   ```
+
+
 ### 2.1. PyPI package
 
 ```bash
