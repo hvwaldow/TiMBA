@@ -12,7 +12,9 @@
 - Updated GitHub Actions workflows (`actions.yml`, `sonarscan.yml`) to use uv for dependency installation and test execution.
 - Cleaned up `pyproject.toml` metadata (`requires-python` and classifiers).
 - `requirements.txt` is kept as a fallback for non-uv users.
-## [Unreleased]
+
+
+## [v1.4.0] - 2026-07-16
 
 ### Added
 - Integration of the TiMBA Charts package into TiMBA.
