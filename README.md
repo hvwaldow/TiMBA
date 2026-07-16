@@ -91,7 +91,62 @@ e.g. `python3.11 -m venv .venv`.
 ***Known Issues***:
 TiMBA currently does not work with Python 3.12 or higher. We observe numerical discrepancies (>5% compared to results generated on Windows or Linux) when running TiMBA on macOS which could traced back to the solver OSQP in CVXPY. The results with MacOS have not been validated. We are investigating the issue.
 
+### 2.2 Install uv
 
+#### 2.2.1 Linux
+
+```bash
+curl -LsSf https://astral.sh/uv/install.sh | sh
+```
+#### 2.2.2 Windows
+```powershell
+powershell -ExecutionPolicy ByPass -c "irm https://astral.sh/uv/install.ps1 | iex"
+```
+
+### 2.3 Install the TiMBA command line programs
+
+If you want to use TiMBA as executable program, install it globally like so:
+
+``` bash
+uv tool install -p 3.11 pytimba
+```
+You will then have access to the CLI command `timba` with the subcommands `carbon`, `dashboard`, `load` ans `run`. Get an overview with `timba --help`. Detailed usage instructions are available with the argument `--help` for each of the subcommands.  See section [Model settings](#model-settings) for further details.
+
+### 2.4 Install TiMBA from PyPi
+
+If you want to use TiMBA as part of your own program, you can install it from PyPi like so:
+
+``` bash
+uv init -p 3.11 my_timba_program  # Create a project skeleton with Python 3.11
+cd my_timba_program               # Change into the project directory
+uv add pytimba                    # Install TiMBA into the project's virtual environment.
+```
+Use TiMBA in Python modules, for example
+
+```python
+from TiMBA.main import run_timba
+
+run_timba()
+```
+
+To change the folder for input and output data, the user can use the `folderpath` option (note: the path must be a `Path` object from `pathlib`):
+
+```python
+from TiMBA.main import run_timba
+from pathlib import Path
+
+run_timba(folderpath=Path(r"your_path"))
+```
+
+To modify specific parameters, you can import `parameter_setter` from `TiMBA.main` and set new values:
+
+```python
+from TiMBA.main import run_timba, parameter_setter
+
+parameters = parameter_setter()
+parameters.max_period = 2
+
+run_timba(Parameters=parameters)
 ### 2.1. PyPI package
 
 ```bash
