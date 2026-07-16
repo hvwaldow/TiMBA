@@ -173,6 +173,8 @@ parameters = parameter_setter()
 parameters.max_period = 2
 
 run_timba(Parameters=parameters)
+```
+
 ### 2.1. PyPI package
 
 ```bash
