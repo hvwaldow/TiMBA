@@ -13,37 +13,6 @@
 [![DOI](https://joss.theoj.org/papers/10.21105/joss.08034/status.svg)](https://doi.org/10.21105/joss.08034)
 [![License](https://img.shields.io/github/license/TI-Forest-Sector-Modelling/TiMBA?style=flat)](https://github.com/TI-Forest-Sector-Modelling/TiMBA/blob/main/COPYING)
 
------------------
-
-<!-- TOC -->
-- [Cite TiMBA](#cite-timba)
-- [Install TiMBA](#install-timba)
-    - [Quick start with uv](#quick-start-with-uv)
-    - [Known Issues](#known-issues)
-    - [Installation Process](#installation-process)
-    - [Double check installation and test suite](#double-check-installation-and-test-suite)
-- [Use TiMBA](#use-timba)
-    - [Model settings](#model-settings)
-      - [Settings as parameters](#settings-as-parameters)
-      - [Advanced settings](#advanced-settings)
-- [TiMBA extended model description](#timba-extended-model-description)
-- [Extensions for TiMBA](#extensions-for-timba)
-- [Roadmap and project status](#roadmap-and-project-status)
-- [Contributing to the project](#contributing-to-the-project)
-- [Authors](#authors)
-- [Contribution statement](#contribution-statement)
-- [License and copyright note](#license-and-copyright-note)
-- [Acknowledgements](#acknowledgements)
-- [References](#references)
-
-<!-- /TOC -->
-
-**TiMBA** is a partial economic equilibrium model for the global forest products
-market. The model endogenously simulates production, consumption and trade of
-wood and wood-based products in 180 countries. TiMBA recursively computes the
-market equilibrium for each country and product in a given period by maximizing
-the social surplus in the global forest sector. In the equilibrium processes,
-product supply, demand and price are balanced for each simulation period.
 -----------------  
 
 **TiMBA** is a partial economic equilibrium model for the global forest products market. The model endogenously simulates 
@@ -52,27 +21,6 @@ equilibrium for each country and product in a given period by maximizing the soc
 In the equilibrium processes, product supply, demand and price are balanced for each simulation period. 
 
 -----------------
-
-- [TiMBA - Timber market Model for policy-Based Analysis](#timba---timber-market-model-for-policy-based-analysis)
-  - [1. Cite TiMBA](#1-cite-timba)
-  - [2. Installation](#2-installation)
-    - [2.1. PyPI package](#21-pypi-package)
-    - [2.2. GitHub repository](#22-github-repository)
-  - [3. Use TiMBA](#3-use-timba)
-  - [4. Model extensions](#4-model-extensions)
-  - [5. Project structure](#5-project-structure)
-  - [6. Model settings](#6-model-settings)
-    - [6.1. Settings as parameters](#61-settings-as-parameters)
-    - [6.2. Advanced settings](#62-advanced-settings)
-  - [7. TiMBA extended model description](#7-timba-extended-model-description)
-  - [8. Extensions for TiMBA](#8-extensions-for-timba)
-  - [9. Roadmap and project status](#9-roadmap-and-project-status)
-  - [10. Contributing to the project](#10-contributing-to-the-project)
-  - [11. Authors](#11-authors)
-  - [12. Contribution statement](#12-contribution-statement)
-  - [13. License and copyright note](#13-license-and-copyright-note)
-  - [14. Acknowledgements](#14-acknowledgements)
-  - [15. References](#15-references)
 
 
 -----------------
@@ -85,27 +33,17 @@ TI-FSM, Morland, C., Schier, F., Tandetzki, J., Honkomp, T. (2025). TiMBA (Timbe
 [Download BibTeX](./citation.bib)
 
 The authors' collective is named "Thünen Institute Forest Sector Modelling
-(TI-FSM)"". The individual authors are listed as Co-authors in alphabetical
+(TI-FSM)". The individual authors are listed as Co-authors in alphabetical
 order.
-The authors' collective is named Thünen Institute Forest Sector Modelling (TI-FSM). The individual authors are listed as 
-co-authors in alphabetical order. 
 
 ## 2. Installation
 
-## Install TiMBA
-
-The package is developed and tested with Python 3.9 on Windows 11. TiMBA is
-compatible with Python versions between 3.9 - 3.11. The functionality with
-supported Python versions is continuously tested using GitHub CI with [operating
-system images](https://github.com/actions/runner-images#available-images)
-`windows-latest` and `ubuntu-latest`.
-
-### Requirements
+### 2.1 Requirements
 
 - Operating system: Linux or Windows on a x64 architecture. We test Windows 11
   and Ubuntu 24.04, but other Windows and Linux versions are likely to work too.
-- The Python package manager [uv](https://docs.astral.sh/uv/). We strongly
-  recommend to use `uv`, because it provides a very user-friendly, quick,
+- The Python package manager [uv](https://docs.astral.sh/uv/). We 
+  recommend to use `uv`, because it provides a user-friendly, quick,
   platform-independent and reliable way to install, use and develop TiMBA.
   
 That said, TiMBA can be also installed classically by creating a virtual
@@ -115,48 +53,85 @@ environment use the right Python version (if your system Python doesn't happen
 to be version 3.9 - 3.11), you need to install a supported Python the the
 operating system level and create the virtual environment with that version,
 e.g. `python3.11 -m venv .venv`.
-Before proceeding, please ensure that Python is installed on your system. 
-It can be downloaded and installed from [Python.org](https://www.python.org/downloads/release/python-3119/).
 
 ***Known Issues***:
-TiMBA currently has compatibility issues on macOS and with Python 3.12 and 3.13. Users may experience unexpected behavior during the optimization 
-process on macOS, as well as package installation problems when using Python 3.12 and 3.13.
-We recommend using Python 3.9–3.11 on Windows or Ubuntu OS for best results until full support of Python 3.12 and 3.13 and macOS is implemented.
+TiMBA currently has compatibility issues on macOS and with Python 3.12 or higher Users may experience unexpected behavior during the optimization 
+process on macOS, as well as package installation problems when using Python 3.12 or higher.
+We recommend using Python 3.9–3.11 on Windows or Ubuntu OS for best results until full support for newer Python versions and macOS is implemented.
 
 
-### Install uv
+### 2.2 Install uv
 
-#### Linux
+#### 2.2.1 Linux/MacOS
 
 ```bash
 curl -LsSf https://astral.sh/uv/install.sh | sh
 ```
-#### Windows
+#### 2.2.2 Windows
 ```powershell
 powershell -ExecutionPolicy ByPass -c "irm https://astral.sh/uv/install.ps1 | iex"
 ```
 
-### Install the TiMBA command line programs
+### 2.3 Install the TiMBA command line programs
 
 If you want to use TiMBA as executable program, install it globally like so:
 
 ``` bash
 uv tool install -p 3.11 pytimba
 ```
-You will then have access to the CLI commands `load_timba`, `run_carbon_module`, `run_timba`. Usage instructions are available with the argument `--help` for each of the commands. 
+
+#### Troubleshooting: `uv` command not found
+
+If you encounter the following error message:
+
+```
+'uv' is not recognized as an internal or external command,
+operable program or batch file.
+```
+
+`uv` may be installed successfully, but the installation directory is not available in your `PATH`.
+
+Check the installation output for the line:
+
+```
+installing to <path>
+```
+
+Verify that `uv` is available at this location:
+
+```powershell
+<path>\uv.exe --version
+```
+
+If this command returns the installed `uv` version, add the directory temporarily to your current terminal session:
+
+**Windows CMD:**
+
+```cmd
+set PATH=%PATH%;<path>
+```
+
+For a permanent solution, add `<path>` to your user `PATH` environment variable in Windows.
+
+Afterwards, rerun:
+
+```bash
+uv tool install -p 3.11 pytimba
+```
+
+You will then have access to the CLI command `timba` and its subcommands `timba load`, `timba carbon`, `timba run` and `timba dashboard`. Usage instructions are available with the argument `--help` for each of the commands. 
 See section [Model settings](#model-settings) for further details.
 
-### Install TiMBA from PyPi
+### 2.3 Install TiMBA from PyPi
 
 If you want to use TiMBA as part of your own program, you can install it from PyPi like so:
 
 ``` bash
-uv init -p 3.11 my_timba_program  # Create a project skeleton with Python 3.11
+uv init -p 3.11 <my_project>      # Create a project skeleton with Python 3.11
 cd my_timba_program               # Change into the project directory
 uv add pytimba                    # Install TiMBA into the project's virtual environment.
 ```
 Use TiMBA in Python modules, for example
-### 2.1. PyPI package
 
 ```bash
 pip install pytimba
@@ -190,7 +165,7 @@ parameters.max_period = 2
 run_timba(Parameters=parameters)
 ```
 
-### 2.2. GitHub repository
+### 2.4. GitHub repository
 
 Clone the repository Begin by cloning the repository to your local machine using the following command:
 ```python
@@ -203,8 +178,10 @@ Switch to the TiMBA directory
 cd TiMBA
 ```
 Create a virtual environment
->It is recommended to set up a virtual environment for TiMBA to manage dependencies. The package is tested for Python versions up to 3.11. With a newer Python version, we can not >guarantee the full functionality of the package. Select the correct Python interpreter.
+>It is recommended to set up a virtual environment for TiMBA to manage dependencies. The package is tested for Python versions up to 3.11. With a newer Python version, we can not guarantee the full functionality of the package. Select the correct Python interpreter.
+
 Show installed versions:
+
 1. Clone the repository
 Begin by cloning the repository to your local machine using the following command: 
     >git clone https://github.com/TI-Forest-Sector-Modelling/TiMBA.git
@@ -247,34 +224,6 @@ Double check if installation was successful by running following command from te
 
 The help provides you information about the basic model commands. 
 
-```python
-py -0
-```
-If you have installed multiple versions of Python, activate the correct version using the py-Launcher.
-```python
-py -3.11 -m venv venv
-```
-If you are using only a single version of Python on your computer:
-```python
-python -m venv venv
-```
-Activate the virtual environment
->Enable the virtual environment to isolate TiMBA dependencies.
-```python
-venv\Scripts\activate
-```
-Or for Linux:
-```python
-source venv/bin/activate
-```
-Install TiMBA in the editable mode
-```python
-pip install -e .
-```
-If the following error occurs: "ERROR: File "setup.py" or "setup.cfg" not found." you might need to update the pip version you use with:
-```python
-python.exe -m pip install --upgrade pip
-```
 Double check installation and test suite:
 >Double check if installation was successful by running following command from terminal:
 ```python
@@ -282,7 +231,7 @@ timba --help
 ```
 The help provides you information about the basic model commands.
 
-### Testing TiMBA
+### 2.5 Testing TiMBA
 
 The TiMBA model comes with a test suite to ensure its functionality. Run the
 test suite to check the functionality of the package and validate the produced
@@ -294,20 +243,8 @@ results with those provided by the TI-FSM using the coverage report:
    ```
    
 To reduce the test suite running time, only the first period will be computed
-and compared. The test suite results will not be saved. The computed results and
-provided validation results are compared with a relative tolerance of 5%.
-To reduce the test suite running time, only the first period will be computed and compared. The test suite results will not be saved.
-The computed results and provided validation results are compared with a relative tolerance of 5%.  
+and compared. The test suite results will not be saved.
 
-### Known Issues
-Python versions >=3.12 are currently not supported because the pinned
-dependencies (e.g. pandas) are not compatible with those Python versions. We
-recommend using Python 3.9–3.11 for best results.
-
-
-## Use TiMBA
-The package comes with a built-in CLI to compute the TiMBA for various inputs. While arguments are documented in the output of calling `run_timba --help` from the terminal, an important part to mention is user input data that need to be imported from a selected folder. You shall not change the following structure within the data folder:  
-TiMBA is provided with an input file (scenario_input.xlsx), including all input data necessary to run the model. The section [TiMBA extended model description](#timba-extended-model-description-) provides a detailed description of the included input data.
 ## 3. Use TiMBA
 
 TiMBA provides a built-in command-line interface (CLI) that enables users to download input data, execute simulations, and analyse model outputs.
@@ -439,6 +376,7 @@ Each model run creates a new set of output files using timestamp-based filenames
 ```text
 results_D20260708T14-32-18.csv
 ```
+
 **Important output information**  
 No output file will ever be overwritten by the application itself. New
 results-files will be generated in the format
@@ -448,19 +386,12 @@ created on additional runs. Log information simply gets appended to the existing
 logfile. Removing the logfile ahead of executing the model won't result in
 errors.
 
-### Model settings
-
-Multiple settings are integrated in TiMBA to allow users to interact with the
-model and adapt the modelling parameters to their research interests. The following
-chapter provides a brief overview of the model settings. A detailed description
-of the settings is provided in the documentation.
-
-This guarantees that previous simulation results remain available for comparison and documentation.
-
 
 ## 6. Model settings
 Multiple settings are integrated for the ***timba run*** command to allow users to interact with the model and adapt the modelling parameters to their research interests.
-The following chapter provides a brief overview of the model settings. A detailed description of the settings is provided in the model documentation (TI-FSM 2025). 
+The following chapter provides a brief overview of the model settings. A detailed description of the settings is provided in the model documentation ([TI-FSM 2025](https://literatur.thuenen.de/digbib_extern/dn069603.pdf)). 
+
+This guarantees that previous simulation results remain available for comparison and documentation.
 
 Basic model settings include:
 
@@ -497,6 +428,7 @@ Check if CLI command is registered and available on your computer by executing:
 - >timba run --help
 
 Default settings can be changed in the following way: (Note that the change of default settings as described below is for demonstration purposes only, and the results have not been validated.):
+
 - > timba run -MP=5 -MB="RCG_specific" -CP="True"
  
 For this example, TiMBA will simulate 5 periods using calculated prices as product prices and shadow prices as world market prices.
@@ -566,7 +498,7 @@ Several projects are currently extending different components of TiMBA:
 
 Frequently check [TiMBA repository](https://github.com/TI-Forest-Sector-Modelling/TiMBA) for new releases.
 
-## FAIR research software
+## 9. FAIR research software
 
 We attempt to adhere as much as possible to the FAIR Principles for research
 software (e.g. see Barker et al. 2022 and Chue Hong et al. 2022) and reach high
@@ -576,7 +508,7 @@ in the GitHub repository or via email to [wf-timba@thuenen.de](mailto:wf-timba@t
 
 In the following we detail our efforts and considerations.
 
-### Findable
+### 9.1 Findable
 
 - Zenodo provides a DOI with extensive metadata according to the DataCite schema.
   - Separate DOIs for each release and one representing all releases.
@@ -590,7 +522,7 @@ In the following we detail our efforts and considerations.
 - We provide machine-actionable citation information in the [Citation File Format
   (CFF)](https://citation-file-format.github.io/).
 
-### Accessible
+### 9.2 Accessible
 
 - The source code can be accessed in the form of a *git remote* from GitHub, via
   *http* from Zenodo, but also by Python package managers through the [Python
@@ -611,9 +543,9 @@ be difficult to achieve with our current resources. We hope that a comparable in
 will be developed in the future for better suited Forges such as [Forgejo](https://forgejo.org/) or
   self-hosted [GitLab](gitlab.com).
 
-### Interoperable
+### 9.3 Interoperable
 
-#### Software interoperability
+#### 9.3.1 Software interoperability
 
 - TiMBA installs both as executable script (`timba_run`) as well as as a Python
   module (`TiMBA`). The script copies its output also to STDOUT and allows to
@@ -628,7 +560,7 @@ will be developed in the future for better suited Forges such as [Forgejo](https
   also adhere to FAIR principles, are version-controlled in GitHub and can be
   referenced with DOIs registered by Zenodo.
 
-#### Data interoperability
+#### 9.3.2 Data interoperability
 
 - TiMBA relies on a set of required input data. The canonical versions of these
   data (a non-trivial scientific output) are also kept [version controlled in
@@ -652,7 +584,7 @@ will be developed in the future for better suited Forges such as [Forgejo](https
 - TiMBA output is written to universally readable CSV-files. We plan to describe
   these files with standardized metadata in the future.
 
-### Reusable
+### 9.4 Reusable
 
 - TiMBA has dependencies and sub-dependencies which are extensively recorded in
   the `uv.lock` file to ensure reproducibility.
@@ -673,16 +605,15 @@ will be developed in the future for better suited Forges such as [Forgejo](https
   contribute increase the chances that this software is being reused in our
   research community.
 
-## Contributing to the project
-We welcome contributions, additions and suggestion to further develop or improve the code and the model. To check, discuss and include them into this project, we would like you to share your ideas with us so that we can agree on the requirements needed for accepting your contribution. 
+
 ## 10. Contributing to the project
-We welcome contributions, additions, and suggestion to further develop or improve the code and the model. To check, discuss and include them into this project, we would like you to share your ideas with us so that we can agree on the requirements needed for accepting your contribution. 
+We welcome contributions, additions and suggestion to further develop or improve the code and the model. To check, discuss and include them into this project, we would like you to share your ideas with us so that we can agree on the requirements needed for accepting your contribution. 
+
 You can contact us directly via GitHub by creating issues, or by writing an Email to:
 
 [wf-timba@thuenen.de](mailto:wf-timba@thuenen.de)
 
-So far, this README serves as a comprehensive introduction and guidance on how to get started. ´The model documentation (TI-FSM 2025) and model validation (TI-FSM 2026) enables a deeper dive.
-
+So far, this README serves as a comprehensive introduction and guidance on how to get started. ´The model documentation ([TI-FSM 2025]()) and model validation ([TI-FSM 2026]()) enables a deeper dive.
 
 
 ## 11. Authors
@@ -736,9 +667,8 @@ This work is the result of great joint efforts of the forest products market ana
 -	The Thünen Institut of Forestry and its Head Matthias Dieter for providing financial resources over the years 
 - [makeareadme.com](https://www.makeareadme.com/) for providing the template this README is leaned on.
 
-## References
-- Barker, M., Chue Hong, N.P., Katz, D.S. et al. Introducing the FAIR Principles for research software. Sci Data 9, 622 (2022). https://doi.org/10.1038/s41597-022-01710-x
 ## 15. References
+- Barker, M., Chue Hong, N.P., Katz, D.S. et al. Introducing the FAIR Principles for research software. Sci Data 9, 622 (2022). https://doi.org/10.1038/s41597-022-01710-x
 - Buongiorno, J.; Zhu, S.; Zhang, D.; Turner, J.; Tomberlin, D. The Global Forest Products Model; Academic Press: Cambridge, MA, USA, 2003; ISBN 978-0-12-141362-0
 - Buongiorno, J. Global modelling to predict timber production and prices: The GFPM approach. Forestry 2015, 88, 291–303.
 - Buongiorno, J.; and Zhu, S. 2015. Technical change in forest sector models: The GFPM approach.  Scand. J. For. Research, 30, 30-48.
