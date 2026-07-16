@@ -246,8 +246,7 @@ To reduce the test suite running time, only the first period will be computed
 and compared. The test suite results will not be saved. The computed results and
 provided validation results are compared with a relative tolerance of 5%.
 
-
-## 3. Use TiMBA
+## 4. Use TiMBA
 
 TiMBA provides a built-in command-line interface (CLI) that enables users to download input data, execute simulations, and analyse model outputs.
 
@@ -295,6 +294,7 @@ To verify that the installation is working correctly, execute a simulation for t
 ```bash
 timba run -MP 1
 ```
+
 
 ## 4. Supplementary modules
 
@@ -453,7 +453,7 @@ In its basic version, TiMBA uses the assumptions made in the “Middle of the ro
 Price and income elasticities of demand are taken from Morland et al. (2018). Further exogenous specifications on technology 
 developments (input-output coefficients and manufacturing cost) are estimated based historical developments from 1993-2020. Information on trade inertia are based on WTO data as provided in the GFPM (Buongiorno et al. 2015; GFPM version 1-29-2017-World500) while data on WTO Ad-valorem taxes rates were recalculated by the authors as described in Schier et al. (2026). 
 The base year for the scenario simulations with the current version of TiMBA is 2020.
-The input data used for simulation with TiMBA needs to be calibrated and provided in a source file prior to model runs. This file is provided together with the model (`scenario_input.xlsx`) as described in [3. Use TiMBA](#3-use-timba). 
+The input data used for simulation with TiMBA needs to be calibrated and provided in a source file prior to model runs. This file is provided together with the model (`scenario_input.xlsx`) as described in [4. Use TiMBA](#4-use-timba). 
 The model input data calibration procedure is described in Buongiorno and Zhu (2015) and altered according to Schier et al. (2018). The input data for calibrating the model are obtained from three global databases: The FAO forestry statistics (FAOSTAT), the FAO Forest Global Resources Assessment (FAO 2020) and the World Bank Development Indicators (World Bank). 
 The model output comprises information about production, consumption and trade quantities, and prices as well as forest development. 
 The model concept bases on the formal description of the Global Forest Products Model (GFPM) (Buongiorno et al. 2015, Buongiorno et al. 2003). 
