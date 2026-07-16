@@ -1,6 +1,6 @@
 # Changelog
 
-## [Unreleased]
+## [v1.4.0] - 2026-07-16
 
 ### Added
 - Integration of the TiMBA Charts package into TiMBA.
