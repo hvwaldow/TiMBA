@@ -21,7 +21,44 @@ equilibrium for each country and product in a given period by maximizing the soc
 In the equilibrium processes, product supply, demand and price are balanced for each simulation period. 
 
 -----------------
+<!-- TOC -->
 
+- [TiMBA - Timber market Model for policy-Based Analysis](#timba---timber-market-model-for-policy-based-analysis)
+    - [Cite TiMBA](#cite-timba)
+    - [Installation](#installation)
+        - [Requirements](#requirements)
+        - [Install TiMBA with uv](#install-timba-with-uv)
+            - [Linux/MacOS](#linuxmacos)
+            - [Windows](#windows)
+            - [Install the TiMBA command line programs](#install-the-timba-command-line-programs)
+            - [Troubleshooting: uv command not found](#troubleshooting-uv-command-not-found)
+        - [Install TiMBA from PyPi](#install-timba-from-pypi)
+        - [Install TiMBA from GitHub repository](#install-timba-from-github-repository)
+        - [Testing TiMBA installation](#testing-timba-installation)
+    - [Use TiMBA](#use-timba)
+    - [Supplementary modules](#supplementary-modules)
+    - [Project structure](#project-structure)
+    - [Model settings](#model-settings)
+        - [Settings as parameters](#settings-as-parameters)
+        - [Advanced settings](#advanced-settings)
+    - [TiMBA extended model description](#timba-extended-model-description)
+    - [Supplementary modules for TiMBA](#supplementary-modules-for-timba)
+    - [Roadmap and project status](#roadmap-and-project-status)
+    - [FAIR research software](#fair-research-software)
+        - [Findable](#findable)
+        - [Accessible](#accessible)
+        - [Interoperable](#interoperable)
+            - [Software interoperability](#software-interoperability)
+            - [Data interoperability](#data-interoperability)
+        - [Reusable](#reusable)
+    - [Contributing to the project](#contributing-to-the-project)
+    - [Authors](#authors)
+    - [Contribution statement](#contribution-statement)
+    - [License and copyright note](#license-and-copyright-note)
+    - [Acknowledgements](#acknowledgements)
+    - [References](#references)
+
+<!-- /TOC -->
 
 -----------------
 
@@ -60,7 +97,7 @@ process on macOS, as well as package installation problems when using Python 3.1
 We recommend using Python 3.9–3.11 on Windows or Ubuntu OS for best results until full support for newer Python versions and macOS is implemented.
 
 
-### 2.2 Install uv
+### 2.2 Install TiMBA with uv
 
 #### 2.2.1 Linux/MacOS
 
@@ -72,7 +109,7 @@ curl -LsSf https://astral.sh/uv/install.sh | sh
 powershell -ExecutionPolicy ByPass -c "irm https://astral.sh/uv/install.ps1 | iex"
 ```
 
-### 2.3 Install the TiMBA command line programs
+#### 2.2.4 Install the TiMBA command line programs
 
 If you want to use TiMBA as executable program, install it globally like so:
 
@@ -165,7 +202,7 @@ parameters.max_period = 2
 run_timba(Parameters=parameters)
 ```
 
-### 2.4. GitHub repository
+### 2.4. Install TiMBA from GitHub repository
 
 Clone the repository Begin by cloning the repository to your local machine using the following command:
 ```python
@@ -231,7 +268,7 @@ timba --help
 ```
 The help provides you information about the basic model commands.
 
-### 2.5 Testing TiMBA
+### 2.5 Testing TiMBA installation
 
 The TiMBA model comes with a test suite to ensure its functionality. Run the
 test suite to check the functionality of the package and validate the produced
@@ -613,7 +650,7 @@ You can contact us directly via GitHub by creating issues, or by writing an Emai
 
 [wf-timba@thuenen.de](mailto:wf-timba@thuenen.de)
 
-So far, this README serves as a comprehensive introduction and guidance on how to get started. ´The model documentation ([TI-FSM 2025]()) and model validation ([TI-FSM 2026]()) enables a deeper dive.
+So far, this README serves as a comprehensive introduction and guidance on how to get started. ´The model documentation ([TI-FSM 2025](https://literatur.thuenen.de/digbib_extern/dn069603.pdf)) and model validation ([TI-FSM 2026](https://literatur.thuenen.de/digbib_extern/dn070984.pdf)) enables a deeper dive.
 
 
 ## 11. Authors
