@@ -24,39 +24,39 @@ In the equilibrium processes, product supply, demand and price are balanced for 
 <!-- TOC -->
 
 - [TiMBA - Timber market Model for policy-Based Analysis](#timba---timber-market-model-for-policy-based-analysis)
-    - [Cite TiMBA](#cite-timba)
-    - [Installation](#installation)
-        - [Requirements](#requirements)
-        - [Install TiMBA with uv](#install-timba-with-uv)
-            - [Linux/MacOS](#linuxmacos)
-            - [Windows](#windows)
-            - [Install the TiMBA command line programs](#install-the-timba-command-line-programs)
-            - [Troubleshooting: uv command not found](#troubleshooting-uv-command-not-found)
-        - [Install TiMBA from PyPi](#install-timba-from-pypi)
-        - [Install TiMBA from GitHub repository](#install-timba-from-github-repository)
-        - [Testing TiMBA installation](#testing-timba-installation)
-    - [Use TiMBA](#use-timba)
-    - [Supplementary modules](#supplementary-modules)
-    - [Project structure](#project-structure)
-    - [Model settings](#model-settings)
-        - [Settings as parameters](#settings-as-parameters)
-        - [Advanced settings](#advanced-settings)
-    - [TiMBA extended model description](#timba-extended-model-description)
-    - [Supplementary modules for TiMBA](#supplementary-modules-for-timba)
-    - [Roadmap and project status](#roadmap-and-project-status)
-    - [FAIR research software](#fair-research-software)
-        - [Findable](#findable)
-        - [Accessible](#accessible)
-        - [Interoperable](#interoperable)
-            - [Software interoperability](#software-interoperability)
-            - [Data interoperability](#data-interoperability)
-        - [Reusable](#reusable)
-    - [Contributing to the project](#contributing-to-the-project)
-    - [Authors](#authors)
-    - [Contribution statement](#contribution-statement)
-    - [License and copyright note](#license-and-copyright-note)
-    - [Acknowledgements](#acknowledgements)
-    - [References](#references)
+  - [1. Cite TiMBA](#1-cite-timba)
+  - [2. Installation](#2-installation)
+    - [2.1 Requirements](#21-requirements)
+    - [2.2 Install TiMBA with uv](#22-install-timba-with-uv)
+      - [2.2.1 Linux/MacOS](#221-linuxmacos)
+      - [2.2.2 Windows](#222-windows)
+      - [2.2.4 Install the TiMBA command line programs](#224-install-the-timba-command-line-programs)
+      - [Troubleshooting: `uv` command not found](#troubleshooting-uv-command-not-found)
+    - [2.3 Install TiMBA from PyPi](#23-install-timba-from-pypi)
+    - [2.4. Install TiMBA from GitHub repository](#24-install-timba-from-github-repository)
+    - [2.5 Testing TiMBA installation](#25-testing-timba-installation)
+  - [3. Use TiMBA](#3-use-timba)
+  - [4. Supplementary modules](#4-supplementary-modules)
+  - [5. Project structure](#5-project-structure)
+  - [6. Model settings](#6-model-settings)
+    - [6.1. Settings as parameters](#61-settings-as-parameters)
+    - [6.2. Advanced settings](#62-advanced-settings)
+  - [7. TiMBA extended model description](#7-timba-extended-model-description)
+  - [8. Supplementary modules for TiMBA](#8-supplementary-modules-for-timba)
+  - [9. Roadmap and project status](#9-roadmap-and-project-status)
+  - [9. FAIR research software](#9-fair-research-software)
+    - [9.1 Findable](#91-findable)
+    - [9.2 Accessible](#92-accessible)
+    - [9.3 Interoperable](#93-interoperable)
+      - [9.3.1 Software interoperability](#931-software-interoperability)
+      - [9.3.2 Data interoperability](#932-data-interoperability)
+    - [9.4 Reusable](#94-reusable)
+  - [10. Contributing to the project](#10-contributing-to-the-project)
+  - [11. Authors](#11-authors)
+  - [12. Contribution statement](#12-contribution-statement)
+  - [13. License and copyright note](#13-license-and-copyright-note)
+  - [14. Acknowledgements](#14-acknowledgements)
+  - [15. References](#15-references)
 
 <!-- /TOC -->
 
@@ -92,10 +92,7 @@ operating system level and create the virtual environment with that version,
 e.g. `python3.11 -m venv .venv`.
 
 ***Known Issues***:
-TiMBA currently has compatibility issues on macOS and with Python 3.12 or higher Users may experience unexpected behavior during the optimization 
-process on macOS, as well as package installation problems when using Python 3.12 or higher.
-We recommend using Python 3.9–3.11 on Windows or Ubuntu OS for best results until full support for newer Python versions and macOS is implemented.
-
+TiMBA currently does not work with Python 3.12 or higher. We observe numerical discrepancies (>5% compared to results generated on Windows or Linux) when running TiMBA on macOS which could traced back to the solver OSQP in CVXPY. The results with MacOS have not been validated. We are investigating the issue.
 
 ### 2.2 Install TiMBA with uv
 
