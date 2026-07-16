@@ -112,6 +112,32 @@ uv tool install -p 3.11 pytimba
 ```
 You will then have access to the CLI command `timba` with the subcommands `carbon`, `dashboard`, `load` ans `run`. Get an overview with `timba --help`. Detailed usage instructions are available with the argument `--help` for each of the subcommands.  See section [Model settings](#model-settings) for further details.
 
+#### 2.3.1 Troubleshooting: `uv` command not found
+
+If you encounter the following error message:
+
+```
+'uv' is not recognized as an internal or external command,
+operable program or batch file.
+```
+
+`uv` may be installed successfully, but the installation directory is not available in your `PATH`.
+
+Check the installation output for the line:
+
+```
+installing to <path>
+```
+
+Add this path to your environment variable `PATH`, e.g. und Windows like so: 
+
+```cmd
+set PATH=%PATH%;<path>
+```
+
+For a permanent solution, add `<path>` to your user `PATH` environment variable in Windows.
+
+
 ### 2.4 Install TiMBA from PyPi
 
 If you want to use TiMBA as part of your own program, you can install it from PyPi like so:
