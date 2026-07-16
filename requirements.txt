@@ -11,4 +11,5 @@ pathlib==1.0.1
 tomli==2.0.2
 typing==3.7.4.3
 PyYAML==6.0.3
-Carbon-Module==1.1.1
+Carbon-Module==1.1.2
+TiMBA-Charts==1.0.3

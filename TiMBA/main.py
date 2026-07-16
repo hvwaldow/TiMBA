@@ -1,14 +1,20 @@
 from TiMBA.main_runner.main_runner import main
 from TiMBA.parameters import INPUT_WORLD_PATH
 from TiMBA.logic.model_extensions import run_extensions
+from TiMBA.data_management.ParameterCollector import ParameterCollector
+from TiMBA.parameters.paths import INPUT_WORLD_PATH,OUTPUT_DIR, ADDINFOPTHTOOLBOX 
 from pathlib import Path
 import datetime as dt
 import os
 import warnings
+from Toolbox.toolbox import timba_dashboard 
+import sys
+warnings.simplefilter(action='ignore', category=FutureWarning)
 from TiMBA.results_logging.base_logger import close_logger
 from TiMBA.parameters.paths import (
     DATA_FOLDER, GIT_USER, GIT_REPO, GIT_BRANCH,
-    GIT_FOLDER, DESTINATION_PATH
+    GIT_FOLDER, INPUT_WORLD_PATH, DESTINATION_PATH,
+    ADDINFOPTHTOOLBOX
 )
 from TiMBA.data_management.Load_Data import load_data
 warnings.simplefilter(action='ignore', category=FutureWarning)
@@ -42,32 +48,44 @@ def run_timba(Parameters: dict = None, folderpath: str = None):
         )
     world_list = os.listdir(INPUT_PATH)
     for world in world_list:
-        current_dt = dt.datetime.now().strftime("%Y%m%dT%H-%M-%S")
-        print("The model starts now:",
-              (dt.datetime.now().strftime("%m/%d/%Y, %H:%M:%S")),
-              "\n")
-        print(f"Path: {folderpath}")
-        print(f"Name of input file: {world[:len(world) - 5]} \n")
-        print("User input for model settings:\n",
-              f"Start year: {Parameters.year}\n",
-              f"Number of periods: {Parameters.max_period}\n",
-              f"Calculation of prices by: {Parameters.calc_product_prices}\n",
-              f"Calculation of world prices by: {Parameters.calc_world_prices}\n",
-              f"Material balance: {Parameters.material_balance}\n",
-              f"Input data through serialization: {Parameters.serialization}\n",
-              f"Dynamization activated: {Parameters.dynamization_activated}\n",
-              f"Prices are capped: {Parameters.capped_prices}\n",
-              f"Optimization gives verbose logs: {Parameters.verbose_optimization_logger}\n",
-              f"TiMBA gives verbose logs: {Parameters.verbose_calculation_logger}\n",
-              f"Read additional informations: {Parameters.addInfo}\n")
-        main(UserIO=Parameters,
-             world_version=world,
-             time_stamp=current_dt,
-             Data_Path=folderpath / DATA_FOLDER,
-             sc_name=world[:len(world) - 5])
-        close_logger()
+        try:
+            current_dt = dt.datetime.now().strftime("%Y%m%dT%H-%M-%S")
+            print("The model starts now:", (dt.datetime.now().strftime("%m/%d/%Y, %H:%M:%S")),"\n")
+            print(f"Path: {folderpath}")
+            print(f"Name of input file: {world[:len(world) - 5]} \n")
+            print("User input for model settings:\n",
+                  f"Start year: {Parameters.year}\n",
+                  f"Number of periods: {Parameters.max_period}\n",
+                  f"Calculation of prices by: {Parameters.calc_product_prices}\n",
+                  f"Calculation of world prices by: {Parameters.calc_world_prices}\n",
+                  f"Material balance: {Parameters.material_balance}\n",
+                  f"Input data through serialization: {Parameters.serialization}\n",
+                  f"Dynamization activated: {Parameters.dynamization_activated}\n",
+                  f"Prices are capped: {Parameters.capped_prices}\n",
+                  f"Optimization gives verbose logs: {Parameters.verbose_optimization_logger}\n",
+                  f"TiMBA gives verbose logs: {Parameters.verbose_calculation_logger}\n",
+                  f"Read additional informations: {Parameters.addInfo}\n")
+            main(UserIO=Parameters,
+                 world_version=world,
+                 time_stamp=current_dt,
+                 Data_Path=folderpath / DATA_FOLDER,
+                 sc_name=world[:len(world) - 5])
+            close_logger()
+        except PermissionError:
+            pass
 
-
+    if Parameters.chart_flag:
+        world_count = len(world_list)
+        SC_FOLDER = Path(DATA_FOLDER) / Path(OUTPUT_DIR)
+        ADDINFO_FOLDER = Path(DATA_FOLDER) / Path(ADDINFOPTHTOOLBOX)
+        td = timba_dashboard(
+            num_files_to_read=world_count,
+            FOLDER_PATH=PACKAGEDIR,
+            SCENARIO_PATH=SC_FOLDER,
+            ADDINFO_PATH=ADDINFO_FOLDER,
+        )
+        td.run()
+    
 def parameter_setter():
     from TiMBA.data_management.ParameterCollector import ParameterCollector
     from TiMBA.user_io.default_parameters import user_input
@@ -76,6 +94,7 @@ def parameter_setter():
 
 if __name__ == '__main__':
     Parameters = parameter_setter()
-    run_timba(Parameters=Parameters)  # ,folderpath=Path(r"E:/"))
-
+    Parameters.max_period = 1
+    Parameters.chart_flag = True
+    run_timba(Parameters=Parameters, folderpath=Path(r"E:/"))
     # run_extensions(UserIO=Parameters)

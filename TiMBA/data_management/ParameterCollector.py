@@ -21,91 +21,37 @@ class ParameterCollector:
         :param param_x: EXEMPLARY ADDITIONAL PARAM  TODO: Drop
         :param param_y: EXEMPLARY ADDITIONAL PARAM  TODO: Drop
         """
-        self._year = (
-            user_input[ParamNames.year.value]
-            )
-        self._max_period = (
-            user_input[ParamNames.max_period.value]
-            )
-        self._calc_product_prices = (
-            user_input[ParamNames.product_price.value])
-        self._calc_world_prices = (
-            user_input[ParamNames.world_price.value]
-            )
-        self._transportation_imp_exp_bound_factor = (
-            user_input[ParamNames.transportation_factor.value]
-            )
-        self._material_balance = (
-            user_input[ParamNames.material_balance.value]
-            )
-        self._global_material_balance = (
-            user_input[ParamNames.global_material_balance.value]
-            )
-        self._serialization = (
-            user_input[ParamNames.serialization.value]
-            )
-        self._constants = (
-            user_input[ParamNames.constants.value]
-            )
-        self._dynamization_activated = (
-            user_input[ParamNames.dynamization_activated.value]
-            )
-        self._capped_prices = (user_input[ParamNames.capped_prices.value])
-        self._cleaned_opt_quantity = (
-            user_input[ParamNames.cleaned_opt_quantity.value]
-            )
-        self._verbose_optimization_logger = (
-            user_input[ParamNames.verbose_optimization_logger.value]
-            )
-        self._verbose_calculation_logger = (
-            user_input[ParamNames.verbose_calculation_logger.value]
-            )
-        self._addInfo = (
-            user_input[ParamNames.addInfo.value]
-            )
+        self._year = user_input[ParamNames.year.value]
+        self._max_period = user_input[ParamNames.max_period.value]
+        self._calc_product_prices = user_input[ParamNames.product_price.value]
+        self._calc_world_prices = user_input[ParamNames.world_price.value]
+        self._transportation_imp_exp_bound_factor = user_input[ParamNames.transportation_factor.value]
+        self._material_balance = user_input[ParamNames.material_balance.value]
+        self._global_material_balance = user_input[ParamNames.global_material_balance.value]
+        self._serialization = user_input[ParamNames.serialization.value]
+        self._constants = user_input[ParamNames.constants.value]
+        self._dynamization_activated = user_input[ParamNames.dynamization_activated.value]
+        self._capped_prices = user_input[ParamNames.capped_prices.value]
+        self._cleaned_opt_quantity = user_input[ParamNames.cleaned_opt_quantity.value]
+        self._verbose_optimization_logger = user_input[ParamNames.verbose_optimization_logger.value]
+        self._verbose_calculation_logger = user_input[ParamNames.verbose_calculation_logger.value]
+        self._addInfo = user_input[ParamNames.addInfo.value]
         self._folderpath = folderpath
-        self._activate_add_on_cmodule = (
-            user_input[ParamNames.activate_cmodule.value]
-            )
-        self._sc_num = (
-            user_input[ParamNames.sc_num.value]
-            )
-        self._read_in_pkl = (
-            user_input[ParamNames.read_in_pkl.value]
-            )
-        self._calc_c_forest_agb = (
-            user_input[ParamNames.calc_c_forest_agb.value]
-            )
-        self._calc_c_forest_bgb = (
-            user_input[ParamNames.calc_c_forest_bgb.value]
-            )
-        self._calc_c_forest_soil = (
-            user_input[ParamNames.calc_c_forest_soil.value]
-            )
-        self._calc_c_forest_dwl = (
-            user_input[ParamNames.calc_c_forest_dwl.value]
-            )
-        self._calc_c_hwp = (
-            user_input[ParamNames.calc_c_hwp.value]
-            )
-        self._c_hwp_accounting_approach = (
-            user_input[ParamNames.c_hwp_accounting_approach.value]
-            )
-        self._historical_c_hwp = (
-            user_input[ParamNames.historical_c_hwp.value]
-            )
-        self._hist_hwp_start_year = (
-            user_input[ParamNames.hist_hwp_start_year.value]
-            )
-        self._hist_hwp_start_year_default = (
-            user_input[ParamNames.hist_hwp_start_year_default.value]
-            )
-        self._show_carbon_dashboard = (
-            user_input[ParamNames.show_carbon_dashboard.value]
-            )
-        self._fao_data_update = (
-            user_input[ParamNames.fao_data_update.value]
-            )
+        self._activate_add_on_cmodule = user_input[ParamNames.activate_cmodule.value]
+        self._sc_num = user_input[ParamNames.sc_num.value]
+        self._read_in_pkl = user_input[ParamNames.read_in_pkl.value]
+        self._calc_c_forest_agb = user_input[ParamNames.calc_c_forest_agb.value]
+        self._calc_c_forest_bgb = user_input[ParamNames.calc_c_forest_bgb.value]
+        self._calc_c_forest_soil = user_input[ParamNames.calc_c_forest_soil.value]
+        self._calc_c_forest_dwl = user_input[ParamNames.calc_c_forest_dwl.value]
+        self._calc_c_hwp = user_input[ParamNames.calc_c_hwp.value]
+        self._c_hwp_accounting_approach = user_input[ParamNames.c_hwp_accounting_approach.value]
+        self._historical_c_hwp = user_input[ParamNames.historical_c_hwp.value]
+        self._hist_hwp_start_year = user_input[ParamNames.hist_hwp_start_year.value]
+        self._hist_hwp_start_year_default = user_input[ParamNames.hist_hwp_start_year_default.value]
+        self._show_carbon_dashboard = user_input[ParamNames.show_carbon_dashboard.value]
+        self._fao_data_update = user_input[ParamNames.fao_data_update.value]
+        self._chart_flag = user_input[ParamNames.chart_flag.value]
 
         # Run directly after __init__ to ensure correct user IO
         self.input_data_check()
@@ -358,6 +304,14 @@ class ParameterCollector:
     def fao_data_update(self, value: bool):
         self._fao_data_update = value
 
+    @property
+    def chart_flag(self) -> bool:
+        return self._chart_flag
+
+    @chart_flag.setter
+    def chart_flag(self, value: bool):
+        self._chart_flag = value
+
     def __repr__(self):
         return repr(f"year={self.year}, "
                     f"max_period={self.max_period}, "
@@ -397,6 +351,7 @@ class ParameterCollector:
         assert isinstance(self.hist_hwp_start_year_default, int)
         assert isinstance(self.show_carbon_dashboard, bool)
         assert isinstance(self.fao_data_update, bool)
+        assert isinstance(self.chart_flag, bool)
 
         # TODO: Adapt tests for new params: Following are just exemplary.
         # assert self.param_x[0] > 0

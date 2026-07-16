@@ -852,6 +852,44 @@ class DataManager:
         DataManager.aggregate_results(WorldData, OptimData, RegionData)
         DataManager.get_forest_output(WorldData)
         DataManager.get_manufacture_output(WorldData)
+    
+    @staticmethod
+    def _get_package_info():
+        """Return version and git information if available."""
+        from importlib.metadata import version, PackageNotFoundError
+        import subprocess
+
+        # Version if download from PyPI
+        try:
+            package_version = version("pytimba")
+        except PackageNotFoundError:
+            package_version = "unknown"
+
+        # Version info if download from GitHub
+        try:
+            git_commit = subprocess.check_output(
+                ["git", "rev-parse", "HEAD"],
+                text=True,
+                stderr=subprocess.DEVNULL,
+            ).strip()
+        except Exception:
+            git_commit = "unknown"
+
+        try:
+            git_description = subprocess.check_output(
+                ["git", "describe", "--tags", "--always", "--dirty"],
+                text=True,
+                stderr=subprocess.DEVNULL,
+            ).strip()
+        except Exception:
+            git_description = "unknown"
+
+        return {
+            "name": "pytimba",
+            "PyPI_version": package_version,
+            "git_commit": git_commit,
+            "git_version": git_description,
+        }
 
     @staticmethod
     def save_sc_info_as_yaml(Data_Path: Path, sc_name: str, Parameters: dict, time_stamp: str):
@@ -862,11 +900,20 @@ class DataManager:
         :param time_stamp: Timestamp of the start of the scenario calculation
         """
         import yaml
+
         filepath = os.path.join(Data_Path / LOGGING_OUTPUT_FOLDER, f"{sc_name}_{time_stamp}_info.yml")
+
         sc_name = {"Scenario name": sc_name}
+        package_info = DataManager._get_package_info()
         params = {"CLI Model Parameters": Parameters}
         constants_dict = {item.name: item.value for item in Constants}
-        sc_info = {**sc_name, **params, "Other Model Parameters": constants_dict}
+        sc_info = {
+            "Scenario name": sc_name,
+            "Package": package_info,
+            "CLI Model Parameters": params,
+            "Other Model Parameters": constants_dict
+        }
+        
         with open(filepath, "w", encoding="utf-8") as f:
             for key, value in sc_info.items():
                 yaml.dump({key: value}, f, allow_unicode=True, sort_keys=False)
