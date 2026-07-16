@@ -193,7 +193,41 @@ To install TiMBA in editable mode, so that you can modify the TiMBA source code,
    uv run run_timba --help
    uv run run_timba -MP=1
    ```
+### 2.5.1 Install from GitHub without 'uv`
 
+If you want to develop without using `uv`, you can install TiMBA with `venv` and `pip`, for example for Windows like so:
+
+The prerequistite is, that the version of you system-Python is supported (3.9 - 3.11).
+
+1. Clone the repository and move into the project folder:
+   ```bash
+   git clone https://github.com/TI-Forest-Sector-Modelling/TiMBA.git timba
+   cd timba
+```
+
+2. Create a virtual environment
+
+   Select the correct Python interpreter.   
+   Show installed versions: 
+   >py -0  
+   >
+   - If you have installed multiple versions of Python, activate the correct version using the py-Launcher.
+   >py -3.11 -m venv venv 
+   > 
+   - If you are using only a single version of Python on your computer:
+   >python -m venv venv
+   >
+3. Activate the virtual environment  
+Enable the virtual environment to isolate TiMBA dependencies. 
+   >venv\Scripts\activate
+
+4. Install TiMBA in the editable mode  
+   >pip install -e .
+
+    If the following error occurs: "ERROR: File "setup.py" or "setup.cfg" not found."
+    you might need to update the pip version you use with: 
+    >python.exe -m pip install --upgrade pip  
+      
 
 ### 2.1. PyPI package
 
