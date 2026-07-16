@@ -46,6 +46,13 @@ In the equilibrium processes, product supply, demand and price are balanced for 
 
 -----------------
 
+**TiMBA** is a partial economic equilibrium model for the global forest products
+market. The model endogenously simulates production, consumption and trade of
+wood and wood-based products in 180 countries. TiMBA recursively computes the
+market equilibrium for each country and product in a given period by maximizing
+the social surplus in the global forest sector. In the equilibrium processes,
+product supply, demand and price are balanced for each simulation period.
+
 ## 1. Cite TiMBA
 
 We are happy that you use TiMBA for your research. When publishing your work in articles, working paper, presentations 
