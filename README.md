@@ -193,7 +193,7 @@ To install TiMBA in editable mode, so that you can modify the TiMBA source code,
    uv run timba run --help
    uv run timba run -MP=1
    ```
-### 2.5.1 Install from GitHub without 'uv`
+#### 2.5.1 Install from GitHub without 'uv`
 
 If you want to develop without using `uv`, you can install TiMBA with `venv` and `pip`, for example for Windows like so:
 
@@ -231,7 +231,20 @@ Enable the virtual environment to isolate TiMBA dependencies.
     you might need to update the pip version you use with: 
     >python.exe -m pip install --upgrade pip  
       
+### 3. Testing TiMBA
 
+The TiMBA model comes with a test suite to ensure its functionality. Run the
+test suite to check the functionality of the package and validate the produced
+results with those provided by the TI-FSM using the coverage report:
+
+   ```bash
+   uv run python -W ignore::DeprecationWarning -m coverage run --rcfile=.coveragerc -m unittest discover
+   uv run coverage report
+   ```
+   
+To reduce the test suite running time, only the first period will be computed
+and compared. The test suite results will not be saved. The computed results and
+provided validation results are compared with a relative tolerance of 5%.
 
 
 ## 3. Use TiMBA
