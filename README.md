@@ -294,9 +294,7 @@ To verify that the installation is working correctly, execute a simulation for t
 ```bash
 timba run -MP 1
 ```
-
-
-## 4. Supplementary modules
+## 5. Supplementary modules
 
 The TiMBA ecosystem has a modular design. Each module extends the base functionality of TiMBA in a specific way.
 TiMBA includes support for **[TiMBA Charts](https://doi.org/10.5281/zenodo.20925292)**, an interactive dashboard for exploring simulation results.
@@ -325,7 +323,7 @@ timba carbon
 
 This module estimates carbon stocks in forest biomass, forest soils, deadwood, litter, harvested wood products, and substitution effects based on TiMBA simulation results and historical statistics on forest resources and forest product markets ([Honkomp 2026](https://www.sciencedirect.com/science/article/pii/S2352711026000828#abs0001)).
 
-## 5. Project structure
+## 6. Project structure
 
 After downloading the input data (`timba load`), the project directory is organised as follows:
 
@@ -379,12 +377,21 @@ Each model run creates a new set of output files using timestamp-based filenames
 results_D20260708T14-32-18.csv
 ```
 
-This guarantees that previous simulation results remain available for comparison and documentation.
+**Important output information**  
+No output file will ever be overwritten by the application itself. New
+results-files will be generated in the format
+`results_D<yyyymmdd>T<hh-mm-ss>.csv` and will be saved to the output folder as
+well. The logfile itself won't be overwritten as well but also no new file
+created on additional runs. Log information simply gets appended to the existing
+logfile. Removing the logfile ahead of executing the model won't result in
+errors.
 
 
-## 6. Model settings
+## 7. Model settings
 Multiple settings are integrated for the ***timba run*** command to allow users to interact with the model and adapt the modelling parameters to their research interests.
-The following chapter provides a brief overview of the model settings. A detailed description of the settings is provided in the model documentation (TI-FSM 2025). 
+The following chapter provides a brief overview of the model settings. A detailed description of the settings is provided in the model documentation ([TI-FSM 2025](https://literatur.thuenen.de/digbib_extern/dn069603.pdf)). 
+
+This guarantees that previous simulation results remain available for comparison and documentation.
 
 Basic model settings include:
 
@@ -414,19 +421,19 @@ Basic add-on module settings include (see [add-on modules for TiMBA](#add-on-mod
 TiMBA is delivered with a validated set of default settings that were tested for stability and consistency. These default parameters can be modified when executing the package via CLI or directly in `default_parameters.py`. Please note that any parameters specified in the CLI will overwrite those defined in `default_parameters.py`.  
 Not all combinations of functionalities and settings have been tested or validated. In particular, shadow and calculated price modes for country- and product-level (PP) and world (WP) prices must be applied consistently. Mixing the two (e.g., PP="calculated_PP" and WP="shadow_WP") is currently not supported and may result in an error. 
   
-### 6.1. Settings as parameters
+### 7.1. Settings as parameters
 The CLI provides access to basic model settings and their default values. 
 Check if CLI command is registered and available on your computer by executing:
 
 - >timba run --help
 
 Default settings can be changed in the following way: (Note that the change of default settings as described below is for demonstration purposes only, and the results have not been validated.):
+
 - > timba run -MP=5 -MB="RCG_specific" -CP="True"
  
-
 For this example, TiMBA will simulate 5 periods using calculated prices as product prices and shadow prices as world market prices.
 
-### 6.2. Advanced settings
+### 7.2. Advanced settings
 In addition to the settings accessible via the CLI, users can control advanced settings through changes in `Defines.py` 
 Advance settings include:
 - solver settings (like accuracy, number of iterations and penalties)
@@ -436,7 +443,7 @@ Advance settings include:
 Some setting combinations might not be coherent and can lead to errors in the simulations or to unreliable results. Those combinations have neither been tested nor validated.   
 Note: TiMBA was tested with a pre-defined number of periods and respective periods' lenght. If the number of periods is changed, it is necessary to compare and adjust this in the ExogChange sheet in the input file.
 
-## 7. TiMBA extended model description 
+## 8. TiMBA extended model description 
 TiMBA is a partial economic equilibrium model for the global forest products market. The market equilibrium is subject to 
 market clearance and constraints balancing necessary raw materials and produced wood products and limiting the trade (Samuelson 1952). 
 The model structure distinguishes between raw, intermediate and end products. TiMBA differentiates three types of roundwood 
@@ -453,12 +460,12 @@ In its basic version, TiMBA uses the assumptions made in the “Middle of the ro
 Price and income elasticities of demand are taken from Morland et al. (2018). Further exogenous specifications on technology 
 developments (input-output coefficients and manufacturing cost) are estimated based historical developments from 1993-2020. Information on trade inertia are based on WTO data as provided in the GFPM (Buongiorno et al. 2015; GFPM version 1-29-2017-World500) while data on WTO Ad-valorem taxes rates were recalculated by the authors as described in Schier et al. (2026). 
 The base year for the scenario simulations with the current version of TiMBA is 2020.
-The input data used for simulation with TiMBA needs to be calibrated and provided in a source file prior to model runs. This file is provided together with the model (`scenario_input.xlsx`) as described in [4. Use TiMBA](#4-use-timba). 
+The input data used for simulation with TiMBA needs to be calibrated and provided in a source file prior to model runs. This file is provided together with the model (`scenario_input.xlsx`) as described in [3. Use TiMBA](#3-use-timba). 
 The model input data calibration procedure is described in Buongiorno and Zhu (2015) and altered according to Schier et al. (2018). The input data for calibrating the model are obtained from three global databases: The FAO forestry statistics (FAOSTAT), the FAO Forest Global Resources Assessment (FAO 2020) and the World Bank Development Indicators (World Bank). 
 The model output comprises information about production, consumption and trade quantities, and prices as well as forest development. 
 The model concept bases on the formal description of the Global Forest Products Model (GFPM) (Buongiorno et al. 2015, Buongiorno et al. 2003). 
 
-## 8. Supplementary modules for TiMBA
+## 9. Supplementary modules for TiMBA
 TiMBA is designed as a modular modelling framework that can be extended with additional applications to enable further functionalities. 
 Depending on the use case and the research question, users can activate or deactivate these modular extensions via the CLI or
 through the `default_parameters`. In this way, the computational load is tailored to the user's needs. The modules are designed
@@ -476,7 +483,7 @@ users should refer the respective GitHub repositories.
 | Carbon Module | tracks carbon stocks and stock changes across pools in the forestry sector including aboveground and belowground biomass, forest soils, deadwood and litter, and harvested wood products. The module applies updated guidelines of the IPCC (2019). A visualization dashbord for carbon results is generated automatically. |                                    `activate_cmodule=True` in `default_parameters.py` <br/>or<br/> `-C=True` in the CLI                                     |     [C-Module](https://github.com/TI-Forest-Sector-Modelling/C-Module)     |                    [Honkomp (2025)](https://zenodo.org/records/16912178)                     |
 | TiMBA Charts  |                                                                                                                          an analysis toolbox with multiple dashboards about the main TiMBA results                                                                                                                          | `timba run -SD True` to open the toolbox directly after simulation has ended, or `timba dashboard` to open the toolbox indepently from a specific TiMBA run | [TiMBA Charts](https://github.com/TI-Forest-Sector-Modelling/TiMBA_Charts) | [Morland, C., Tandetzki, J., & Honkomp, T. (2026)](https://doi.org/10.5281/zenodo.20925292)  |
 
-## 9. Roadmap and project status
+## 10. Roadmap and project status
 
 The development of TiMBA is ongoing and we are already working on future releases.
 
@@ -491,17 +498,125 @@ Several projects are currently extending different components of TiMBA:
 
 Frequently check [TiMBA repository](https://github.com/TI-Forest-Sector-Modelling/TiMBA) for new releases.
 
-## 10. Contributing to the project
-We welcome contributions, additions, and suggestion to further develop or improve the code and the model. To check, discuss and include them into this project, we would like you to share your ideas with us so that we can agree on the requirements needed for accepting your contribution. 
+## 11. FAIR research software
+
+We attempt to adhere as much as possible to the FAIR Principles for research
+software (e.g. see Barker et al. 2022 and Chue Hong et al. 2022) and reach high
+standards of scientific quality and openness. If you find that TiMBA or its documentation could be improved, we would greatly appreciate your feedback.
+Please submit it as an [Issue](https://github.com/TI-Forest-Sector-Modelling/TiMBA/issues/new/choose)
+in the GitHub repository or via email to [wf-timba@thuenen.de](mailto:wf-timba@thuenen.de).
+
+In the following we detail our efforts and considerations.
+
+### 11.1 Findable
+
+- Zenodo provides a DOI with extensive metadata according to the DataCite schema.
+  - Separate DOIs for each release and one representing all releases.
+- A set of SWHID (Software Hash IDentifiers) is created by the [Software
+  Heritage archive](https://archive.softwareheritage.org/) for each release and
+  refereneces the code in a very granular fashion.
+- An accompanying [software paper](https://doi.org/10.21105/joss.08034) makes
+  sure the software is also referenced in search indices that focus on journal articles.
+- We provide rich metadata also as linked data in the form of the file `codemeta.json` in the
+  [CodeMeta](https://codemeta.github.io/) standard.
+- We provide machine-actionable citation information in the [Citation File Format
+  (CFF)](https://citation-file-format.github.io/).
+
+### 11.2 Accessible
+
+- The source code can be accessed in the form of a *git remote* from GitHub, via
+  *http* from Zenodo, but also by Python package managers through the [Python
+  Package Index](https://pypi.org/), both as source distribution and as a
+  *Wheel*.
+
+- Metadata is preserved to a very high degree of safety in a redundant fashion.
+  The DataCite type metadata not only preserved by DataCite but also by Zenodo
+  and in the form of a file `zenodo.json` on GitHub and in the SoftwareHeritage
+  datacenters. These three repositories also hold the file `codemeta.json`.
+
+- We recognize that GitHub, a commercial platform owned by Microsoft, is subject
+to business and strategic considerations that may raise concerns regarding data
+governance, security, adherence to scientific community standards, and long-term
+sustainability. Nevertheless, GitHub's seamless integration with Zenodo provides
+substantial benefits, including automated archiving and DOI assignment, which would
+be difficult to achieve with our current resources. We hope that a comparable integration
+will be developed in the future for better suited Forges such as [Forgejo](https://forgejo.org/) or
+  self-hosted [GitLab](gitlab.com).
+
+### 11.3 Interoperable
+
+#### 11.3.1 Software interoperability
+
+- TiMBA installs both as executable script (`timba_run`) as well as as a Python
+  module (`TiMBA`). The script copies its output also to STDOUT and allows to
+  chain TiMBA with other command line tools in a classical UNIX fashion.
+  Importing the module allows users to integrate TiMBA into their own Python
+  programs.
+  
+- We also maintain extensions to TiMBA ([Carbon
+  Module](https://github.com/TI-Forest-Sector-Modelling/C-Module) and [TiMBA
+  Charts](https://github.com/TI-Forest-Sector-Modelling/TiMBA_Charts)) in the
+  form of Python packages that can be used by importing them. These packages
+  also adhere to FAIR principles, are version-controlled in GitHub and can be
+  referenced with DOIs registered by Zenodo.
+
+#### 11.3.2 Data interoperability
+
+- TiMBA relies on a set of required input data. The canonical versions of these
+  data (a non-trivial scientific output) are also kept [version controlled in
+  GitHub](https://github.com/TI-Forest-Sector-Modelling/TiMBA_Additional_Information)
+  and releases are [published to
+  Zenodo](https://doi.org/10.5281/zenodo.14928910).
+
+- The main input data file is Office Open XML ("Microsoft Excel") format. We are
+  aware that this format is not a good choice from a purely technical point of
+  view and has severe shortcomings with regard to robustness, stability over
+  time, machine readability, interoperability, platform independence and
+  accessibility. However, this is the optimal format to make the input
+  understandable and modifyable by our main target group, who understands
+  Microsoft Excel very well but might struggle with less common formats and
+  conventions. This is a cultural and educational problem we can't solve in this
+  context. We are familiar with and track projects such as [Frictionnless
+  Data](https://frictionlessdata.io/) with its [Data Package
+  standard](https://datapackage.org/). We hope to eventually be able to combine
+  user-friendliness with robust data standards to represent our input data.
+
+- TiMBA output is written to universally readable CSV-files. We plan to describe
+  these files with standardized metadata in the future.
+
+### 11.4 Reusable
+
+- TiMBA has dependencies and sub-dependencies which are extensively recorded in
+  the `uv.lock` file to ensure reproducibility.
+- We continually strife to keep and improve software quality. We utilize
+  automated CI processes (testing for different platforms, linting) in the form
+  of GitHub workflows.
+- We have licensed the software under the [GNU Affero General Public
+  License](https://www.gnu.org/licenses/agpl-3.0.txt). On the one hand side this
+  license is most compatible with the potential need to In-license further
+  dependencies. On the other hand, as a *Copyleft* license, it is very well
+  suited to support Open Science, reproducibility and transparency (von Waldow,
+  2024).
+- The scientific background and in particular prior software on which this work
+  improves, is extensively documented and referenced in this README file.
+- Python as a programming language, adherence to an improved
+  ([`ruff`](https://docs.astral.sh/ruff/)-defaults) PEP8 style guide,
+  user-friendly formatting of input data, and instructions about how to
+  contribute increase the chances that this software is being reused in our
+  research community.
+
+
+## 12. Contributing to the project
+We welcome contributions, additions and suggestion to further develop or improve the code and the model. To check, discuss and include them into this project, we would like you to share your ideas with us so that we can agree on the requirements needed for accepting your contribution. 
+
 You can contact us directly via GitHub by creating issues, or by writing an Email to:
 
 [wf-timba@thuenen.de](mailto:wf-timba@thuenen.de)
 
-So far, this README serves as a comprehensive introduction and guidance on how to get started. ´The model documentation (TI-FSM 2025) and model validation (TI-FSM 2026) enables a deeper dive.
+So far, this README serves as a comprehensive introduction and guidance on how to get started. ´The model documentation ([TI-FSM 2025](https://literatur.thuenen.de/digbib_extern/dn069603.pdf)) and model validation ([TI-FSM 2026](https://literatur.thuenen.de/digbib_extern/dn070984.pdf)) enables a deeper dive.
 
 
-
-## 11. Authors
+## 13. Authors
 TiMBA was developed and written by an authors' collective named Thünen Institute Forest Sector Modelling (TI-FSM). 
 
 The individual authors are listed in alphabetical order 
@@ -510,7 +625,7 @@ The individual authors are listed in alphabetical order
 - [Julia Tandetzki](https://www.thuenen.de/de/fachinstitute/waldwirtschaft/personal/wissenschaftliches-personal/julia-tandetzki-msc) [(ORCID 0000-0002-0630-9434)](https://orcid.org/0000-0002-0630-9434), and 
 - [Tomke Honkomp](https://www.thuenen.de/de/fachinstitute/waldwirtschaft/personal/wissenschaftliches-personal/tomke-honkomp-msc) [(ORCID 0000-0002-6719-0190)](https://orcid.org/0000-0002-6719-0190). 
 
-## 12. Contribution statement
+## 14. Contribution statement
 Within the authors' collective TI-FSM, the authors have contributed over years their individual strengths and knowledge to make the model work:
 
 | Author            | Conceptualization and theoretical framework | Methodology | Data Curation and Management | Formal Analysis | Programming | Writing and Documentation | Visualization | Review and Editing | Supervision |
@@ -520,7 +635,7 @@ Within the authors' collective TI-FSM, the authors have contributed over years t
 | Julia Tandetzki   |                      X                      |      X      |              X               |        X        |      X      |             X             |       X       |         X          |             |
 | Tomke Honkomp     |                      X                      |      X      |              X               |        X        |      X      |             X             |       X       |         X          |             |
 
-## 13. License and copyright note
+## 15. License and copyright note
 
 Licensed under the GNU AGPL, Version 3.0. 
 
@@ -542,7 +657,7 @@ Copyright ©, 2024, Thuenen Institute, TI-FSM, wf-timba@thuenen.de
 
 
 
-## 14. Acknowledgements
+## 16. Acknowledgements
 
 This work is the result of great joint efforts of the forest products market analysis team at the Thünen Institute of Forestry and others from 2018 to 2024. In the last years, many people made important contributions to this work. Without their support, reflection, and constructive criticism, this undertaking would not have been as successful as it turns out to be now. We would like express our gratitude to all of them. In particular, we would like to thank 
 -	Pixida GmbH and especially Tobias Hierlmeier for professional support in revising and restructuring the model architecture and code and being valuable help in programming tasks
@@ -552,11 +667,13 @@ This work is the result of great joint efforts of the forest products market ana
 -	The Thünen Institut of Forestry and its Head Matthias Dieter for providing financial resources over the years 
 - [makeareadme.com](https://www.makeareadme.com/) for providing the template this README is leaned on.
 
-## 15. References
+## 17. References
+- Barker, M., Chue Hong, N.P., Katz, D.S. et al. Introducing the FAIR Principles for research software. Sci Data 9, 622 (2022). https://doi.org/10.1038/s41597-022-01710-x
 - Buongiorno, J.; Zhu, S.; Zhang, D.; Turner, J.; Tomberlin, D. The Global Forest Products Model; Academic Press: Cambridge, MA, USA, 2003; ISBN 978-0-12-141362-0
 - Buongiorno, J. Global modelling to predict timber production and prices: The GFPM approach. Forestry 2015, 88, 291–303.
 - Buongiorno, J.; and Zhu, S. 2015. Technical change in forest sector models: The GFPM approach.  Scand. J. For. Research, 30, 30-48.
 - GFPM - Global Forest Product Model is available at https://onedrive.live.com/?authkey=%21AEF7RY7oAPlrDPk&id=93BC28B749A1DFB6%21118&cid=93BC28B749A1DFB6
+- Chue Hong, N.P. et al. (2022) “FAIR Principles for Research Software (FAIR4RS Principles)”. Zenodo. Available at: https://doi.org/10.15497/RDA00068.
 - FAO. Global Forest Resources Assessment: Terms and Definitions; Forest Resources Assessment Working Paper 188; FAO: Rome, Italia, 2020; Available online: http://www.fao.org/3/I8661EN/i8661en.pdf
 - FAO. Global Forest Resources Assessment. 2022. Available online: https://fra-data.fao.org/
 - FAOSTAT. Forestry Production and Trade: Datenbank. Available online: https://www.fao.org/faostat/en/#data/FO
@@ -568,5 +685,8 @@ This work is the result of great joint efforts of the forest products market ana
 - Samuelson, Paul A. Spatial Price Equilibrium and Linear Programming; The American Economic Review, 1952, 42 (3), 283–303; Available online http://www.jstor.org/stable/1810381.
 - Schier, F.; Morland, C.; Tandetzki, J.; Honkomp, T. (2026). TI-Forest-Sector-Modelling/TiMBA_Additional_Information: Reworking data files and licenses (Version v1.0.2). Zenodo. https://doi.org/10.5281/zenodo.19466845
 - TI-FSM (2025) TiMBA - Timber market Model for policy-Based Analysis: Documentation of model structure, data, and parameters. Braunschweig: Johann Heinrich von Thünen-Institut, 35 p, Thünen Working Paper 263, DOI:10.3220/253-2025-16
+- von Waldow, H. (2024). Research Software Licensing Guide (Version v1.0.2). Zenodo. https://doi.org/10.5281/zenodo.14008091
 - TI-FSM (2026) TiMBA - Timber market Model for policy-Based Analysis: Validation of a partial equilibrium model. Braunschweig: Johann Heinrich von Thünen-Institut, 36 p, Thünen Working Paper 282, DOI:10.3220/253-2026-29
 - World Bank. World Development Indicators|DataBank. Available online: https://databank.worldbank.org/source/world-development-indicators
+
+
