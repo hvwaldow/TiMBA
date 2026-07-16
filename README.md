@@ -13,7 +13,7 @@
 [![DOI](https://joss.theoj.org/papers/10.21105/joss.08034/status.svg)](https://doi.org/10.21105/joss.08034)
 [![License](https://img.shields.io/github/license/TI-Forest-Sector-Modelling/TiMBA?style=flat)](https://github.com/TI-Forest-Sector-Modelling/TiMBA/blob/main/COPYING)
 
------------------  
+-----------------
 
 **TiMBA** is a partial economic equilibrium model for the global forest products market. The model endogenously simulates 
 production, consumption, and trade of wood and wood-based products in 180 countries. TiMBA recursively computes the market 
@@ -25,33 +25,33 @@ In the equilibrium processes, product supply, demand and price are balanced for 
 - [TiMBA - Timber market Model for policy-Based Analysis](#timba---timber-market-model-for-policy-based-analysis)
   - [1. Cite TiMBA](#1-cite-timba)
   - [2. Installation](#2-installation)
-    - [2.1. PyPI package](#21-pypi-package)
-    - [2.2. GitHub repository](#22-github-repository)
-  - [3. Use TiMBA](#3-use-timba)
-  - [4. Model extensions](#4-model-extensions)
-  - [5. Project structure](#5-project-structure)
-  - [6. Model settings](#6-model-settings)
-    - [6.1. Settings as parameters](#61-settings-as-parameters)
-    - [6.2. Advanced settings](#62-advanced-settings)
-  - [7. TiMBA extended model description](#7-timba-extended-model-description)
-  - [8. Extensions for TiMBA](#8-extensions-for-timba)
-  - [9. Roadmap and project status](#9-roadmap-and-project-status)
-  - [10. Contributing to the project](#10-contributing-to-the-project)
-  - [11. Authors](#11-authors)
-  - [12. Contribution statement](#12-contribution-statement)
-  - [13. License and copyright note](#13-license-and-copyright-note)
-  - [14. Acknowledgements](#14-acknowledgements)
-  - [15. References](#15-references)
-
-
+    - [2.1 Requirements](#21-requirements)
+    - [2.2 Install uv](#22-install-uv)
+    - [2.3 Install the TiMBA command line programs](#23-install-the-timba-command-line-programs)
+    - [2.4 Install TiMBA from PyPi](#24-install-timba-from-pypi)
+    - [2.5 Install TiMBA from GitHub](#25-install-timba-from-github)
+    - [3. Testing TiMBA](#3-testing-timba)
+  - [4. Use TiMBA](#4-use-timba)
+  - [5. Supplementary modules](#5-supplementary-modules)
+  - [6. Project structure](#6-project-structure)
+  - [7. Model settings](#7-model-settings)
+    - [7.1. Settings as parameters](#71-settings-as-parameters)
+    - [7.2. Advanced settings](#72-advanced-settings)
+  - [8. TiMBA extended model description](#8-timba-extended-model-description)
+  - [9. Supplementary modules for TiMBA](#9-supplementary-modules-for-timba)
+  - [10. Roadmap and project status](#10-roadmap-and-project-status)
+  - [11. FAIR research software](#11-fair-research-software)
+    - [11.1 Findable](#111-findable)
+    - [11.2 Accessible](#112-accessible)
+    - [11.3 Interoperable](#113-interoperable)
+    - [11.4 Reusable](#114-reusable)
+  - [12. Contributing to the project](#12-contributing-to-the-project)
+  - [13. Authors](#13-authors)
+  - [14. Contribution statement](#14-contribution-statement)
+  - [15. License and copyright note](#15-license-and-copyright-note)
+  - [16. Acknowledgements](#16-acknowledgements)
+  - [17. References](#17-references)
 -----------------
-
-**TiMBA** is a partial economic equilibrium model for the global forest products
-market. The model endogenously simulates production, consumption and trade of
-wood and wood-based products in 180 countries. TiMBA recursively computes the
-market equilibrium for each country and product in a given period by maximizing
-the social surplus in the global forest sector. In the equilibrium processes,
-product supply, demand and price are balanced for each simulation period.
 
 ## 1. Cite TiMBA
 
