@@ -66,20 +66,31 @@ co-authors in alphabetical order.
 
 ## 2. Installation
 
-The package is developed and tested with Python 3.9 on Windows. TiMBA is compatible with Python versions between 3.9–3.11
-with Windows and Ubuntu OS. The functionality with Python versions and different OS is continuously tested using GitHub
-Actions. 
+The package is developed and tested with Python 3.9 on Windows 11. TiMBA is
+compatible with Python versions between 3.9 - 3.11. The functionality with
+supported Python versions is continuously tested using GitHub CI with [operating
+system images](https://github.com/actions/runner-images#available-images)
+`windows-latest` and `ubuntu-latest`.
 
-Before proceeding, please ensure that Python is installed on your system. 
-It can be downloaded and installed from [Python.org](https://www.python.org/downloads/release/python-3119/).
+### 2.1 Requirements
+
+- Operating system: Linux or Windows on a x64 architecture. We test Windows 11
+  and Ubuntu 24.04, but other Windows and Linux versions are likely to work too.
+- The Python package manager [uv](https://docs.astral.sh/uv/). We strongly
+  recommend to use `uv`, because it provides a very user-friendly, quick,
+  platform-independent and reliable way to install, use and develop TiMBA.
+  
+That said, TiMBA can be also installed classically by creating a virtual
+environment using [`venv`](https://docs.python.org/3.14/library/venv.html) and
+installing with [`pip`](https://pip.pypa.io/en/stable/). To make the virtual
+environment use the right Python version (if your system Python doesn't happen
+to be version 3.9 - 3.11), you need to install a supported Python the the
+operating system level and create the virtual environment with that version,
+e.g. `python3.11 -m venv .venv`.
 
 ***Known Issues***:
-TiMBA currently has compatibility issues on macOS and with Python 3.12 and 3.13. Users may experience unexpected behavior during the optimization 
-process on macOS, as well as package installation problems when using Python 3.12 and 3.13.
-We recommend using Python 3.9–3.11 on Windows or Ubuntu OS for best results until full support of Python 3.12 and 3.13 and macOS is implemented.
+TiMBA currently does not work with Python 3.12 or higher. We observe numerical discrepancies (>5% compared to results generated on Windows or Linux) when running TiMBA on macOS which could traced back to the solver OSQP in CVXPY. The results with MacOS have not been validated. We are investigating the issue.
 
-
-The package can be installed from **PyPI** or directly from **GitHub**:
 
 ### 2.1. PyPI package
 
