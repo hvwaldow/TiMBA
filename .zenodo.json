@@ -66,9 +66,9 @@
     "Stellato, B., Banjac, G., Goulart, P., Bemporad, A., & Boyd, S. (2020). OSQP: An operator splitting solver for quadratic programs. Mathematical Programming Computation, 12(4), 637–672. https://doi.org/10.1007/s12532-020-00179-2",
     "Samuelson, P. A. (1952). Spatial price equilibrium and linear programming. The American Economic Review, 42(3), 283–303. http://www.jstor.org/stable/1810381"
   ],
-  "related_identifiers": [
+    "related_identifiers": [
     {
-      "identifier": "https://github.com/TI-Forest-Sector-Modelling/TiMBA/tree/v1.3.0",
+      "identifier": "https://github.com/TI-Forest-Sector-Modelling/TiMBA",
       "relation": "isSupplementTo",
       "scheme": "url",
       "resource_type": "software"
