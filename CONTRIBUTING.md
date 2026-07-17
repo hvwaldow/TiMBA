@@ -10,6 +10,27 @@ initiate a topic under the [Github discussion section](#https://github.com/TI-Fo
 Below you can find some guidance that helps us to streamline the integration of your code contributions or facilitate addressing
 any issues you report.
 
+## Development setup
+
+TiMBA uses [uv](https://docs.astral.sh/uv/) for dependency management. The project is pinned to Python 3.11 in `.python-version`.
+
+After installing uv, clone the repository and run:
+
+```bash
+uv sync
+```
+
+This installs the locked dependencies and the package in editable mode. Most development commands are then run via `uv run`:
+
+```bash
+uv run run_timba --help
+uv run python -W ignore::DeprecationWarning -m coverage run --rcfile=.coveragerc -m unittest discover
+uv run coverage report
+uv run build --sdist --wheel
+```
+
+If you prefer pip, you can still install the project with `pip install -r requirements.txt` and `pip install -e .`.
+
 ## Contributing code
 
 -----------------

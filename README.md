@@ -21,16 +21,21 @@ equilibrium for each country and product in a given period by maximizing the soc
 In the equilibrium processes, product supply, demand and price are balanced for each simulation period. 
 
 -----------------
+<!-- TOC -->
 
 - [TiMBA - Timber market Model for policy-Based Analysis](#timba---timber-market-model-for-policy-based-analysis)
   - [1. Cite TiMBA](#1-cite-timba)
   - [2. Installation](#2-installation)
     - [2.1 Requirements](#21-requirements)
     - [2.2 Install uv](#22-install-uv)
+      - [2.2.1 Linux](#221-linux)
+      - [2.2.2 Windows](#222-windows)
     - [2.3 Install the TiMBA command line programs](#23-install-the-timba-command-line-programs)
+      - [2.3.1 Troubleshooting: `uv` command not found](#231-troubleshooting-uv-command-not-found)
     - [2.4 Install TiMBA from PyPi](#24-install-timba-from-pypi)
     - [2.5 Install TiMBA from GitHub](#25-install-timba-from-github)
-    - [3. Testing TiMBA](#3-testing-timba)
+      - [2.5.1 Install from GitHub without 'uv\`](#251-install-from-github-without-uv)
+    - [2.6. Testing TiMBA](#26-testing-timba)
   - [3. Use TiMBA](#3-use-timba)
   - [4. Supplementary modules](#4-supplementary-modules)
   - [5. Project structure](#5-project-structure)
@@ -44,6 +49,8 @@ In the equilibrium processes, product supply, demand and price are balanced for 
     - [10.1 Findable](#101-findable)
     - [10.2 Accessible](#102-accessible)
     - [10.3 Interoperable](#103-interoperable)
+      - [10.3.1 Software interoperability](#1031-software-interoperability)
+      - [10.3.2 Data interoperability](#1032-data-interoperability)
     - [10.4 Reusable](#104-reusable)
   - [11. Contributing to the project](#11-contributing-to-the-project)
   - [12. Authors](#12-authors)
@@ -51,18 +58,20 @@ In the equilibrium processes, product supply, demand and price are balanced for 
   - [14. License and copyright note](#14-license-and-copyright-note)
   - [15. Acknowledgements](#15-acknowledgements)
   - [16. References](#16-references)
+
+<!-- /TOC -->
 -----------------
 
 ## 1. Cite TiMBA
 
-We are happy that you use TiMBA for your research. When publishing your work in articles, working paper, presentations 
-or elsewhere, please cite the model as 
+We are happy that you use TiMBA for your research. When publishing your work in articles, working paper, presentations or elsewhere, please cite the model as 
 
 TI-FSM, Morland, C., Schier, F., Tandetzki, J., Honkomp, T. (2025). TiMBA (Timber market Model for policy-Based Analysis). Journal of Open Source Software, 10(115), 8034, [https://doi.org/10.21105/joss.08034](https://doi.org/10.21105/joss.08034)  
 [Download BibTeX](./citation.bib)
 
-The authors' collective is named Thünen Institute Forest Sector Modelling (TI-FSM). The individual authors are listed as 
-co-authors in alphabetical order. 
+The authors' collective is named "Thünen Institute Forest Sector Modelling
+(TI-FSM)". The individual authors are listed as Co-authors in alphabetical
+order.
 
 ## 2. Installation
 
@@ -75,22 +84,22 @@ system images](https://github.com/actions/runner-images#available-images)
 ### 2.1 Requirements
 
 - Operating system: Linux or Windows on a x64 architecture. We test Windows 11
-  and Ubuntu 24.04, but other Windows and Linux versions are likely to work too.
+  and Ubuntu 24.04 but other Windows and Linux versions are likely to work, too.
 - The Python package manager [uv](https://docs.astral.sh/uv/). We recommend to
-  use `uv`, because it provides a user-friendly, quick, platform-independent
-  and reliable way to install, use and develop TiMBA.
+  use `uv`, because it provides a user-friendly, quick, platform-independent,
+  and reliable way to install, use, and develop TiMBA.
   
 That said, TiMBA can be also installed classically by creating a virtual
 environment using [`venv`](https://docs.python.org/3.14/library/venv.html) and
-installing with [`pip`](https://pip.pypa.io/en/stable/). To make the virtual
-environment use the right Python version (if your system Python doesn't happen
-to be version 3.9 - 3.11), you need to install a supported Python the the
-operating system level and create the virtual environment with that version,
+installing with [`pip`](https://pip.pypa.io/en/stable/). If your system Python 
+doesn't happen to be version 3.9 - 3.11, you need to install a supported Python 
+version to make the virtual environment use. 
+
 e.g. `python3.11 -m venv .venv`.
 
 ***Known Issues***:
 TiMBA currently does not work with Python 3.12 or higher. We observe numerical discrepancies 
-(>5% compared to results generated on Windows or Linux) when running TiMBA on macOS which 
+(>5% compared to results generated on Windows or Linux) when running TiMBA on MacOS which 
 could traced back to the solver OSQP in CVXPY. The results with MacOS have not been validated. 
 We are investigating the issue.
 
@@ -196,6 +205,7 @@ To install TiMBA in editable mode, so that you can modify the TiMBA source code,
    uv run timba run --help
    uv run timba run -MP=1
    ```
+
 #### 2.5.1 Install from GitHub without 'uv`
 
 If you want to develop without using `uv`, you can install TiMBA with `venv` and `pip`, for example for Windows like so:
@@ -206,17 +216,14 @@ Windows](https://github.com/oleksis/pylauncher/blob/master/docs/launcher.rst)
 installed.
 
 1. Clone the repository and move into the project folder:
-   ```bash
-   git clone https://github.com/TI-Forest-Sector-Modelling/TiMBA.git timba
-   cd timba
-```
+   >git clone https://github.com/TI-Forest-Sector-Modelling/TiMBA.git timba  
+   >cd timba
 
 2. Create a virtual environment
-
    Select the correct Python interpreter.   
-   Show installed versions: 
+   Show installed versions:
    >py -0  
-   >
+
    - If you have installed multiple versions of Python, activate the correct version using the py-Launcher.
    >py -3.11 -m venv venv 
    > 
@@ -234,7 +241,7 @@ Enable the virtual environment to isolate TiMBA dependencies.
     you might need to update the pip version you use with: 
     >python.exe -m pip install --upgrade pip  
       
-### 3. Testing TiMBA
+### 2.6. Testing TiMBA
 
 The TiMBA model comes with a test suite to ensure its functionality. Run the
 test suite to check the functionality of the package and validate the produced
