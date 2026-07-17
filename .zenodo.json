@@ -68,12 +68,6 @@
   ],
   "related_identifiers": [
     {
-      "identifier": "https://github.com/TI-Forest-Sector-Modelling/TiMBA/tree/v1.3.0",
-      "relation": "isSupplementTo",
-      "scheme": "url",
-      "resource_type": "software"
-    },
-    {
       "identifier": "10.21105/joss.08034",
       "relation": "isPublishedIn",
       "scheme": "doi",
