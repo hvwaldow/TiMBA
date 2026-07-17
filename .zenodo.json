@@ -1,14 +1,6 @@
 {
   "$schema": "http://json-schema.org/draft-04/schema#",
   "access_right": "open",
-  "communities": [
-    {
-      "identifier": "thuenen"
-    },
-    {
-      "identifier": "09c92e32-50ba-4d88-8c60-9a74a198078d"
-    }
-  ],
   "creators": [
     {
       "name": "TI-FSM"
