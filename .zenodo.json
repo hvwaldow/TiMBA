@@ -67,7 +67,6 @@
   "license": "agpl-3.0-or-later",
   "notes": "TiMBA was developed and written by an authors' collective in which the authors have contributed over years their individual strengths and knowledge to make the model work. The authors' collective is named Thünen Institute Forest Sector Modelling (TI-FSM). The individual authors are listed as  Co-authors in alphabetical order.",
   "partof_title": "TiMBA - Timber market Model for policy-Based Analysis: Validation of a Partial Equilibrium Model (DOI: 10.3220/253-2026-29)",
-  "publication_date": "2025-12-03",
   "references": [
     "Buongiorno, J., Zhu, S., Zhang, D., Turner, J., & Tomberlin, D. (2003). The global forest products model: Structure, estimation, and applications. Academic Press. ISBN: 978- 0121413620",
     "Buongiorno, J. (2015). Global modelling to predict timber production and prices: The GFPM approach. Forestry, 88(3), 291–303. https://doi.org/10.1093/forestry/cpu047",
