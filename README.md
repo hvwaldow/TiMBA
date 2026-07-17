@@ -76,9 +76,9 @@ system images](https://github.com/actions/runner-images#available-images)
 
 - Operating system: Linux or Windows on a x64 architecture. We test Windows 11
   and Ubuntu 24.04, but other Windows and Linux versions are likely to work too.
-- The Python package manager [uv](https://docs.astral.sh/uv/). We strongly
-  recommend to use `uv`, because it provides a very user-friendly, quick,
-  platform-independent and reliable way to install, use and develop TiMBA.
+- The Python package manager [uv](https://docs.astral.sh/uv/). We recommend to
+  use `uv`, because it provides a user-friendly, quick, platform-independent
+  and reliable way to install, use and develop TiMBA.
   
 That said, TiMBA can be also installed classically by creating a virtual
 environment using [`venv`](https://docs.python.org/3.14/library/venv.html) and
@@ -89,7 +89,10 @@ operating system level and create the virtual environment with that version,
 e.g. `python3.11 -m venv .venv`.
 
 ***Known Issues***:
-TiMBA currently does not work with Python 3.12 or higher. We observe numerical discrepancies (>5% compared to results generated on Windows or Linux) when running TiMBA on macOS which could traced back to the solver OSQP in CVXPY. The results with MacOS have not been validated. We are investigating the issue.
+TiMBA currently does not work with Python 3.12 or higher. We observe numerical discrepancies 
+(>5% compared to results generated on Windows or Linux) when running TiMBA on macOS which 
+could traced back to the solver OSQP in CVXPY. The results with MacOS have not been validated. 
+We are investigating the issue.
 
 ### 2.2 Install uv
 
@@ -129,7 +132,7 @@ Check the installation output for the line:
 installing to <path>
 ```
 
-Add this path to your environment variable `PATH`, e.g. und Windows like so: 
+Add this path to your environment variable `PATH`, e.g. on Windows like so: 
 
 ```cmd
 set PATH=%PATH%;<path>
@@ -238,13 +241,12 @@ test suite to check the functionality of the package and validate the produced
 results with those provided by the TI-FSM using the coverage report:
 
    ```bash
-   uv run python -W ignore::DeprecationWarning -m coverage run --rcfile=.coveragerc -m unittest discover
+   uv run python -W ignore::DeprecationWarning -m coverage run --rcfile=.coveragerc -m unittest discover -s test -p "test*.py"
    uv run coverage report
    ```
    
 To reduce the test suite running time, only the first period will be computed
-and compared. The test suite results will not be saved. The computed results and
-provided validation results are compared with a relative tolerance of 5%.
+and compared. The test suite results will not be saved.
 
 ## 4. Use TiMBA
 
@@ -281,7 +283,7 @@ The available CLI commands are:
 | `carbon`    | Calculate forest carbon stocks in forests and harvested wood products. |
 | `dashboard` | Launch an interactive dashboard for analysing simulation results.      |
 
-By default, TiMBA uses the current working directory for input and output files. A different project directory can be specified using the `-FP` (folder path) option:
+By default, TiMBA uses the current working directory also for output files. A different project directory can be specified using the `-FP` (folder path) option:
 
 ```bash
 timba run -FP your_path
@@ -289,11 +291,6 @@ timba run -FP your_path
 
 This allows users to organise multiple projects or customise model runs with alternative input datasets (see [Model settings](#model-settings) for further details).
 
-To verify that the installation is working correctly, execute a simulation for the first model period only:
-
-```bash
-timba run -MP 1
-```
 ## 5. Supplementary modules
 
 The TiMBA ecosystem has a modular design. Each module extends the base functionality of TiMBA in a specific way.
@@ -348,43 +345,32 @@ After simulation, TiMBA creates an `output` directory inside the `data` folder.
 ```text
 data
 └── output
-    ├── TiMBA.log
-    ├── DataContainer_<timestamp>.pkl
-    ├── results_<timestamp>.csv
-    ├── worldprices_<timestamp>.csv
-    ├── forest_<timestamp>.csv
-    ├── manufacture_<timestamp>.csv
-    └── results_aggregated_<timestamp>.csv
+    └── data
+        ├── DataContainer_<scenario><timestamp>.pkl
+        ├── results_<timestamp>.csv
+        ├── worldprices_<timestamp>.csv
+        ├── forest_<timestamp>.csv
+        ├── manufacture_<timestamp>.csv
+        └── results_aggregated_<timestamp>.csv
+    └── logs
+        ├── TiMBA.log
+        └── <scenario><timestamp>_info.yml
 ```
 
 The output files contain:
 
-| File                                 | Description                                                   |
-|--------------------------------------|---------------------------------------------------------------|
-| `TiMBA.log`                          | Log file containing information about the simulation process. |
-| `DataContainer_<timestamp>.pkl`      | Complete serialized simulation results for programmatic use.  |
-| `results_<timestamp>.csv`            | Main simulation results in csv format.                        |
-| `worldprices_<timestamp>.csv`        | World price results in csv format.                            |
-| `forest_<timestamp>.csv`             | Forest resources-related results in csv format.               |
-| `manufacture_<timestamp>.csv`        | Manufacturing sector-related results in csv format.           |
-| `results_aggregated_<timestamp>.csv` | Results aggregated at the continental level in csv format.    |
+| File                                           | Description                                                                |
+|------------------------------------------------|----------------------------------------------------------------------------|
+| `TiMBA.log`                                    | Log file containing information about the simulation process.              |
+| `<scenario><timestamp>_info.yml`               | Records all model input parameters for reproducibility and transparency.   |
+| `DataContainer_<scenario><timestamp>.pkl`      | Contains the complete serialized simulation output for efficient reuse.    |
+| `results_<timestamp>.csv`                      | Main simulation results in csv format.                                     |
+| `worldprices_<timestamp>.csv`                  | World price results in csv format.                                         |
+| `forest_<timestamp>.csv`                       | Forest resources-related results in csv format.                            |
+| `manufacture_<timestamp>.csv`                  | Manufacturing sector-related results in csv format.                        |
+| `results_aggregated_<timestamp>.csv`           | Results aggregated at the continental level in csv format.                 |
 
 To ensure reproducibility, TiMBA never overwrites existing simulation results.
-
-Each model run creates a new set of output files using timestamp-based filenames, for example:
-
-```text
-results_D20260708T14-32-18.csv
-```
-
-**Important output information**  
-No output file will ever be overwritten by the application itself. New
-results-files will be generated in the format
-`results_D<yyyymmdd>T<hh-mm-ss>.csv` and will be saved to the output folder as
-well. The logfile itself won't be overwritten as well but also no new file
-created on additional runs. Log information simply gets appended to the existing
-logfile. Removing the logfile ahead of executing the model won't result in
-errors.
 
 
 ## 7. Model settings
@@ -581,8 +567,9 @@ will be developed in the future for better suited Forges such as [Forgejo](https
   standard](https://datapackage.org/). We hope to eventually be able to combine
   user-friendliness with robust data standards to represent our input data.
 
-- TiMBA output is written to universally readable CSV-files. We plan to describe
-  these files with standardized metadata in the future.
+- TiMBA output is written to universally readable CSV-files, while a serialized PKL file
+  preserves the complete simulation state for efficient reuse in Python.
+  We plan to describe these files with standardized metadata in the future.
 
 ### 11.4 Reusable
 
