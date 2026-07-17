@@ -1,6 +1,6 @@
 # Changelog
 
-## Unreleased
+## [v1.4.1] - 2026-07-17
 
 ### Added
 - Migrated dependency management to [uv](https://docs.astral.sh/uv/).
