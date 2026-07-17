@@ -1,0 +1,86 @@
+{
+  "@context": "https://doi.org/10.5063/schema/codemeta-2.0",
+  "@id": "https://doi.org/10.5281/zenodo.17806030",
+  "@type": "SoftwareSourceCode",
+  "identifier": [
+    {
+      "@type": "doi",
+      "value": "10.5281/zenodo.13842384",
+      "propertyID": "http://doi.org/10.5281/zenodo.13842384"
+    },
+    {  
+      "@type": "swhid",
+      "value": "swh:1:dir:e6e6240c08c0b70af91ed91083b3e37fce702214;origin=https://doi.org/10.5281/zenodo.13842384;visit=swh:1:snp:2f6aed0842a62a28ae45836d1833807ac77f2a2d;anchor=swh:1:rel:82b8d27a24ca85e5c57a89bcae5b69d8f9bc047f;path=TI-Forest-Sector-Modelling-TiMBA-b659274",
+      "propertyID": "https://archive.softwareheritage.org/swh:1:dir:e6e6240c08c0b70af91ed91083b3e37fce702214;origin=https://doi.org/10.5281/zenodo.13842384;visit=swh:1:snp:2f6aed0842a62a28ae45836d1833807ac77f2a2d;anchor=swh:1:rel:82b8d27a24ca85e5c57a89bcae5b69d8f9bc047f;path=TI-Forest-Sector-Modelling-TiMBA-b659274"
+    }
+  ],
+  "name": "TiMBA (Timber market Model for policy-Based Analysis)",
+  "creator": [
+    {
+      "@type": "Person",
+      "name": "TI-FSM"
+    },
+    {
+      "name": "Morland, Christian",
+      "givenName": "Christian",
+      "familyName": "Morland",
+      "@id": "https://orcid.org/0000-0001-6600-570X",
+      "@type": "Person",
+      "affiliation": {
+        "@type": "Organization",
+        "name": "Thünen Institue of Forestry"
+       }
+    },
+    {
+      "@id": "https://orcid.org/0000-0002-3378-1371",
+      "@type": "Person",
+      "affiliation": {
+        "@type": "Organization",
+        "name": "Thünen Institue of Forestry"
+      },
+      "familyName": "Schier",
+      "givenName": "Franziska"
+    },
+    {
+      "@id": "https://orcid.org/0000-0002-0630-9434",
+      "@type": "Person",
+      "affiliation": {
+        "@type": "Organization",
+        "name": "Thünen Institue of Forestry"
+      },
+      "familyName": "Tandetzki",
+      "givenName": "Julia"
+    },
+    {
+      "@id": "https://orcid.org/0000-0002-6719-0190",
+      "@type": "Person",
+      "affiliation": {
+        "@type": "Organization",
+        "name": "Thünen Institue of Forestry"
+      },
+      "familyName": "Honkomp",
+      "givenName": "Tomke"
+    }
+  ],
+  "publisher": {
+    "@type": "Organization",
+    "name": "Zenodo"
+  },
+  "keywords": "research, Forest sector model, partial equilibrium model, optimization, wood markets", 
+  "dateCreated": "2025-12-03",
+  "dateModified": "2026-07-08",
+  "datePublished": "2025-12-03",
+  "version": "v1.3.0",
+  "license": "https://www.gnu.org/licenses/agpl.txt",
+  "description": "TiMBA is a partial economic equilibrium model for the\n global forest products market. The model endogenously\n simulates production, consumption and trade of wood and\n wood-based products in 180 countries. TiMBA recursively\n computes the market equilibrium for each country and\n product in a given period by maximizing the social surplus\n in the global forest sector. In the equilibrium processes,\n product supply, demand and price are balanced for each\n simulation period. ",
+  "hasPart": [
+    {
+      "@type": "CreativeWork",
+      "@id": "https://doi.org/10.5281/zenodo.19466845"
+    }
+  ],
+  "url": "https://zenodo.org/records/17806030",
+  "codeRepository": "https://github.com/TI-Forest-Sector-Modelling/TiMBA",
+  "programmingLanguage": "Python",
+  "developmentStatus": "Active"
+}
